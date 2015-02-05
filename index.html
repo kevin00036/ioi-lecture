@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>reveal.js - The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        \( 
+          \newcommand{\ord}[1]{\opord\left(#1\right)}
+          \newcommand{\abs}[1]{\lvert #1 \rvert}
+          \newcommand{\floor}[1]{\lfloor #1 \rfloor}
+          \newcommand{\ceil}[1]{\lceil #1 \rceil}
+          \newcommand{\opord}{\operatorname{\mathcal{O}}}
+          \newcommand{\fail}{\operatorname{\mathcal{F}}}
+          \newcommand{\flk}{\operatorname{\mathfrak{F}}}
+          \newcommand{\suf}{\operatorname{\sigma}}
+          \newcommand{\rank}{\operatorname{\mathcal{R}}}
+          \newcommand{\sa}{\operatorname{\mathcal{SA}}}
+          \newcommand{\hei}{\operatorname{\mathcal{H}}}
+          \newcommand{\edps}{\operatorname{\mathcal{E}}}
+          \newcommand{\mx}{\operatorname{\mathcal{M}}}
+          \newcommand{\argmax}{\operatorname{arg\,max}}
+          \newcommand{\cons}[1]{\left[ \: #1 \: \right]}
+          \newcommand{\str}[1]{\texttt{"#1"}}
+        \)
+        <section>
+          <h2> String - 字串 </h2>
+        </section>
+
+        <section>
+          <section>
+            <h3> 字串為何如此重要？ </h3>
+          </section>
+
+          <section>
+            <h3> 資料檢索 </h3>
+            <p>
+              <ul>
+                <li> google </li>
+                <li> ctrl-F </li>
+              </ul>
+            </p>
+          </section>
+
+          <section>
+            <h3> 生物資訊 </h3>
+            <p>
+              <ul>
+                <li> DNA 比對 </li>
+              </ul>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 字串相關的問題 </h3>
+            <p> 剛剛的問題都圍繞在一個最基本的問題上：<br> <b> 匹配(Matching) </b>  </p>
+            <p>
+              也就是我們會關心一個字串 \( B \) <br> 有沒有出現在 \( A \) 上 ？ 
+            </p>
+          </section>
+          <section>
+            <h3> 一些我們關心的問題 </h3>
+            <p>
+              <ul>
+                <li> 匹配字串的數量：<br> 一對一？一對多？多對多？ </li>
+                <li> 出現的位置 </li>
+                <li> 出現的數量 </li>
+              </ul>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 一些定義 </h3>
+            <div class="def"> 
+              一個 <em> 字串 \( A \)</em> 是由在 <em>字元集 \( \Sigma \)</em> 裡的字元所組成的<b>序列</b>。
+              我們記作 \( A = a_0 a_1 a_2 \cdots a_{n-1} \)，其中 \( n \) 為字串的 <em> 長度 </em>。
+            </div>
+          </section>
+
+          <section>
+            <h3> 一些定義 </h3>
+            <div class="def"> 
+              一個字串 \( A \) 的<em>子字串</em>是 \( A \) 的一段連續子序列 \( a_i a_{i+1} \cdots a_j \)，我們記作
+              \( A[i, j] \)
+            </div>
+
+            <p> 如 \( A = \str{abcd} \)， \( A[1, 3] = \str{bcd} ,  A[1, 2] = \str{bc} \) 
+            </p>
+            <p> 可以知道用 \( B \) 匹配 \( A \) 其實就是在問 \( B \) 是不是 \( A \) 的子字串！ </p>
+          </section>
+
+          <section>
+            <h3> 一些定義 </h3>
+            <div class="def"> 
+              一個字串 \( A \) 的<em>後綴</em>是 \( A \) 的一個子字串 \( A[i, n-1] \)，記作 \( S_A(i) \)。 類似的我們也可以定義<em>前綴</em>
+            </div>
+
+            <p> 如 \( A = \str{abcd} \)， \( S(1) = A[1, 3] = \str{bcd}\) ，<br> 簡單來說就是 \( A \) 尾巴的子字串！
+            </p> <br>
+            <p> 一個簡單的廢話： </p>
+            <div class="thm"> 
+              一個字串 \( A \) 的子字串一定是他某個後綴的前綴 。
+            </div>
+          </section>
+
+        </section>
+
+        <section>
+          <h3> 今天最重要的問題 </h3>
+          <div class="ques"> 
+            請用 \( B \) 匹配 \( A \) ，並告訴我 \( B \) 出現在哪些位置。
+            要快、狠、準！
+          </div>
+        </section>
+
+        <section>
+          <section>
+            <h3> 暴力法！ </h3>
+            <p> 啊就一個一個位置慢慢試嘛… </p>
+            <pre><code data-trim class="cpp">
+for(int i = 0; i < lenA - lenB; i++) {
+  bool flag = true;
+  for(int j = 0; j < lenB && flag; j++) {
+    if(A[i+j] != B[j]) flag = false;
+  }
+  if( flag ) {
+    // Match !
+  }
+}
+          </code></pre>
+            <p>
+              在亂數的情形下 \( \ord{N} \) ！
+            </p>
+          </section>
+
+          <section>
+            <p> 當然，測資哪會給你那麼好過！ </p>
+            <p> 考慮 \( A = \texttt{"aaa} \cdots \texttt{aa"}, B = \texttt{"aaa} \cdots \texttt{ab"} \) ， <br>
+              並且 \( A \) 的長度遠大於 \( B \) </p>
+            <p> \( B \) 從來沒有出現在 \( A \) 上，但你每個位置都要匹配到 \( B \) 的末端才知道！ </p>
+            <p> 總匹配數： \( \left( \abs{A} - \abs{B} \right) \abs{B} = \ord{ \abs{A} \abs{B} } \) </p>
+            <p> 不夠好！ </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2> Hashing </h2>
+            <p> 就像我們找東西會先分類一樣，何不先把字串分類？ </p>
+            <p> Want : 一個函數 \( f : \texttt{string} \mapsto \{ 0, 1, \cdots, Q-1\}  \) </p> <br>
+            <p> 要求： <br>
+              <ol>
+                <li> \( f \) 容易求得 </li>
+                <li> \( f \) 均勻 </li>
+              </ol>
+            </p>
+          </section>
+
+          <section>
+            <h2> Hashing </h2>
+
+            <div class="def">
+              我們定義 Rolling Hash Function 為 
+              <div>
+                $$ f(A) = a_0 p^{n-1} + a_1 p^{n-2} + \cdots + a_{n-2} p + a_{n-1} \mod{q} $$
+              </div>
+              其中 \( p, q \) 為挑好的質數
+            </div>
+            <p> 有點像進位制。 </p>
+          </section>
+
+          <section>
+            <p> 好處： 可以滾動(Roll)！ </p>
+            <div class="thm">
+              $$ f(A) \equiv f(A[0, n-2]) p + a_{n-1} \pmod{q} $$
+              並且
+              $$ f(A[i, j]) \equiv f(A[0, j]) - p^{j-i+1} f(A[0, i-1]) \pmod{q} $$
+            </div>
+            <p> 記下所有 \( f(A[0, k]) \) ， 所有 \( f(A[i, j]) \) 都可立刻 ( \( \ord{1} \) )求出！
+            </section>
+
+            <section>
+              <h2> 用 Hashing 來匹配 </h2>
+              <p> 算出 \( f(A), f(B) \) </p>
+              <ul>
+                <li> 如果 \( f(A) \ne f(B) \) ，那必定 \(A \ne B\) 。 </li>
+                <li> 但如果 \( f(A) = f(B) \) ，還必會有 \(A = B\) 嗎？ <br>
+                  &#8594; 不一定，但發生意外的機率極低！</li>
+              </ul>
+              <p> 碰撞的機率是 \( 1/q \) &#8594; 最好 \(q\) 大一點！</p>
+            </section>
+
+            <section>
+              <div class="prob">
+                Klingon Warfare <a href="http://acm.csie.org/ntujudge/problem.php?id=2196"> 2013 Pacific Northwest Region Programming Contest </a> <br>
+                <hr>
+                給兩棵樹，每個節點上有一個字母，並且一個點的子節點是有序的，在兩者分別找一個子樹使得這兩棵子樹相等，並且點的數目最多。 <br>
+                ( 點的數量 \( \abs{V} \leq 10^6 \) )
+              </div>
+              <p> 咦？跟字串有什麼關係？ </p>
+            </section>
+          </section>
+
+          <section>
+            <section>
+              <h2> KMP </h2>
+              <p> Knuth–Morris–Pratt algorithm </p>
+              <p> 應該是最廣為人知的線性單字串匹配演算法 </p>
+            </section>
+
+            <section>
+              <h2> Fail function </h2>
+              <p> 在暴力法時我們每次匹配失敗時，往前一格，繼續匹配 </p>
+              <p>但往前一格真的是必要的嗎？</p>
+              <p> 其實有可能右移 \( 1, 2, \cdots, k-1 \) 都是不必要的，直接右移 \(k\) 就可以了。</p>
+              <p> Want: \( \fail(i) \) 要告訴我們，當我們匹配到 \( B[i] = A[j]\)，卻在 \( B[i+1] \) 的位置匹配失敗，應把
+                \( B[\fail(i)] \) 對齊 \(A[j]\) 繼續匹配。 </p>
+              <div class="quick">
+                \( \fail(0) \) 應該要是多少？ 
+              </div>
+            </section>
+
+            <section>
+              <p> 仔細思考一陣，你會發現如果 \( \fail(i) = k \) ， 那 \( B[0, k] = B[i-k, i] \) </p>
+              <p> 而且 \( \fail(i) \) 還要是滿足此性質的最大質，否則會漏掉一些可能性 </p> 
+              <div class="def">
+                $$ \fail_B(i) = \begin{cases}
+      \max \{ k: P_B(k) = B[0, k] = B[i-k, i] \} \\
+      -1  \\
+                \end{cases}
+                $$
+              </div><br>
+              <p> 那要怎麼求出 \( \fail(i) \) 呢？ </p>
+            </section>
+
+            <section>
+              <h3> Fail function 的遞回 </h3>
+              <p> 利用 \( \fail(k) : k \le i \) ， 我們可以求出 \( \fail(i) \) ！ </p>
+              <p> 不段嘗試 \( \fail(i), \fail^2(i), \fail^3(i), \cdots \) </p>
+            </section>
+
+            <section>
+              <h3> Sample Code </h3>
+              <pre><code data-trim>
+void build_fail_function(string B, int *fail) {
+    int len = B.length(), current_pos;
+    current_pos = fail[0] = -1; //Specially fail[0] = -1
+    for( int i = 1 ; i < len ; i ++ ) {
+        while( current_pos != -1
+               && B[current_pos + 1] != B[i] ) {
+            current_pos = fail[current_pos];
+        }
+        if( B[ current_pos + 1 ] == B[i] ) current_pos ++;
+        fail[i] = current_pos;
+    }
+}
+                </code></pre>
+            </section>
+            <section>
+              <h3> Sample Code </h3>
+                <pre><code data-trim>
+void match(string A, string B, int *fail) {
+    int lenA = A.length(), lenB = B.length();
+    int current_pos = -1;
+    for( int i = 0 ; i < lenA ; i ++ ) {
+        while( current_pos != -1 
+               && B[current_pos + 1] != A[i] ) {
+            current_pos = fail[current_pos];
+        }
+        if( B[current_pos + 1] == A[i] ) current_pos ++;
+        if( current_pos == lenB - 1 ) {
+            // Match ! A[i - lenB + 1, i] = B
+            current_pos = fail[current_pos];
+        }
+    }
+}
+                </code></pre>
+            </section>
+
+            <section>
+              <div class="prob">
+                字串的周期 <a> 經典問題 </a> <br>
+                <hr>
+                對一個字串 \( A \) ，如果 \( A[i] = A[i+k] \) ， 我們就稱 \( k \) 是 \( A \) 的周期。 請找出 \( A \) 所有的周期。
+                (  \( \ord{\abs{A}} \) )
+              </div>
+            </section>
+
+            <section>
+              <div class="prob">
+                Template <a href="http://main.edu.pl/en/archive/oi/12/sza"> POI XII </a> <br>
+                <hr>
+                給定字串 \( S \)，求出最短的 \( A \) 使得 \( A \) 可以覆蓋 \( S \) 。 <br>
+                (  \( \abs{S} \leq 500000 \) )
+              </div>
+            </section>
+
+          </section>
+          
+          <section>
+            <section>
+              <h3> Z algorithm </h3>
+              <p> 光是名字聽起來就很潮 </p>
+              <div class="def">
+                \( Z(i) ) 表示 \( A[i, n-1] \) 可以和 \( A \) 匹配多長，也就是 \( A[i, i+Z(i)-1] = A[0, Z(i)-1] \)。<br>
+                特別令 \( Z(0) = 0 \)。
+              </div>
+            </section>
+          </section>
+        </div>
+      </div>
+
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+
+      <script>
+
+        // Full list of configuration options available at:
+          // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/math/math.js', async: true }
+        ]
+      });
+      
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        setTimeout( function() {
+          MathJax.Hub.Rerender(event.currentSlide);
+        }, 100);
+      });
+      </script>
+
+      <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          "HTML-CSS": {
+            scale: 80
+          }
+        });
+      </script>
+
+    </body>
+  </html>
