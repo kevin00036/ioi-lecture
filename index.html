@@ -358,9 +358,46 @@ void match(string A, string B, int *fail) {
                 \( A = \str{abaab} , Z_A(i) = ? \)
               </div>
             </section>
+
+
+            
             <section>
               <h3> 如何求得 Z-Value ? </h3>
               <p>利用已知的資訊！</p>
+              <script type="text/paperscript" canvas="myCanvas">
+              var start = new Point(10, 100);
+              var end = start + [400, 0];
+              var path = new CompoundPath({
+                children: [
+                  new Path.Line(start, end), 
+                  new Path.Line(start - [0, 20], start + [0, 20]), 
+                  new Path.Line(end - [0, 20], end + [0, 20]), 
+                ],
+              });
+              path.style = {
+                strokeColor: 'black',
+                strokeWidth: 5,
+              };
+              var rect1 = new Rectangle(start - [0, 20], start + [100, 20]);
+              var pathRec = new Path.RoundRectangle(rect1, 5);
+              pathRec.style = {
+                fillColor: 'blue',
+              };
+              </script>
+              <canvas id="myCanvas" width="450" height="300"></canvas>
+            </section>
+
+            <section>
+              <h3> 如何求得 Z-Value ? </h3>
+              <p>利用已知的資訊！</p>
+            </section>
+
+            <section>
+              <h3> 和匹配有什麼關係? </h3>
+              <p> 把兩個字串接起來， \( B \) 在前，\( A \) 在後，<br>中間用一個沒有出現過的字元連接。</p>
+              <p> 如 \( A = \str{abaab}, B = \str{aab} \) ， 便令 \( S = \str{aab\$abaab} \) 。 </p>
+              <p> &#8594; 你會發現 \( B \) 是否能在 \( A \) 的某個位置被匹配， <br> 
+                只要看那個位置的 Z-value 是否等於 \( B \) 的長度</p>
             </section>
 
             <section>
@@ -372,11 +409,86 @@ void match(string A, string B, int *fail) {
               </div>
             </section>
           </section>
+
+          <section>
+            <section>
+              <h3> Suffix Array </h3>
+              <p> 又稱作後綴數組。 </p>
+              <p> 非常強大的一個工具，匹配、計數…樣樣都行。 </p>
+            </section>
+
+            <section>
+              <p> 在看一次這句廢話： </p>
+              <div class="thm"> 
+                一個字串 \( A \) 的子字串一定是他某個後綴的前綴 。
+              </div>
+              <p> 從頭開始比對兩個字串： Easy</p>
+              <p> 但不知道起始位置，只知道一個字串<br>出現在另一個字串中間： Not so easy</p>
+              <p> &#8594; 乾脆把所有後綴都抓出來！ </p>
+            </section>
+            <section>
+              <h3> Suffix Array </h3>
+              <p> 把所有的後綴全部抓出來排序。 </p>
+              <p> 好處：
+                <ul>
+                  <li> 相像的後綴會被排在一起。</li>
+                  <li> 要匹配一個字串，只要二分搜，看哪個跟他最像，從頭比對！</li>
+                </ul>
+              </p>
+            </section>
+            <section>
+              <h3> Suffix Array </h3>
+              <p> 問題來了，怎麼排序？ </p>
+              <p> 真的直接抓出來硬排， \( \ord{N^2} \) 起跳 ， GG </p>
+              <p> 有不少線性的做法 DC3, SAIS ， 但不好寫。 </p>
+              <p> 這裡只介紹最基本的倍增算法， \( \ord{N \log N} \) 。 </p>
+            </section>
+
+            <section>
+              <h3> 倍增算法 </h3>
+              <p> 現在有兩個字串 \( A \lt B \) ，把兩個對半切，變成 \( A_1 A_2, B_1 B_2 \) </p>
+              <p> 只有兩種可能：
+                <ol>
+                  <li> \( A_1 \lt B_1 \) </li>
+                  <li> \( A_1 = B_1 \; \land \; A_2 \lt B_2 \) </li>
+                </ol>
+              </p>
+              <p> 也就是 \( B \) 不可能會輸，頂多在第一階段平手。 </p>
+            </section>
+
+            <section>
+              <h3> 倍增算法 </h3>
+              <p> Want: 對每個後綴，我先只比較前 \( 1 \) 個字元，用此得到的資訊求出只比前 \( 2 \) 個字元的大小關係，
+              再用此求出只比前 \( 4 \) 個字元的大小關係 … </p>
+              <p> 
+              </p>
+              <p> 也就是 \( B \) 不可能會輸，頂多在第一階段平手。 </p>
+            </section>
+
+            <section>
+              <h3> Height Array </h3>
+              <p> 前面說過， Suffix Array 會把相像的後綴排在一起。 </p>
+              <div class="def"> 
+                
+              </div>
+              <p> </p>
+            </section>
+
+            <section>
+              <div class="prob"> 
+                Nessaj, the Chaos Knight <a href="http://main.edu.pl/en/archive/oi/12/sza"> 2013 NTU Final(簡化版) </a> <br>
+                <hr>
+                現在有一個七段顯示器，你只知道他會從 \( [1, M] \) 中的某一秒開始倒數。 現在有一個人他把七段顯示器的
+              </div>
+            </section>
+
+          </section>
         </div>
       </div>
 
       <script src="lib/js/head.min.js"></script>
       <script src="js/reveal.js"></script>
+      <script src="bower_components/paper/dist/paper-full.js"></script>
 
       <script>
 
@@ -405,7 +517,7 @@ void match(string A, string B, int *fail) {
       Reveal.addEventListener( 'slidechanged', function( event ) {
         setTimeout( function() {
           MathJax.Hub.Rerender(event.currentSlide);
-        }, 100);
+        }, 150);
       });
       </script>
 
