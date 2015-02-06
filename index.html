@@ -87,6 +87,12 @@
               </ul>
             </p>
           </section>
+
+          <section>
+            <h3> 最重要的是他常常在資訊題目中出現 </h3>
+            <p> 當然一定要好好弄清楚
+            </p>
+          </section>
         </section>
 
         <section>
@@ -329,12 +335,13 @@ void match(string A, string B, int *fail) {
 
             <section>
               <div class="prob">
-                Template <a href="http://main.edu.pl/en/archive/oi/12/sza"> POI XII </a> <br>
+                ABA  <a> 經典問題 </a> <br>
                 <hr>
-                給定字串 \( S \)，求出最短的 \( A \) 使得 \( A \) 可以覆蓋 \( S \) 。 <br>
-                (  \( \abs{S} \leq 500000 \) )
+                對一個字串 \( S \) ，請找一個最長的 \(A\) 使得 \( S = ABA \)
+                (  \( \ord{\abs{S}} \) )
               </div>
             </section>
+
 
           </section>
           
@@ -343,8 +350,25 @@ void match(string A, string B, int *fail) {
               <h3> Z algorithm </h3>
               <p> 光是名字聽起來就很潮 </p>
               <div class="def">
-                \( Z(i) ) 表示 \( A[i, n-1] \) 可以和 \( A \) 匹配多長，也就是 \( A[i, i+Z(i)-1] = A[0, Z(i)-1] \)。<br>
+                \( Z(i) \) 表示 \( A[i, n-1] \) 可以和 \( A \) 匹配多長，也就是 \( A[i, i+Z(i)-1] = A[0, Z(i)-1] \)。<br>
                 特別令 \( Z(0) = 0 \)。
+              </div>
+
+              <div class="quick">
+                \( A = \str{abaab} , Z_A(i) = ? \)
+              </div>
+            </section>
+            <section>
+              <h3> 如何求得 Z-Value ? </h3>
+              <p>利用已知的資訊！</p>
+            </section>
+
+            <section>
+              <div class="prob">
+                Template <a href="http://main.edu.pl/en/archive/oi/12/sza"> POI XII </a> <br>
+                <hr>
+                給定字串 \( S \)，求出最短的 \( A \) 使得 \( A \) 可以覆蓋 \( S \) 。 <br>
+                (  \( \abs{S} \leq 500000 \) )
               </div>
             </section>
           </section>
