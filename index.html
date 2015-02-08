@@ -43,25 +43,353 @@
       <div class="slides">
 
         \( 
-          \newcommand{\ord}[1]{\opord\left(#1\right)}
-          \newcommand{\abs}[1]{\lvert #1 \rvert}
-          \newcommand{\floor}[1]{\lfloor #1 \rfloor}
-          \newcommand{\ceil}[1]{\lceil #1 \rceil}
-          \newcommand{\opord}{\operatorname{\mathcal{O}}}
-          \newcommand{\fail}{\operatorname{\mathcal{F}}}
-          \newcommand{\flk}{\operatorname{\mathfrak{F}}}
-          \newcommand{\suf}{\operatorname{\sigma}}
-          \newcommand{\rank}{\operatorname{\mathcal{R}}}
-          \newcommand{\sa}{\operatorname{\mathcal{SA}}}
-          \newcommand{\hei}{\operatorname{\mathcal{H}}}
-          \newcommand{\edps}{\operatorname{\mathcal{E}}}
-          \newcommand{\mx}{\operatorname{\mathcal{M}}}
-          \newcommand{\argmax}{\operatorname{arg\,max}}
-          \newcommand{\cons}[1]{\left[ \: #1 \: \right]}
-          \newcommand{\str}[1]{\texttt{"#1"}}
+        \newcommand{\ord}[1]{\opord\left(#1\right)}
+        \newcommand{\abs}[1]{\lvert #1 \rvert}
+        \newcommand{\floor}[1]{\lfloor #1 \rfloor}
+        \newcommand{\ceil}[1]{\lceil #1 \rceil}
+        \newcommand{\opord}{\operatorname{\mathcal{O}}}
+        \newcommand{\fail}{\operatorname{\mathcal{F}}}
+        \newcommand{\flk}{\operatorname{\mathfrak{F}}}
+        \newcommand{\suf}{\operatorname{\sigma}}
+        \newcommand{\rank}{\operatorname{\mathcal{R}}}
+        \newcommand{\sa}{\operatorname{\mathcal{SA}}}
+        \newcommand{\hei}{\operatorname{\mathcal{H}}}
+        \newcommand{\edps}{\operatorname{\mathcal{E}}}
+        \newcommand{\mx}{\operatorname{\mathcal{M}}}
+        \newcommand{\argmax}{\operatorname{arg\,max}}
+        \newcommand{\cons}[1]{\left[ \: #1 \: \right]}
+        \newcommand{\str}[1]{\texttt{"#1"}}
+        \newcommand{\vec}[1]{\overrightarrow{#1}}
         \)
         <section>
-          <h2> String - 字串 </h2>
+          <h1> <small>Computational Geometry</small> <br> 計算幾何 </h1>
+        </section>
+
+        <section>
+          <section>
+            =DD
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 解析幾何 </h3>
+            <p> 什麼？解析度很高的幾何嗎？</p>
+          </section>
+          <section>
+            <h3> 解析幾何 </h3>
+            <ul>
+              <li> 純幾何：長度、角度、形狀、全等、相似...</li>
+              <li> <b>解析</b>幾何：座標、向量、內積、外積、行列式...難算到要人命</li>
+            </ul>
+            <p> 電腦上只能做四則運算... </p>
+            <p> 還是用解析幾何吧!</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 點 </h3>
+            <p> 這輕鬆! 只需要兩個數字$(x, y)$</p>
+            (圖)
+          </section>
+          <section>
+            <h3> 向量 </h3>
+            <p> 同樣的$(x, y)$也可以代表一個向量</p>
+            (圖)
+            <p> 兩者有什麼關聯呢? </p>
+            <p><b>位置向量</b>：從原點指到$(x, y)$的向量</p>
+          </section>
+          <section>
+            <h3> 向量運算 </h3>
+            <ul>
+              <li> 加法 </li>
+              <li> 減法 </li>
+              <li> 內積 : $(x_1, y_1) \cdot (x_2, y_2) = x_1y_1+x_2y_2$ </li>
+              <li> 外積 : $(x_1, y_1) \times (x_2, y_2) = x_1y_2 - x_2y_1$ </li>
+              <li> 除法? A__A</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3> 向量運算 </h3>
+            <pre><code data-trim class="cpp">
+#define F first
+#define S second
+typedef pair&lt;double, double&gt; pdd;
+
+pdd operator+ (const pdd &amp;a, const pdd &amp;b) { return pdd(a.F+b.F, a.S+b.S);}
+pdd operator- (const pdd &amp;a, const pdd &amp;b) { return pdd(a.F-b.F, a.S-b.S);}
+pdd operator* (const pdd &amp;a, const double &amp;b) { return pdd(a.F*b, a.S*b);}
+pdd operator/ (const pdd &amp;a, const double &amp;b) { return pdd(a.F/b, a.S/b);}
+
+double dot(const pdd &amp;a, const pdd &amp;b) { return a.F*b.F + a.S*b.S;}
+double cross(const pdd &amp;a, const pdd &amp;b) { return a.F*b.S - a.S*b.F;}
+double abs2(const pdd &amp;a) { return dot(a, a);}
+double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3> 直線 </h3>
+            <p> 點斜式!</p>
+            $$ y = m x + b $$
+            <p> $m$ : 斜率 </p>
+            <p> 垂直線? G___G</p>
+          </section>
+          <section>
+            <h3> 直線 </h3>
+            <p> 點向式</p>
+            $$ (x, y) = (x_0, y_0) + t \cdot (d_x, d_y), \ t \in \mathbb{R}$$
+            <p> $\vec{P_0} = (x_0, y_0)$ : 直線上任意一點 </p>
+            <p> $\vec{d} = (d_x, d_y)$ : <b>方向</b>向量 </p>
+            <p> 就說向量比較好用吧..</p>
+            (圖)
+          </section>
+          <section>
+            <h3> 線段 </h3>
+            <p> 線段 $\overline{P_1P_2}$ </p>
+            $$ (x, y) = P_1 + t \cdot (P_2 - P_1), \ \color{red}{0 \le t \le 1}$$
+            <p> $\vec{d} = P_2 - P_1$ : <b>方向</b>向量 </p>
+            (圖)
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 有向直線 </h3>
+            $$ (x, y) = P_0 + t \cdot \color{green}{\vec{d}}, \ t \in \mathbb{R}$$
+            (圖)
+
+          </section>
+          <section>
+            <h3> 有向直線 </h3>
+            <p> 直線<font color="blue">左</font>邊(<font color="blue">正</font>方向) : 
+              $\color{green}{\vec{d}} \times \vec{P_0P} \color{blue}{&gt;} 0$</p>
+            <p> 直線<font color="red">右</font>邊(<font color="red">負</font>方向) : 
+              $\color{green}{\vec{d}} \times \vec{P_0P} \color{red}{&lt;} 0$</p>
+            (圖)
+          </section>
+          <section>
+            <h3> 有向角度 </h3>
+            <p> 與轉的方向有關!</p>
+            <p> 逆時針(往<font color="blue">左</font>邊轉) : <font color="blue">正</font>角度 </p> 
+            <p> 順時針(往<font color="red">右</font>邊轉) : <font color="red">負</font>角度 </p>
+            (圖)
+          </section>
+          <section>
+            <h3> 有向角度 </h3>
+            $$ \vec{BA} \times \vec{BC} = |BA||BC| \sin(\angle ABC)$$
+            $$ \vec{BA} \cdot \vec{BC} = |BA||BC| \cos(\angle ABC)$$
+            (圖)
+          </section>
+          <section>
+            <h3> 判斷方向 </h3>
+            $$\mathrm{ori}(P_1, P_2, P_3) = 
+            \mathrm{sign}(\vec{P_1P_2} \times \vec{P_1P_3})$$
+            <p> 
+              <ul>
+                <li> $1$ : $P_3$ 在 $\vec{P_1P_2}$ <font color="blue">左</font>邊</li>
+                <li> $-1$ : $P_3$ 在 $\vec{P_1P_2}$ <font color="red">右</font>邊</li>
+                <li> $0$ : $P_1, P_2, P_3$ 三點共線</li>
+              </ul>
+            </p>
+            (圖)
+          </section>
+          <section>
+            <h3> 有向面積 </h3>
+            <p> 三角形的<b>有向</b>面積</p>
+            $$ \Delta ABC = \frac{1}{2} \vec{AB} \times \vec{AC}$$
+            (圖: +/-)
+          </section>
+          <section>
+            <h3> 有向面積 </h3>
+            <p> <b>凸多邊形</b>的有向面積</p>
+            <p> 切割成$N$個三角形!</p>
+            $$ \mathrm{Area}(P_1P_2\cdots P_N) = \Delta P_1AP_2 + \Delta P_2AP_3
+             + \cdots + \Delta P_NAP_1$$
+            (圖: 逆時針切割)
+          </section>
+          <section>
+            <h3> 有向面積 </h3>
+            <p> <b>凹</b>多邊形的有向面積</p>
+            <p> 照切!</p>
+            <p> <b>有向</b>面積的好處 : 正負會抵消掉</p>
+            (圖: 正負號抵銷)
+          </section>
+          <section>
+            <h3> 有向面積 </h3>
+            <p> 任意多邊形的有向面積</p>
+            <p> 乾脆把中心點$A$選成原點，那麼$\vec{AP_i}$就變成$P_i$位置向量</p>
+            $$ \mathrm{Area}(P_1P_2\cdots P_N) = \sum_{i=1}^{N} \Delta P_iOP_{i+1}
+            = \frac{1}{2} \sum_{i=1}^{N} P_i \times P_{i+1}$$
+            <p>(定義$P_{N+1} = P_1$)</p>
+            <p>時間複雜度 : $O(N)$</p>
+          </section>
+          <section>
+            <p> 真的嗎...^_^;;</p>
+            (非簡單多邊形)
+          </section>
+          <section>
+            <h3> 簡單多邊形 </h3>
+            <ul>
+              <li> 邊不相交 </li>
+            </ul>
+            <br>
+            (圖)
+          </section>
+          <section>
+            <h3> 有向面積 </h3>
+            <p> <b>簡單多邊形</b>的有向面積</p>
+            <p> 乾脆把中心點$A$選成原點，那麼$\vec{AP_i}$就變成$P_i$位置向量</p>
+            $$ \mathrm{Area}(P_1P_2\cdots P_N) = \sum_{i=1}^{N} \Delta P_iOP_{i+1}
+            = \frac{1}{2} \sum_{i=1}^{N} P_i \times P_{i+1}$$
+            <p>(定義$P_{N+1} = P_1$)</p>
+            <p>時間複雜度 : $O(N)$</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 線段相交 </h3>
+            <div class="ques">
+              給定兩條線段 $\overline{P_1P_2}$ 和 $\overline{P_3P_4}$，請問他們有交點嗎？
+            </div>
+            (圖)
+          </section>
+          <section>
+            <h3> 直線相交 </h3>
+            先考慮這個問題:
+            <div class="ques">
+              給定兩條<b>直線</b> $\overline{P_1P_2}$ 和 $\overline{P_3P_4}$，請問他們有交點嗎？
+            </div>
+            (圖)
+          </section>
+          <section>
+            <h3> 直線相交 </h3>
+            <p> 好像還蠻簡單的... </p>
+            <ul>
+              <li> 兩直線不平行 : 肯定有交點! </li>
+              <li> 兩直線平行 : 不相交 or 完全重合</li>   
+            </ul>
+          </section>
+          <section>
+            <h3> 直線求交點 </h3>
+            <ul style="line-height: 150%">
+              <li> $ \vec{d_1} = \vec{P_1P_2}, \vec{d_2} = \vec{P_3P_4}$ </li>
+              <li> 交點 $ x = P_1 + t\vec{d_1} = P_3 + s\vec{d_2}$ </li>
+              <li> $ t\vec{d_1} = \vec{P_1P_3} + s\vec{d_2}$ </li>
+              <li> $ t\vec{d_1} \times \vec{d_2} = \vec{P_1P_3} \times \vec{d_2}$ </li>
+              <li> $\displaystyle t = \frac{\vec{P_1P_3} \times \vec{d_2}}{\vec{d_1} \times \vec{d_2}}$ </li>
+              <br>
+              <li> $\vec{d_1} \times \vec{d_2} \neq 0$ (為什麼?)</li>
+            </ul>
+            (左邊一張圖)
+          </section>
+          <section>
+            <h3> 線段求交點 </h3>
+            <ul>
+              <li> 類似的方法可以求出 $s$  </li>
+              <li> $0 \le t \le 1$ and $0 \le s \le 1$ : 兩<b>線段</b>有交點!</li>   
+            </ul>
+          </section>
+          <section>
+            <h3> 另一種方法 </h3>
+            <ul>
+              <li> 如果 $\overline{P_1P_2}$ 和 $\overline{P_3P_4}$ 有交點的話 ... </li>
+              <li> $P_3$ 和 $P_4$ 在 $\vec{P_1P_2}$ 的<b>異側</b> </li>   
+              <li> $P_1$ 和 $P_2$ 在 $\vec{P_3P_4}$ 的<b>異側</b> </li>   
+              <li> $\mathrm{ori}(P_1, P_2, P_3) \cdot \mathrm{ori}(P_1, P_2, P_4) &lt; 0$ </li>   
+              <li> $\mathrm{ori}(P_3, P_4, P_1) \cdot \mathrm{ori}(P_3, P_4, P_2) &lt; 0$ </li>   
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 慘了了 </h3>
+            (圖 : 相交在邊上)
+          </section>
+          <section>
+            <h3> 線段相交 </h3>
+            <ul>
+              <li> 兩線段無交點 $\Leftrightarrow P_3, P_4$ 在 $\vec{P_1P_2}$ 同側
+                <font color="red">或</font> $P_1, P_2$ 在 $\vec{P_3P_4}$ 同側</li>
+              <li> 萬一兩線段平行呢?</li>
+              <li> 延伸的直線不重合 : 無交點</li>
+              <li> 延伸的直線重合 : 一維的判斷交點</li>
+            </ul>
+            (圖: 1維)
+            <p><b> 好麻煩喔 QQQQ </b></p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 多邊形內外判斷</h3>
+            <div class="ques">
+              給定一個<b>簡單多邊形</b>和一個點 $A$，請問 $A$ 在該多邊形的內部還是外部？
+            </div>
+            (圖)
+          </section>
+          <section>
+            <h3> 多邊形內外判斷</h3>
+            <ul>
+              <li> 想辦法往外走，不能越過多邊形邊界，走得到外面就是外部 </li>
+              <li> 時間複雜度 : $O(?)$ </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 多邊形內外判斷</h3>
+            <ul>
+              <li> 開外掛穿牆(?) </li>
+              <li> 往一個方向一直走 </li>
+              <li> 每穿過一次牆，內部變外部，外部變內部 </li>
+              <li> 走到無限遠處... 這下總是外部了吧! </li>
+              <li> 計算總共穿幾次牆 </li>
+              <li> 偶數次 : 原本的點在<b>外部</b> </li>
+              <li> 奇數次 : 原本的點在<b>內部</b> </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 多邊形內外判斷</h3>
+            <ul>
+              <li> 要怎麼計算穿牆次數呢？ </li>
+              <li> 線段相交! </li>
+              <li> 把多邊形的 $N$ 條邊都檢查一次</li>
+              <li> 時間複雜度 : $O(N)$</li>
+            </ul>
+          </section>
+          <section>
+            <h3> 慘了了</h3>
+            <ul>
+              <li> 萬一剛好交到邊、頂點上呢？ </li>
+              <li> 可能會重複算到次數 </li>
+              <li> 隨機取一個方向射線，交到邊、頂點的機率很低 (為什麼?) </li>
+              <li> 座標都是整數(範圍 $W$ )的話，外面的點取 $(W, W+1)$，肯定不會交到邊點 </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 多邊形內外判斷</h3>
+            <ul>
+              <li> 如果是<b>凸</b>多邊形呢？ </li>
+              <li> 中間找一個點 $A$，連線到每個頂點 </li>
+              <li> 把一圈分成 $N$ 個角度區間 </li>
+              <li> 查詢時，先二分搜出在哪個區間，再檢查是否在三角形內</li>
+              <li> 時間複雜度 : 預處理 $O(N)$，查詢$O(\log N)$</li>
+            </ul>(圖)
+          </section>
+          <section>
+            <h3> 多邊形內外判斷</h3>
+            <ul>
+              <li> 如果是<b>凸</b>多邊形呢？ </li>
+              <li> 中間找一個點 $A$，連線到每個頂點 </li>
+              <li> 把一圈分成 $N$ 個角度區間 </li>
+              <li> 查詢時，先二分搜出在哪個區間，再檢查是否在三角形內</li>
+              <li> 時間複雜度 : 預處理 $O(N)$，查詢$O(\log N)$</li>
+            </ul>
+          </section>
         </section>
 
         <section>
@@ -272,8 +600,8 @@ for(int i = 0; i < lenA - lenB; i++) {
               <p> 而且 \( \fail(i) \) 還要是滿足此性質的最大質，否則會漏掉一些可能性 </p> 
               <div class="def">
                 $$ \fail_B(i) = \begin{cases}
-      \max \{ k: P_B(k) = B[0, k] = B[i-k, i] \} \\
-      -1  \\
+                \max \{ k: P_B(k) = B[0, k] = B[i-k, i] \} \\
+                -1  \\
                 \end{cases}
                 $$
               </div><br>
@@ -305,7 +633,7 @@ void build_fail_function(string B, int *fail) {
             </section>
             <section>
               <h3> Sample Code </h3>
-                <pre><code data-trim>
+              <pre><code data-trim>
 void match(string A, string B, int *fail) {
     int lenA = A.length(), lenB = B.length();
     int current_pos = -1;
@@ -344,7 +672,7 @@ void match(string A, string B, int *fail) {
 
 
           </section>
-          
+
           <section>
             <section>
               <h3> Z algorithm </h3>
@@ -360,29 +688,29 @@ void match(string A, string B, int *fail) {
             </section>
 
 
-            
+
             <section>
               <h3> 如何求得 Z-Value ? </h3>
               <p>利用已知的資訊！</p>
               <script type="text/paperscript" canvas="myCanvas">
-              var start = new Point(10, 100);
-              var end = start + [400, 0];
-              var path = new CompoundPath({
-                children: [
-                  new Path.Line(start, end), 
-                  new Path.Line(start - [0, 20], start + [0, 20]), 
-                  new Path.Line(end - [0, 20], end + [0, 20]), 
-                ],
-              });
-              path.style = {
-                strokeColor: 'black',
-                strokeWidth: 5,
-              };
-              var rect1 = new Rectangle(start - [0, 20], start + [100, 20]);
-              var pathRec = new Path.RoundRectangle(rect1, 5);
-              pathRec.style = {
-                fillColor: 'blue',
-              };
+                var start = new Point(10, 100);
+                var end = start + [400, 0];
+                var path = new CompoundPath({
+                  children: [
+                    new Path.Line(start, end), 
+                    new Path.Line(start - [0, 20], start + [0, 20]), 
+                    new Path.Line(end - [0, 20], end + [0, 20]), 
+                  ],
+                });
+                path.style = {
+                  strokeColor: 'black',
+                  strokeWidth: 5,
+                };
+                var rect1 = new Rectangle(start - [0, 20], start + [100, 20]);
+                var pathRec = new Path.RoundRectangle(rect1, 5);
+                pathRec.style = {
+                  fillColor: 'blue',
+                };
               </script>
               <canvas id="myCanvas" width="450" height="300"></canvas>
             </section>
@@ -459,7 +787,7 @@ void match(string A, string B, int *fail) {
             <section>
               <h3> 倍增算法 </h3>
               <p> Want: 對每個後綴，我先只比較前 \( 1 \) 個字元，用此得到的資訊求出只比前 \( 2 \) 個字元的大小關係，
-              再用此求出只比前 \( 4 \) 個字元的大小關係 … </p>
+                再用此求出只比前 \( 4 \) 個字元的大小關係 … </p>
               <p> 
               </p>
               <p> 也就是 \( B \) 不可能會輸，頂多在第一階段平手。 </p>
@@ -469,7 +797,7 @@ void match(string A, string B, int *fail) {
               <h3> Height Array </h3>
               <p> 前面說過， Suffix Array 會把相像的後綴排在一起。 </p>
               <div class="def"> 
-                
+
               </div>
               <p> </p>
             </section>
@@ -493,7 +821,7 @@ void match(string A, string B, int *fail) {
       <script>
 
         // Full list of configuration options available at:
-          // https://github.com/hakimel/reveal.js#configuration
+      // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
         controls: true,
         progress: true,
@@ -513,7 +841,7 @@ void match(string A, string B, int *fail) {
           { src: 'plugin/math/math.js', async: true }
         ]
       });
-      
+
       Reveal.addEventListener( 'slidechanged', function( event ) {
         setTimeout( function() {
           MathJax.Hub.Rerender(event.currentSlide);
