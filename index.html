@@ -154,6 +154,13 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> $\vec{d} = P_2 - P_1$ : <b>方向</b>向量 </p>
             (圖)
           </section>
+          <section>
+            <h3> 多邊形 </h3>
+            <p> $N$ 個頂點，兩兩連線繞成一圈</p>
+            <p> $P_1, P_2, P_3, \cdots, P_N$</p>
+            <p> $\overline{P_1P_2}, \overline{P_2P_3}, \cdots, \overline{P_NP_1}$ </p>
+            (圖)
+          </section>
         </section>
 
         <section>
@@ -389,6 +396,202 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 查詢時，先二分搜出在哪個區間，再檢查是否在三角形內</li>
               <li> 時間複雜度 : 預處理 $O(N)$，查詢$O(\log N)$</li>
             </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 凸包 </h3>
+            <div class="ques">
+              給定平面上一個點集，請找出包含這個點集的最小面積<b>凸</b>多邊形。
+            </div>
+            (圖: "凸"包)
+          </section>
+          <section>
+            <h3> "凸"多邊形? </h3>
+            <ul>
+              <li> 內角皆小於 $180^\circ$ </li>
+              <li> 兩點連線包含在多邊形內 </li>
+            </ul>
+            (圖: 兩點連線在內部)
+          </section>
+          <section>
+            <h3> 捲包裹法 </h3>
+            <ul>
+              <li> 先找一個必定在凸包上的點 (怎麼找?)</li>
+              <li> 每次找最靠右邊的，加入凸包</li>
+              <li> 時間複雜度 : $O(N^2)$</li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> Monotone Chain </h3>
+            <ul>
+              <li> 每次都重新排序，太辛苦了!</li>
+              <li> 一次從左到右排序好，一個一個點慢慢加</li>
+              <li> 每多加一個點時，檢查看會不會影響凸包</li>
+            </ul>
+          </section>
+          <section>
+            <h3> Monotone Chain </h3>
+            <p> 檢查新增的點與目前凸包最後2個點的夾角:</p>
+            <ul>
+              <li> $&lt; 180^\circ$ : 加入凸包</li>
+              <li> $\ge 180^\circ$ : 中間那個點刪掉</li>
+              <li> 用外積判斷夾角</li>
+              <li> 凸包根本沒有2個點? 那直接加入</li>
+            </ul>
+            (圖: 凸角，凹角)
+          </section>
+          <section>
+            <h3> Monotone Chain </h3>
+            (實作動畫)
+          </section>
+          <section>
+            <h3> Monotone Chain </h3>
+            <ul>
+              <li> 用 stack 維護目前凸包 </li>
+              <li> 每個點會被加入 1 次</li>
+              <li> 每個點<b>最多</b>被刪除 1 次</li>
+              <li> 時間複雜度 : $O(N \log N) + O(N)$</li>
+              <li> 這樣找到的是<b>下</b>凸包</li>
+              <li> 從右到左排序再做一次，接起來才是完整的凸包</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 掃描線 </h3>
+            <p>拿一條垂直線，從左掃到右</p>
+            (圖)
+            <p> 實作上就只是把點照 $x$ 座標排序 </p>
+          </section>
+          <section>
+            <h3> 矩形覆蓋次數  </h3>
+            <div class="ques">
+              給定平面上 $N$ 個矩形和 $M$ 個點，問每個點被包含在<b>幾個</b>矩形中？
+            </div>
+            (圖)
+          </section>
+          <section>
+            <h3> 矩形覆蓋次數  </h3>
+            <p>從左掃到右，會經歷一些<b>事件</b></p>
+            <ul>
+              <li> 矩形的左邊界</li>
+              <li> 矩形的右邊界</li>
+              <li> 查詢點</li>
+            </ul>
+            <p>兩個事件之間，什麼都不會發生!</p>
+            (圖)
+          </section>
+          <section>
+            <h3> 矩形覆蓋次數  </h3>
+            <ul>
+              <li> 掃描線 : 1 維 </li>
+              <li> 維護每個 $y$ 座標被多少矩形覆蓋</li>
+              <li> 線段樹! </li>
+              <li> 左邊界 : $y$ 區間 +1 </li>
+              <li> 右邊界 : $y$ 區間 -1 </li>
+              <li> 查詢點 : 某詢某 $y$ 數值 </li>
+              <li> 時間複雜度 : $O((M+N) \log N)$ </li>
+            </ul>
+            (圖)
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 旋轉卡尺 </h3>
+            <ul>
+              <li>類似掃描線，不過是用轉的!</li>
+              <li> 通常用在凸多邊形上 </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 凸多邊形最窄寬度 </h3>
+            <div class="ques">
+              給定一個凸多邊形 $P$，計算他的最窄寬度(也就是用距離最短的直線夾住)。
+            </div>
+              (圖)
+          </section>
+          <section>
+            <h3> 凸多邊形最窄寬度 </h3>
+            <ul>
+              <li> 轉一圈，總會遇到最小值 </li>
+              <li> <b>事件</b> : 其中一條卡尺貼到邊 </li>
+              <li> 點到直線的距離？外積! </li>
+              <li> 距離最遠的點即為對面的切點 </li>
+              <li> 跑過所有的事件一次，取最小值 </li>
+              <li> 枚舉一條邊，再計算另一個多邊形上的切點 </li>
+              <li> 時間複雜度 : $O(N^2)$ :( </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 凸多邊形最窄寬度 </h3>
+            <ul>
+              <li> <b>逆時針</b>枚舉貼的邊 </li>
+              <li> 另一邊的切點？可能會移動好幾個點，但只會<b>逆時針</b>移動!</li>
+              <li> 貼的邊繞一圈 $\to$ 切點也只會繞一圈 </li>
+              <li> 時間複雜度 : $O(N)$ </li>
+            </ul>
+              (圖)
+          </section>
+          <section>
+            <h3> 凸多邊形最窄寬度 </h3>
+            <ul>
+              <li> 那事件與事件之間呢？(兩個卡尺皆沒有貼到邊)</li>
+              <li> 卡尺繞著兩個點轉 </li>
+              <li> 不可能發生極小值! </li>
+            </ul>
+              (圖)
+          </section>
+          <section>
+            <h3> 兩點集最寬分割直線 </h3>
+            <div class="ques">
+              給定兩個點集 $A, B$，請用一條最寬的直線把這兩個點集分成兩邊。
+            </div>
+              (圖)
+          </section>
+          <section>
+            <h3> 兩點集最寬分割直線 </h3>
+            <ul>
+              <li> 中間的點沒有用</li>
+              <li> 直線必定只會碰到凸包! </li>
+              <li> 先求凸包 </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 兩凸包最近距離 </h3>
+            <div class="ques">
+              給定兩個凸多邊形 $A, B$，求他們間的最近距離。
+            </div>
+              (圖)
+          </section>
+          <section>
+            <h3> 兩凸包最近距離 </h3>
+            <ul>
+              <li> 兩條反向的平行卡尺</li>
+              <li> 繞一圈，找最小距離</li>
+              <li> <b>事件</b> : 其中一條卡尺貼到邊 </li>
+              <li> 記得枚舉兩邊的貼邊! </li>
+              <li> 距離為負 $\to$ 凸多邊形相交 </li>
+            </ul>
+              (圖)
+          </section>
+          <section>
+            <h3> 兩凸包最近距離 </h3>
+            <ul>
+              <li> 事件與事件之間，不會有極值 </li>
+              <li> ...嗎？</li>
+              <li> 還要考慮卡尺旋轉過程，切到兩點的直線距離 </li>
+              <li> 每個事件之間 $O(1)$ 檢查，總複雜度不變</li>
+              <li> 直線距離一定合法嗎? </li>
+            </ul>
+              (圖)
           </section>
         </section>
 
