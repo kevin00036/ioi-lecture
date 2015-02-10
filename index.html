@@ -20,7 +20,9 @@
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
 
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement( 'link' );
@@ -29,6 +31,7 @@
       link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
       document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.3/jsxgraphcore.js"></script>
 
 
     <!--[if lt IE 9]>
@@ -91,14 +94,23 @@
           <section>
             <h3> 點 </h3>
             <p> 這輕鬆! 只需要兩個數字$(x, y)$</p>
-            (圖)
+            <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], axis:true});
+              board.create('point', [5,3], {name:'(5, 3)', strokecolor:'red'});
+            </script>
           </section>
           <section>
             <h3> 向量 </h3>
             <p> 同樣的$(x, y)$也可以代表一個向量</p>
-            (圖)
             <p> 兩者有什麼關聯呢? </p>
             <p><b>位置向量</b>：從原點指到$(x, y)$的向量</p>
+            <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box2', {boundingbox: [-10, 10, 10, -10], axis:true});
+              var pt = board.create('point', [5,3], {name:'(5, 3)', strokecolor:'red'});
+              var li3 = board.create('line', [[0,0],pt], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true});
+            </script>
           </section>
           <section>
             <h3> 向量運算 </h3>
