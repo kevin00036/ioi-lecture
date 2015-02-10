@@ -597,6 +597,353 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
 
         <section>
           <section>
+            <div class="ques">
+              請問 $0.1 + 0.2 = $ ?
+            </div>
+            <p>... 啊不就 $0.3$</p>
+            <p> 恭喜你得到了一個 <font color="red">WA</font> !</p>
+          </section>
+          <section>
+            <h3> 浮點數誤差 </h3>
+            <pre><code data-trim class="cpp">
+&gt;&gt;&gt; 0.1+0.2
+0.30000000000000004
+&gt;&gt;&gt;
+            </code></pre>
+            <ul>
+              <li> double 有效位數 : 約 16 位</li>
+              <li> 該怎麼辦呢？</li>
+              <li> 改用整數計算</li>
+              <li> <b>寬鬆</b>比對</li>
+            </ul>
+          </section>
+          <section>
+            <h3> 寬鬆比對 </h3>
+            <pre><code data-trim class="cpp">
+bool operator == (const double &amp;a, const double &amp;b)
+{ return abs(a-b) &lt; EPS;}
+bool operator &lt; (const double &amp;a, const double &amp;b)
+{ return a &lt; b - EPS;}
+bool operator &gt; (const double &amp;a, const double &amp;b)
+{ return a &gt; b + EPS;}
+            </code></pre>
+            <ul>
+              <li> EPS : 誤差容忍值</li>
+              <li> 約 $10^{-6}$ ~ $10^{-14}$</li>
+              <li> 視題目性質而定</li>
+            </ul>
+          </section>
+          <section>
+            <h3> 誤差傳遞</h3>
+            <ul>
+              <li> 有誤差的數字，經過運算後誤差會累積 </li>
+              <li> $A = 1.0000\color{red}{2}, B = 1.0000\color{red}{1}$</li>
+              <li> $A+B = 2.0000\color{red}{3}$</li>
+              <li> $A \cdot B = 1.0000\color{red}{3}\color{gray}{0002}$</li>
+              <li> $A / B = 1.00000\color{red}{9}\color{gray}{9999\cdots}$</li>
+              <li> $A-B = \color{gray}{0.0000}\color{red}{1}$</li>
+            </ul>
+          </section>
+          <section>
+            <h3> 誤差傳遞</h3>
+            <ul>
+              <li> EPS 要設夠大 </li>
+              <li> <b>減法</b>要特別注意 </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 數據精度</h3>
+            <ul>
+              <li> EPS 要夠小，不能把不同的數誤判為相同 </li>
+              <li> 輸入座標點為整數，範圍為 $[0, M]$ </li>
+              <li> 不同點間相對誤差約 $O(1/M)$ </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 數據精度</h3>
+            <ul>
+              <li> 機八 Case </li>
+              <li> 角度差 : $O(1/M^2)$ </li>
+            </ul>
+            (圖: 細夾角)
+          </section>
+          <section>
+            <h3> 替代方案</h3>
+            <ul>
+              <li> 萬一精度就是不夠怎麼辦？ </li>
+              <li> long double : 精度 $10^{-19}$ </li>
+              <li> __float128 : 精度 $10^{-34}$ (但非常慢) </li>
+              <li> 回歸<b>整數</b>運算! </li>
+            </ul>
+            (圖: 細夾角)
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 數值方法 </h3>
+            計算幾何中常會碰到求最小值的問題 :
+            <div class="ques">
+              給定一個函數 $f : [a, b] \to \mathbb{R}$ ，求 $\min f(x)$
+            </div>
+          </section>
+          <section>
+            ... 別唬我了，這根本無法做吧
+            (圖 : 尖函數)
+          </section>
+          <section>
+            <p> 如果函數 $f$ 有一些條件呢？</p>
+            <div class="def">
+              如果一個函數 $f$ 在 $x_0$ 處有最小值，且在 $x &lt; x_0$ 時嚴格遞減，
+              $x &gt; x_0$ 時嚴格遞增，則稱 $f$ 為<b>嚴格單極值函數</b>。              
+            </div>
+            (圖)
+          </section>
+          <section>
+            <ul>
+              <li> 隨便戳一點 $x$ </li>
+              <li> $f$ 在 $x$ 處遞減 : 極值在 $x$ 右邊 </li>
+              <li> $f$ 在 $x$ 處遞增 : 極值在 $x$ 左邊 </li>
+              <li> 二分搜！ </li>
+              <li> 時間複雜度 : $O(T \log\left(\frac{b-a}{\epsilon}\right))$ </li>
+              <li> $T$ : $f$ 求值一次的時間；$\epsilon$ : 誤差容忍值 </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <ul>
+              <li> 如何判斷遞增或遞減？ </li>
+              <li> 斜率 $f'(x)$ </li>
+              <li> 取旁邊一個很近的點 $f(x+\epsilon)$ 比大小 </li>
+              <li> 有時候不容易判斷 </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 三分搜尋法</h3>
+            <ul>
+              <li> 戳兩點 $l, r$ </li>
+              <li> $f(l) &lt; f(r)$ : 極值在 $[a, r]$ </li>
+              <li> $f(l) &gt; f(r)$ : 極值在 $[l, b]$ </li>
+              <li> $f(l) = f(r)$ ? </li>
+              <li> 時間複雜度 : $O(T \log\left(\frac{b-a}{\epsilon}\right))$ </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 多變數函數 </h3>
+            <ul>
+              <li> 二維函數 $f(x, y)$ </li>
+              <li> 二維的單極值函數，要怎麼找極小值？ </li>
+              <li> $\displaystyle \min_{x, y} f(x, y) = \min_y \min_x f(x, y)$ </li>
+              <li> 兩次三分搜 </li>
+              <li> 時間複雜度 : $O(T \log^2\left(\frac{b-a}{\epsilon}\right))$ </li>
+              <li> $d$ 維函數呢？ </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 模擬退火 </h3>
+            <ul>
+              <li> 先隨便戳一個點 </li>
+              <li> 一直往下走(函數值小的地方) </li>
+              <li> 總有一天會走到極小值 </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 模擬退火 </h3>
+            <ul>
+              <li> 可是要怎麼知道哪邊的函數值比較小呢？ </li>
+              <li> 最簡單的方法 : 隨便亂試! </li>
+              <li> 函數值變小 $\to$ 走過去 </li>
+              <li> 函數值變大 $\to$ 不理他 </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> Gradient Descent </h3>
+            <ul>
+              <li> 真的只能亂走嗎? </li>
+              <li> 直接計算出函數值<b>變小</b>的方向! </li>
+            </ul>
+            <div class="def">
+              <b>梯度</b> (Gradient) : 概念上就是多維度的<em>斜率</em>。
+              梯度是一個向量，指向函數<em>上升最快</em>(坡度最陡)的方向；
+              大小即為該方向上的斜率。<br>
+              $$\nabla f(x, y) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)$$
+            </div>
+          </section>
+          <section>
+            <h3> Gradient Descent </h3>
+            <ul>
+              <li> 每一次往<b>負</b>梯度的方向走一步 </li>
+              <li> $(x, y) \gets (x, y) - \eta \cdot \nabla f(x, y)$ </li>
+              <li> $\eta$ 參數決定了步長(走的速度) </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 步長的選擇 </h3>
+            <ul>
+              <li> 步長太短 : 收斂太慢 </li>
+              <li> 步長太長 : 會走過頭 (甚至不收斂) </li>
+              <li> 一開始步長大一點，接著慢慢縮小 </li>
+              <li> 例如 : 每次乘以 $0.999$ 倍 </li>
+              <li> 如果走得很順利，也可以放大 </li>
+              <li> Trial &amp; Error ! </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 時間複雜度 </h3>
+            <ul>
+              <li> $O(?)$ </li>
+              <li> 看人品囉... 雖一點的話可能永遠走不完 </li>
+              <li> 函數性質越好，<b>通常</b>會比較快收斂 </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 凸函數 </h3>
+            <div class="def">
+              若一個函數 $f$，對於任意的 $x_1, x_2, 0 \le t \le 1$，皆符合
+              $$ f(t \cdot x_1 + (1-t)\cdot x_2) \leq t\cdot f(x_1) + (1-t)\cdot f(x_2)$$
+              則稱 $f$ 是<b>凸</b>函數。
+            </div>
+            <ul>
+              <li> 1維凸函數：<b>斜率單調遞增</b> </li>
+              <li> 函數曲線永遠在兩點連線下方 </li>
+              <li> 往每個方向走，斜率都單調遞增 </li>
+              <li> Hessian Matrix 永遠是 Positive Semi-Definite </li>
+            </ul>
+            (圖)
+          </section>
+          <section>
+            <h3> 凸函數 </h3>
+            <ul>
+              <li> 凸函數一定單極值 (比單極值更強!) </li>
+              <li> 斜率單調 </li>
+              <li> 越靠近極值點越平緩 </li>
+              <li> 對 Gradient Descent 相當有利 </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 常見的凸函數 </h3>
+            <ul>
+              <li> $x^2$ </li>
+              <li> $2^x$ </li>
+              <li> $x^2 + y^2$ </li>
+              <li> $\sqrt{x^2 + y^2}$ (直線距離)</li>
+              <li> 多個凸函數<b>相加</b> </li>
+              <li> 多個凸函數<b>取$\max$</b> </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 時間複雜度 </h3>
+            <ul>
+              <li> ...還是$O(?)$ </li>
+              <li> 但通常不會太差 </li>
+              <li> 實際跑起來大概走個 $30$ ~ $1000$ 步左右會結束(通常啦...) </li>
+              <li> 保證時間複雜度? 函數條件要更強，而且要用較複雜的演算法 </li>
+              <li> 最簡單的是牛頓插值法 (多維的也不好寫)</li>
+              <li> 其他的嘛... 「線性規劃只是一個特例」</li>
+              <li> 還是放棄吧XDDD </li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> Geometric Median </h3>
+            <div class="prob">
+              平面上有 $N$ 個點，請找一個點，到這 $N$ 個點的距離總和最小。
+            </div>
+            (圖)
+          </section>
+          <section>
+            <h3> Geometric Median </h3>
+            <ul>
+              <li> $N = 3$ : 三角形的費馬點，與三點連線夾角 $120^\circ$ </li>
+              <li> $N \ge 5$ : 沒有解析公式 Q__Q </li>
+            </ul>
+          </section>
+          <section>
+            <h3> Geometric Median </h3>
+            <div class="ques">
+              令
+              $$f(x, y) = \sum_{i=1}^N \sqrt{(x-x_i)^2 + (y-y_i)^2}$$
+              求 $\min f(x, y)$。
+            </div>
+            <ul>
+              <li> $\sqrt{(x-x_i)^2 + (y-y_i)^2}$ 是凸函數 </li>
+              <li> 凸函數相加還是凸函數 </li>
+              <li> $f(x, y)$ 是凸函數! </li>
+            </ul>
+          </section>
+          <section>
+            <h3> Geometric Median </h3>
+            <ul>
+              <li> 用任何一個你喜歡的方法找極值 </li>
+              <li> $\sqrt{x^2+y^2}$ 在原點有個尖點 </li>
+              <li> $f(x, y)$ 在那 $N$ 個點處以外都是平滑的 </li>
+              <li> 模擬退火 / Gradient Descent 都能順利找到極值 </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 最小包含圓 </h3>
+            <div class="prob">
+              平面上有 $N$ 個點，請找一個最小半徑的圓，把這 $N$ 個點包含在內。
+            </div>
+            (圖)
+          </section>
+          <section>
+            <h3> 最小包含圓 </h3>
+            <ul>
+              <li> 有各式各樣的算法 </li>
+              <li> 枚舉3個點的外接圓 : $O(N^4)$ </li>
+              <li> 隨機增量法 : 期望 $O(N)$ </li>
+              <li> 數值方法 </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 最小包含圓 </h3>
+            <div class="ques">
+              設圓心為 $(x, y)$，需要的最小半徑即為最遠的點距離：
+              $$f(x, y) = \max_{i=1}^N \sqrt{(x-x_i)^2 + (y-y_i)^2}$$
+              求 $\min f(x, y)$。
+            </div>
+            <ul>
+              <li> $\sqrt{(x-x_i)^2 + (y-y_i)^2}$ 是凸函數 </li>
+              <li> 凸函數取 $\max$ 還是凸函數 </li>
+              <li> $f(x, y)$ 是凸函數! </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 最小包含圓 </h3>
+            <ul>
+              <li> 取 $\max$ 有個小問題 : 函數會不平滑、有稜角 (不可微分) </li>
+              <li> Gradient Descent 會在兩壁間來回跳動 </li>
+              <li> ...可能會吃土 </li>
+              <li> 模擬退火比較容易成功 </li>
+            </ul>
+          </section>
+          <section>
+            <h3> 模擬退火 vs Gradient Descent </h3>
+            <p>模擬退火:</p>
+            <ul>
+              <li> 適用範圍比較廣 </li>
+              <li> 甚至非單極值函數，也有機會找到最小值 </li>
+              <li> 收斂比較慢 </li>
+            </ul>
+            <p>Gradient Descent:</p>
+            <ul>
+              <li> 如果函數性質良好，收斂相當的快 </li>
+              <li> 良好 : 凸函數、平滑函數 (可微分)</li>
+              <li> 如果函數很糟的話，可能會發散，或是收斂地非常非常慢</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
             <h3> 字串為何如此重要？ </h3>
           </section>
 
