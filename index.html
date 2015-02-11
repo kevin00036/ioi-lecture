@@ -105,8 +105,8 @@
               <li class="fragment"> 純幾何：長度、角度、形狀、全等、相似...</li>
               <li class="fragment"> <b>解析</b>幾何：座標、向量、內積、外積、行列式...難算到要人命</li>
             </ul>
-            <p> 電腦上只能做四則運算... </p>
-            <p> 還是用解析幾何吧!</p>
+            <p class="fragment"> 電腦上只能做四則運算... </p>
+            <p class="fragment"> 還是用解析幾何吧!</p>
           </section>
         </section>
 
@@ -126,7 +126,7 @@
             <h3> 向量 </h3>
             <p> 同樣的$(x, y)$也可以代表一個向量</p>
             <p> 兩者有什麼關聯呢? </p>
-            <p><b>位置向量</b>：從原點指到$(x, y)$的向量</p>
+            <p class="fragment"><b>位置向量</b>：從原點指到$(x, y)$的向量</p>
             <div id="box2" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
               {
@@ -588,7 +588,7 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 board.create('segment', [P3, P4]);
               }
             </script>
-            <p><b> 好麻煩喔 QQQQ </b></p>
+            <p class="fragment"><b> 好麻煩喔 QQQQ </b></p>
           </section>
         </section>
 
@@ -718,6 +718,13 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             </script>
           </section>
           <section>
+            <h3> <b>"凸"</b>包 </h3>
+            <p class="fragment">字不要寫錯啊!</p>
+            <p class="fragment">不然就會變這樣...</p>
+            <img src="sanp15.png" class="fragment"/>
+          </section>
+
+          <section>
             <h3> "凸"多邊形? </h3>
             <ul>
               <li class="fragment"> 內角皆小於 $180^\circ$ </li>
@@ -814,7 +821,7 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           <section>
             <h3> 掃描線 </h3>
             <p>拿一條垂直線，從左掃到右</p>
-            <p> 實作上就只是把點照 $x$ 座標排序 </p>
+            <p class="fragment"> 實作上就只是把點照 $x$ 座標排序 </p>
             <div id="box29" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
               {
@@ -845,7 +852,7 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           </section>
           <section>
             <h3> 矩形覆蓋次數  </h3>
-            <div class="ques">
+            <div class="prob">
               給定平面上 $N$ 個矩形和 $M$ 個點，問每個點被包含在<b>幾個</b>矩形中？
             </div>
             <div id="box30" class="jxgbox" style="width:300px; height:300px;"></div>
@@ -879,7 +886,7 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li class="fragment"> 矩形的右邊界</li>
               <li class="fragment"> 查詢點</li>
             </ul>
-            <p>兩個事件之間，什麼都不會發生!</p>
+            <p class="fragment">兩個事件之間，什麼都不會發生!</p>
             <div id="box31" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
               {
@@ -934,6 +941,24 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li class="fragment"> 查詢點 : 某詢某 $y$ 數值 </li>
               <li class="fragment"> 時間複雜度 : $O((M+N) \log N)$ </li>
             </ul>
+          </section>
+          <section>
+            <div class="prob">
+              平面上有 $N$ 個點，問一條直線最多能同時通過幾個點。
+              ($N \le 1000$)
+            </div>
+          </section>
+          <section>
+            <div class="prob">
+              平面上有 $N$ 條線段，問是否存在<b>任兩條</b>線段相交。
+              ($N \le 10^5$)
+            </div>
+          </section>
+          <section>
+            <div class="prob">
+              平面上有 $N$ 個圓形，問交集面積有多大。
+              ($N \le 100$)
+            </div>
           </section>
         </section>
 
@@ -1271,6 +1296,13 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               }
             </script>
           </section>
+          <section>
+            <div class="prob">
+              平面上 $N$ 個點，請找出包含這 $P$ 個點的最小面積矩形。
+              矩形的邊不一定要平行座標軸。
+              ($N \le 10^5$)
+            </div>
+          </section>
         </section>
 
         <section>
@@ -1279,7 +1311,7 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               請問 $0.1 + 0.2 = $ ?
             </div>
             <p>... 啊不就 $0.3$</p>
-            <p> 恭喜你得到了一個 <font color="red">WA</font> !</p>
+            <p class="fragment"> 恭喜你得到了一個 <font color="red">WA</font> !</p>
           </section>
           <section>
             <h3> 浮點數誤差 </h3>
@@ -1380,8 +1412,12 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
             <script type="text/javascript">
               {
                 var board = JXG.JSXGraph.initBoard('box100', {boundingbox: [-5, 5, 5, -5], axis:true});
+                var arr = [];
+                for(i=0; i<50; i++) arr.push(Math.random() * 5 - 2.5);
                 board.create('functiongraph', [function(x){
-                  return 2-2*Math.exp(1.0/(1+100*x*x));
+                  var nu = Math.floor((x+5)*5);
+                  var ep = x+5-nu/5;
+                  return arr[nu+1] * ep + arr[nu] * (1-ep);
                 }, -5, 5]);
               }
             </script>
@@ -1487,7 +1523,7 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
               <li class="fragment"> 真的只能亂走嗎? </li>
               <li class="fragment"> 直接計算出函數值<b>變小</b>的方向! </li>
             </ul>
-            <div class="def">
+            <div class="def fragment">
               <b>梯度</b> (Gradient) : 概念上就是多維度的<em>斜率</em>。
               梯度是一個向量，指向函數<em>上升最快</em>(坡度最陡)的方向；
               大小即為該方向上的斜率。<br>
@@ -1694,7 +1730,13 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
               <li class="fragment"> 如果函數很糟的話，可能會發散，或是收斂地非常非常慢</li>
             </ul>
           </section>
-
+        </section>
+        <section>
+          <h2>習題 / Q &amp; A</h2>
+        </section>
+        <section>
+          <h2>感謝大家!</h2>
+          <img src="sanp16.png" />
         </section>
 
       </div>
