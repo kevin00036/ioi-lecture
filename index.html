@@ -94,9 +94,9 @@
           <section>
             <h3> 點 </h3>
             <p> 這輕鬆! 只需要兩個數字$(x, y)$</p>
-            <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+            <div id="box" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], axis:true});
+              var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-5, 5, 10, -5], axis:true});
               board.create('point', [5,3], {name:'(5, 3)', strokecolor:'red'});
             </script>
           </section>
@@ -105,9 +105,9 @@
             <p> 同樣的$(x, y)$也可以代表一個向量</p>
             <p> 兩者有什麼關聯呢? </p>
             <p><b>位置向量</b>：從原點指到$(x, y)$的向量</p>
-            <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+            <div id="box2" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box2', {boundingbox: [-10, 10, 10, -10], axis:true});
+              var board = JXG.JSXGraph.initBoard('box2', {boundingbox: [-5, 5, 10, -5], axis:true});
               var pt = board.create('point', [5,3], {name:'(5, 3)', strokecolor:'red'});
               var li3 = board.create('line', [[0,0],pt], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true});
             </script>
@@ -157,21 +157,46 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> $\vec{P_0} = (x_0, y_0)$ : 直線上任意一點 </p>
             <p> $\vec{d} = (d_x, d_y)$ : <b>方向</b>向量 </p>
             <p> 就說向量比較好用吧..</p>
-            (圖)
+            <div id="box3" class="jxgbox" style="width:300px; height:200px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box3', {boundingbox: [-5, 5, 10, -5], axis:true});
+              var A = [1, 1];
+              var B = [8, 3];
+              board.create('point', A, {name:'P0', strokecolor:'red'});
+              board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
+              board.create('line', [A,B], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+            </script>
           </section>
           <section>
             <h3> 線段 </h3>
             <p> 線段 $\overline{P_1P_2}$ </p>
             $$ (x, y) = P_1 + t \cdot (P_2 - P_1), \ \color{red}{0 \le t \le 1}$$
             <p> $\vec{d} = P_2 - P_1$ : <b>方向</b>向量 </p>
-            (圖)
+            <div id="box4" class="jxgbox" style="width:300px; height:200px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box4', {boundingbox: [-5, 5, 10, -5], axis:true});
+              var A = [1, 1];
+              var B = [8, 3];
+              board.create('point', A, {name:'P1', strokecolor:'red'});
+              board.create('point', B, {name:'P2', strokecolor:'red'});
+              board.create('segment', [A,B], {strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+            </script>
           </section>
           <section>
             <h3> 多邊形 </h3>
             <p> $N$ 個頂點，兩兩連線繞成一圈</p>
             <p> $P_1, P_2, P_3, \cdots, P_N$</p>
             <p> $\overline{P_1P_2}, \overline{P_2P_3}, \cdots, \overline{P_NP_1}$ </p>
-            (圖)
+            <div id="box5" class="jxgbox" style="width:300px; height:200px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box5', {boundingbox: [-5, 5, 10, -5]});
+              var poly = [[0, 4], [3, 2], [3, -1], [2, 0], [-2, -2], [-3, 1]];
+              board.create('polygon', poly);
+              for(i=0; i<6; i++)
+              {
+                board.create('point', poly[i], {name:'P'+(6-i), strokecolor:'red'});
+              }
+            </script>
           </section>
         </section>
 
@@ -179,7 +204,15 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           <section>
             <h3> 有向直線 </h3>
             $$ (x, y) = P_0 + t \cdot \color{green}{\vec{d}}, \ t \in \mathbb{R}$$
-            (圖)
+            <div id="box6" class="jxgbox" style="width:300px; height:200px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box6', {boundingbox: [-5, 5, 10, -5]});
+              var A = [1, 1];
+              var B = [8, 3];
+              board.create('point', A, {name:'P0', strokecolor:'red'});
+              board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
+              board.create('line', [A,B], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+            </script>
 
           </section>
           <section>
@@ -188,20 +221,48 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               $\color{green}{\vec{d}} \times \vec{P_0P} \color{blue}{&gt;} 0$</p>
             <p> 直線<font color="red">右</font>邊(<font color="red">負</font>方向) : 
               $\color{green}{\vec{d}} \times \vec{P_0P} \color{red}{&lt;} 0$</p>
-            (圖)
+            <div id="box7" class="jxgbox" style="width:300px; height:200px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box7', {boundingbox: [-5, 5, 10, -5]});
+              var A = [1, 1];
+              var B = [8, 3];
+              var C = [1, 4];
+              var D = [6, -2];
+              board.create('point', A, {name:'P0', strokecolor:'red'});
+              board.create('point', C, {name:'P', strokecolor:'red'});
+              board.create('point', D, {name:'P', strokecolor:'red'});
+              board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
+              var l = board.create('segment', [A,B], {lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}, strokeColor:'green'});
+              var l2 = board.create('segment', [A,C], {lastArrow:true});
+              var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
+              ineq = board.create('inequality', [l]);
+              ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
+            </script>
           </section>
           <section>
             <h3> 有向角度 </h3>
             <p> 與轉的方向有關!</p>
             <p> 逆時針(往<font color="blue">左</font>邊轉) : <font color="blue">正</font>角度 </p> 
             <p> 順時針(往<font color="red">右</font>邊轉) : <font color="red">負</font>角度 </p>
-            (圖)
-          </section>
-          <section>
-            <h3> 有向角度 </h3>
             $$ \vec{BA} \times \vec{BC} = |BA||BC| \sin(\angle ABC)$$
             $$ \vec{BA} \cdot \vec{BC} = |BA||BC| \cos(\angle ABC)$$
-            (圖)
+            <div id="box8" class="jxgbox" style="width:300px; height:200px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box8', {boundingbox: [-5, 5, 10, -5]});
+              var A = [1, 1];
+              var B = [8, 3];
+              var C = [1, 4];
+              var D = [6, -2];
+              board.create('point', A, {name:'B', strokecolor:'red'});
+              board.create('point', B, {name:'A', strokecolor:'red'});
+              board.create('point', C, {name:'C', strokecolor:'red'});
+              board.create('point', D, {name:'C', strokecolor:'red'});
+              var l = board.create('segment', [A,B], {lastArrow:true, strokeColor:'green'});
+              var l2 = board.create('segment', [A,C], {lastArrow:true});
+              var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
+              var a1 = board.create('angle', [B,A,C], {strokeColor:'blue', fillColor:'blue', radius:1, withLabel:false});
+              var a2 = board.create('angle', [D,A,B], {strokeColor:'red', fillColor:'red', radius:1, withLabel:false});
+            </script>
           </section>
           <section>
             <h3> 判斷方向 </h3>
@@ -214,13 +275,43 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 <li> $0$ : $P_1, P_2, P_3$ 三點共線</li>
               </ul>
             </p>
-            (圖)
+            <div id="box9" class="jxgbox" style="width:300px; height:200px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box9', {boundingbox: [-5, 5, 10, -5]});
+              var A = [1, 1];
+              var B = [8, 3];
+              var C = [1, 4];
+              var D = [6, -2];
+              board.create('point', A, {name:'P1', strokecolor:'red'});
+              board.create('point', B, {name:'P2', strokecolor:'red'});
+              board.create('point', C, {name:'P3', strokecolor:'red'});
+              board.create('point', D, {name:'P3', strokecolor:'red'});
+              var l = board.create('segment', [A,B], {lastArrow:true, strokeColor:'green'});
+              var l2 = board.create('segment', [A,C], {lastArrow:true});
+              var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
+              var a1 = board.create('angle', [B,A,C], {strokeColor:'blue', fillColor:'blue', radius:1, withLabel:false});
+              var a2 = board.create('angle', [D,A,B], {strokeColor:'red', fillColor:'red', radius:1, withLabel:false});
+            </script>
           </section>
           <section>
             <h3> 有向面積 </h3>
             <p> 三角形的<b>有向</b>面積</p>
-            $$ \Delta ABC = \frac{1}{2} \vec{AB} \times \vec{AC}$$
-            (圖: +/-)
+            $$ \Delta ABC = \frac{1}{2} \vec{BA} \times \vec{BC}$$
+            <div id="box10" class="jxgbox" style="width:300px; height:200px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box10', {boundingbox: [-5, 5, 10, -5]});
+              var A = [1, -3];
+              var B = [8, 3];
+              var C = [1, 4];
+              board.create('point', A, {name:'B', strokecolor:'red'});
+              board.create('point', B, {name:'A', strokecolor:'red'});
+              board.create('point', C, {name:'C', strokecolor:'red'});
+              var l = board.create('segment', [A,B], {lastArrow:true});
+              var l2 = board.create('segment', [A,C], {lastArrow:true});
+              var l3 = board.create('segment', [B,C], {});
+              var poly = board.create('polygon', [A,B,C], {fillColor:'blue'});
+              var t = board.create('text', [3, 3, '+'], {fontSize: 36});
+            </script>
           </section>
           <section>
             <h3> 有向面積 </h3>
@@ -228,14 +319,40 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> 切割成$N$個三角形!</p>
             $$ \mathrm{Area}(P_1P_2\cdots P_N) = \Delta P_1AP_2 + \Delta P_2AP_3
              + \cdots + \Delta P_NAP_1$$
-            (圖: 逆時針切割)
+            <div id="box11" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box11', {boundingbox: [-5, 5, 5, -5]});
+              var A = [0, 0];
+              var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+              board.create('point', A, {name:'A'});
+              board.create('polygon', poly);
+              for(i=0; i<5; i++)
+              {
+                board.create('point', poly[i], {name:'P'+(i+1)});
+                board.create('segment', [poly[i],poly[(i+1)%5]], {lastArrow:true});
+                board.create('segment', [A, poly[i]], {lastArrow:true});
+              }
+            </script>
           </section>
           <section>
             <h3> 有向面積 </h3>
             <p> <b>凹</b>多邊形的有向面積</p>
             <p> 照切!</p>
             <p> <b>有向</b>面積的好處 : 正負會抵消掉</p>
-            (圖: 正負號抵銷)
+            <div id="box12" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box12', {boundingbox: [-5, 5, 5, -5]});
+              var A = [0, 0];
+              var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+              board.create('point', A, {name:'A'});
+              board.create('polygon', poly);
+              for(i=0; i<5; i++)
+              {
+                board.create('point', poly[i], {name:'P'+(i+1)});
+                board.create('segment', [poly[i],poly[(i+1)%5]], {lastArrow:true});
+                board.create('segment', [A, poly[i]], {lastArrow:true});
+              }
+            </script>
           </section>
           <section>
             <h3> 有向面積 </h3>
@@ -248,7 +365,12 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           </section>
           <section>
             <p> 真的嗎...^_^;;</p>
-            (非簡單多邊形)
+            <div id="box13" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box13', {boundingbox: [-5, 5, 5, -5]});
+              var poly = [[3, 0], [-2, 3], [-1, -3], [3, -1], [-3, 2], [-4,-4]];
+              board.create('polygon', poly);
+            </script>
           </section>
           <section>
             <h3> 簡單多邊形 </h3>
@@ -256,7 +378,12 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 邊不相交 </li>
             </ul>
             <br>
-            (圖)
+            <div id="box14" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box14', {boundingbox: [-5, 5, 5, -5]});
+              var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
+              board.create('polygon', poly);
+            </script>
           </section>
           <section>
             <h3> 有向面積 </h3>
@@ -275,7 +402,16 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <div class="ques">
               給定兩條線段 $\overline{P_1P_2}$ 和 $\overline{P_3P_4}$，請問他們有交點嗎？
             </div>
-            (圖)
+            <div id="box15" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box15', {boundingbox: [-5, 5, 5, -5]});
+              var P1 = board.create('point', [-2, -1], {name: 'P1'});
+              var P2 = board.create('point', [2, 3], {name: 'P2'});
+              var P3 = board.create('point', [-3, 2], {name: 'P3'});
+              var P4 = board.create('point', [2, -2], {name: 'P4'});
+              board.create('segment', [P1, P2]);
+              board.create('segment', [P3, P4]);
+            </script>
           </section>
           <section>
             <h3> 直線相交 </h3>
@@ -283,7 +419,18 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <div class="ques">
               給定兩條<b>直線</b> $\overline{P_1P_2}$ 和 $\overline{P_3P_4}$，請問他們有交點嗎？
             </div>
-            (圖)
+            <div id="box16" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box16', {boundingbox: [-5, 5, 5, -5]});
+              var P1 = board.create('point', [-2, -1], {name: 'P1'});
+              var P2 = board.create('point', [2, 3], {name: 'P2'});
+              var P3 = board.create('point', [-3, 2], {name: 'P3'});
+              var P4 = board.create('point', [2, -2], {name: 'P4'});
+              board.create('line', [P1, P2], {strokeColor:'lightgreen'});
+              board.create('line', [P3, P4], {strokeColor:'lightgreen'});
+              board.create('segment', [P1, P2]);
+              board.create('segment', [P3, P4]);
+            </script>
           </section>
           <section>
             <h3> 直線相交 </h3>
@@ -322,11 +469,29 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> $\mathrm{ori}(P_1, P_2, P_3) \cdot \mathrm{ori}(P_1, P_2, P_4) &lt; 0$ </li>   
               <li> $\mathrm{ori}(P_3, P_4, P_1) \cdot \mathrm{ori}(P_3, P_4, P_2) &lt; 0$ </li>   
             </ul>
-            (圖)
+            <div id="box17" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box17', {boundingbox: [-5, 5, 5, -5]});
+              var P1 = board.create('point', [-2, -1], {name: 'P1'});
+              var P2 = board.create('point', [2, 3], {name: 'P2'});
+              var P3 = board.create('point', [-3, 2], {name: 'P3'});
+              var P4 = board.create('point', [2, -2], {name: 'P4'});
+              board.create('segment', [P1, P2]);
+              board.create('segment', [P3, P4]);
+            </script>
           </section>
           <section>
             <h3> 慘了了 </h3>
-            (圖 : 相交在邊上)
+            <div id="box18" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box18', {boundingbox: [-5, 5, 5, -5]});
+              var P1 = board.create('point', [-2, -1], {name: 'P1'});
+              var P2 = board.create('point', [2, 3], {name: 'P2'});
+              var P3 = board.create('point', [-1, 0], {name: 'P3'});
+              var P4 = board.create('point', [2, -2], {name: 'P4'});
+              board.create('segment', [P1, P2]);
+              board.create('segment', [P3, P4]);
+            </script>
           </section>
           <section>
             <h3> 線段相交 </h3>
@@ -337,7 +502,16 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 延伸的直線不重合 : 無交點</li>
               <li> 延伸的直線重合 : 一維的判斷交點</li>
             </ul>
-            (圖: 1維)
+            <div id="box19" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box19', {boundingbox: [-5, 5, 5, -5]});
+              var P1 = board.create('point', [-2, 0], {name: 'P1'});
+              var P2 = board.create('point', [0, 0], {name: 'P2'});
+              var P3 = board.create('point', [1, 0], {name: 'P3'});
+              var P4 = board.create('point', [4, 0], {name: 'P4'});
+              board.create('segment', [P1, P2]);
+              board.create('segment', [P3, P4]);
+            </script>
             <p><b> 好麻煩喔 QQQQ </b></p>
           </section>
         </section>
@@ -348,7 +522,14 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <div class="ques">
               給定一個<b>簡單多邊形</b>和一個點 $A$，請問 $A$ 在該多邊形的內部還是外部？
             </div>
-            (圖)
+            <div id="box20" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box20', {boundingbox: [-5, 5, 5, -5]});
+              var A = [-0.5, 2];
+              var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
+              board.create('point', A, {name:'A', strokeColor:'green'});
+              board.create('polygon', poly);
+            </script>
           </section>
           <section>
             <h3> 多邊形內外判斷</h3>
@@ -368,7 +549,16 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 偶數次 : 原本的點在<b>外部</b> </li>
               <li> 奇數次 : 原本的點在<b>內部</b> </li>
             </ul>
-            (圖)
+            <div id="box21" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box21', {boundingbox: [-5, 5, 5, -5]});
+              var A = [-0.5, 2];
+              var B = [6, 3];
+              var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
+              board.create('point', A, {name:'A', strokeColor:'green'});
+              board.create('polygon', poly);
+              board.create('segment', [A,B]);
+            </script>
           </section>
           <section>
             <h3> 多邊形內外判斷</h3>
@@ -387,17 +577,16 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 隨機取一個方向射線，交到邊、頂點的機率很低 (為什麼?) </li>
               <li> 座標都是整數(範圍 $W$ )的話，外面的點取 $(W, W+1)$，肯定不會交到邊點 </li>
             </ul>
-            (圖)
-          </section>
-          <section>
-            <h3> 多邊形內外判斷</h3>
-            <ul>
-              <li> 如果是<b>凸</b>多邊形呢？ </li>
-              <li> 中間找一個點 $A$，連線到每個頂點 </li>
-              <li> 把一圈分成 $N$ 個角度區間 </li>
-              <li> 查詢時，先二分搜出在哪個區間，再檢查是否在三角形內</li>
-              <li> 時間複雜度 : 預處理 $O(N)$，查詢$O(\log N)$</li>
-            </ul>(圖)
+            <div id="box22" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box22', {boundingbox: [-5, 5, 5, -5]});
+              var A = [-0.5, 2];
+              var B = [2, 7];
+              var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
+              board.create('point', A, {name:'A', strokeColor:'green'});
+              board.create('polygon', poly);
+              board.create('segment', [A,B]);
+            </script>
           </section>
           <section>
             <h3> 多邊形內外判斷</h3>
@@ -408,6 +597,22 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 查詢時，先二分搜出在哪個區間，再檢查是否在三角形內</li>
               <li> 時間複雜度 : 預處理 $O(N)$，查詢$O(\log N)$</li>
             </ul>
+            <div id="box23" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box23', {boundingbox: [-5, 5, 5, -5]});
+              var A = [0, 0];
+              var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+              board.create('point', A, {name:'A'});
+              board.create('point', [2,1], {name:'P'});
+              board.create('polygon', poly);
+              for(i=0; i<5; i++)
+              {
+                board.create('point', poly[i], {name:'P'+(i+1)});
+                board.create('segment', [A, poly[i]], {lastArrow:true});
+              }
+              board.create('segment', [A, 'P'], {lastArrow:true, strokeColor:'yellow'});
+              board.create('polygon', [A,poly[0],poly[1]], {fillColor:'blue'});
+            </script>
           </section>
         </section>
 
@@ -417,7 +622,14 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <div class="ques">
               給定平面上一個點集，請找出包含這個點集的最小面積<b>凸</b>多邊形。
             </div>
-            (圖: "凸"包)
+            <div id="box24" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box24', {boundingbox: [-5, 5, 5, -5]});
+              var poly = [[3, 0], [1, 0], [1, 2], [-1, 2], [-1, 0], [-3, 0], [-3, -2], [3, -2]];
+              var poly2 = [[3, 0], [1, 2], [-1, 2], [-3, 0], [-3, -2], [3, -2]];
+              board.create('polygon', poly);
+              board.create('polygon', poly2, {fillColor: 'yellow'});
+            </script>
           </section>
           <section>
             <h3> "凸"多邊形? </h3>
@@ -425,7 +637,16 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 內角皆小於 $180^\circ$ </li>
               <li> 兩點連線包含在多邊形內 </li>
             </ul>
-            (圖: 兩點連線在內部)
+            <div id="box25" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box25', {boundingbox: [-5, 5, 5, -5]});
+              var poly2 = [[3, 0], [1, 2], [-1, 2], [-3, 0], [-3, -2], [3, -2]];
+              board.create('polygon', poly2, {fillColor: 'yellow'});
+
+              var A = board.create('point', [-2, -1]);
+              var B = board.create('point', [-1, 1]);
+              var l = board.create('segment', [A, B]);
+            </script>
           </section>
           <section>
             <h3> 捲包裹法 </h3>
@@ -434,7 +655,18 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 每次找最靠右邊的，加入凸包</li>
               <li> 時間複雜度 : $O(N^2)$</li>
             </ul>
-            (圖)
+            <div id="box26" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box26', {boundingbox: [-5, 5, 5, -5]});
+              var poly2 = [];
+              for(i=0; i<20; i++)
+              {
+                var x = Math.random()*9-4.5;
+                var y = Math.random()*9-4.5;
+                poly2.push([x, y]);
+              }
+              board.create('polygon', poly2, {fillColor: 'yellow'});
+            </script>
           </section>
           <section>
             <h3> Monotone Chain </h3>
@@ -453,7 +685,21 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li> 用外積判斷夾角</li>
               <li> 凸包根本沒有2個點? 那直接加入</li>
             </ul>
-            (圖: 凸角，凹角)
+            <div id="box27" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box27', {boundingbox: [-5, 5, 5, -5]});
+              var A = board.create('point', [-4, 1], {name:'A'});
+              var B = board.create('point', [-3, 0], {name:'B'});
+              var C = board.create('point', [-1, 1], {name:'C'});
+              board.create('segment', [A,B]);
+              board.create('segment', [B,C], {dash:true});
+              var D = board.create('point', [0, -1], {name:'A'});
+              var E = board.create('point', [1, 0], {name:'B'});
+              var F = board.create('point', [3, -2], {name:'C'});
+              board.create('segment', [D,E]);
+              board.create('segment', [E,F], {dash:true});
+              board.create('line', [[-0.5,-6],[-0.5,6]], {dash:true, strokeColor:'lightgreen'});
+            </script>
           </section>
           <section>
             <h3> Monotone Chain </h3>
@@ -476,15 +722,59 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           <section>
             <h3> 掃描線 </h3>
             <p>拿一條垂直線，從左掃到右</p>
-            (圖)
             <p> 實作上就只是把點照 $x$ 座標排序 </p>
+            <div id="box29" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box29', {boundingbox: [-5, 5, 5, -5]});
+              var poly2 = [];
+              for(i=0; i<20; i++)
+              {
+                var x = Math.random()*9-4.5;
+                var y = Math.random()*9-4.5;
+                poly2.push([x, y]);
+                board.create('point', poly2[i], {withLabel:false});
+              }
+
+              var P = board.create('point', [-5,-6]);
+              var Q = board.create('point', [-5,6]);
+              var li = board.create('line', [P, Q]);
+
+              var f = function(){
+                P.moveTo([5, -6], 2000);
+                Q.moveTo([5, 6], 2000);
+                P.moveTo([-5, -6], 1);
+                Q.moveTo([-5, 6], 1);
+                setTimeout(f, 3000);
+              };
+              f();
+            </script>
           </section>
           <section>
             <h3> 矩形覆蓋次數  </h3>
             <div class="ques">
               給定平面上 $N$ 個矩形和 $M$ 個點，問每個點被包含在<b>幾個</b>矩形中？
             </div>
-            (圖)
+            <div id="box30" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box30', {boundingbox: [-5, 5, 5, -5]});
+              var poly2 = [];
+              for(i=0; i<10; i++)
+              {
+                var x = Math.random()*9-4.5;
+                var y = Math.random()*9-4.5;
+                poly2.push([x, y]);
+                board.create('point', poly2[i], {withLabel:false});
+              }
+              for(i=0;i<5;i++)
+              {
+                var x1 = Math.random()*9-4.5;
+                var y1 = Math.random()*9-4.5;
+                var x2 = Math.random()*9-4.5;
+                var y2 = Math.random()*9-4.5;
+                board.create('polygon', [[x1,y1],[x1,y2],[x2,y2],[x2,y1]], {vertices:{visible:false}});
+              }
+
+            </script>
           </section>
           <section>
             <h3> 矩形覆蓋次數  </h3>
@@ -677,7 +967,15 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
               <li> 機八 Case </li>
               <li> 角度差 : $O(1/M^2)$ </li>
             </ul>
-            (圖: 細夾角)
+            <div id="box99" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              var board = JXG.JSXGraph.initBoard('box99', {boundingbox: [-5, 5, 6, -5], axis:true});
+              var A = board.create('point', [0,0], {name:'O'});
+              var B = board.create('point', [4,3], {name:'(4,3)'});
+              var C = board.create('point', [5,4], {name:'(5,4)'});
+              board.create('segment', [A,B]);
+              board.create('segment', [A,C]);
+            </script>
           </section>
           <section>
             <h3> 替代方案</h3>
@@ -687,7 +985,6 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
               <li> __float128 : 精度 $10^{-34}$ (但非常慢) </li>
               <li> 回歸<b>整數</b>運算! </li>
             </ul>
-            (圖: 細夾角)
           </section>
         </section>
 
@@ -954,426 +1251,6 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
 
         </section>
 
-        <section>
-          <section>
-            <h3> 字串為何如此重要？ </h3>
-          </section>
-
-          <section>
-            <h3> 資料檢索 </h3>
-            <p>
-              <ul>
-                <li> google </li>
-                <li> ctrl-F </li>
-              </ul>
-            </p>
-          </section>
-
-          <section>
-            <h3> 生物資訊 </h3>
-            <p>
-              <ul>
-                <li> DNA 比對 </li>
-              </ul>
-            </p>
-          </section>
-
-          <section>
-            <h3> 最重要的是他常常在資訊題目中出現 </h3>
-            <p> 當然一定要好好弄清楚
-            </p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h3> 字串相關的問題 </h3>
-            <p> 剛剛的問題都圍繞在一個最基本的問題上：<br> <b> 匹配(Matching) </b>  </p>
-            <p>
-              也就是我們會關心一個字串 \( B \) <br> 有沒有出現在 \( A \) 上 ？ 
-            </p>
-          </section>
-          <section>
-            <h3> 一些我們關心的問題 </h3>
-            <p>
-              <ul>
-                <li> 匹配字串的數量：<br> 一對一？一對多？多對多？ </li>
-                <li> 出現的位置 </li>
-                <li> 出現的數量 </li>
-              </ul>
-            </p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h3> 一些定義 </h3>
-            <div class="def"> 
-              一個 <em> 字串 \( A \)</em> 是由在 <em>字元集 \( \Sigma \)</em> 裡的字元所組成的<b>序列</b>。
-              我們記作 \( A = a_0 a_1 a_2 \cdots a_{n-1} \)，其中 \( n \) 為字串的 <em> 長度 </em>。
-            </div>
-          </section>
-
-          <section>
-            <h3> 一些定義 </h3>
-            <div class="def"> 
-              一個字串 \( A \) 的<em>子字串</em>是 \( A \) 的一段連續子序列 \( a_i a_{i+1} \cdots a_j \)，我們記作
-              \( A[i, j] \)
-            </div>
-
-            <p> 如 \( A = \str{abcd} \)， \( A[1, 3] = \str{bcd} ,  A[1, 2] = \str{bc} \) 
-            </p>
-            <p> 可以知道用 \( B \) 匹配 \( A \) 其實就是在問 \( B \) 是不是 \( A \) 的子字串！ </p>
-          </section>
-
-          <section>
-            <h3> 一些定義 </h3>
-            <div class="def"> 
-              一個字串 \( A \) 的<em>後綴</em>是 \( A \) 的一個子字串 \( A[i, n-1] \)，記作 \( S_A(i) \)。 類似的我們也可以定義<em>前綴</em>
-            </div>
-
-            <p> 如 \( A = \str{abcd} \)， \( S(1) = A[1, 3] = \str{bcd}\) ，<br> 簡單來說就是 \( A \) 尾巴的子字串！
-            </p> <br>
-            <p> 一個簡單的廢話： </p>
-            <div class="thm"> 
-              一個字串 \( A \) 的子字串一定是他某個後綴的前綴 。
-            </div>
-          </section>
-
-        </section>
-
-        <section>
-          <h3> 今天最重要的問題 </h3>
-          <div class="ques"> 
-            請用 \( B \) 匹配 \( A \) ，並告訴我 \( B \) 出現在哪些位置。
-            要快、狠、準！
-          </div>
-        </section>
-
-        <section>
-          <section>
-            <h3> 暴力法！ </h3>
-            <p> 啊就一個一個位置慢慢試嘛… </p>
-            <pre><code data-trim class="cpp">
-for(int i = 0; i < lenA - lenB; i++) {
-  bool flag = true;
-  for(int j = 0; j < lenB && flag; j++) {
-    if(A[i+j] != B[j]) flag = false;
-  }
-  if( flag ) {
-    // Match !
-  }
-}
-          </code></pre>
-            <p>
-              在亂數的情形下 \( \ord{N} \) ！
-            </p>
-          </section>
-
-          <section>
-            <p> 當然，測資哪會給你那麼好過！ </p>
-            <p> 考慮 \( A = \texttt{"aaa} \cdots \texttt{aa"}, B = \texttt{"aaa} \cdots \texttt{ab"} \) ， <br>
-              並且 \( A \) 的長度遠大於 \( B \) </p>
-            <p> \( B \) 從來沒有出現在 \( A \) 上，但你每個位置都要匹配到 \( B \) 的末端才知道！ </p>
-            <p> 總匹配數： \( \left( \abs{A} - \abs{B} \right) \abs{B} = \ord{ \abs{A} \abs{B} } \) </p>
-            <p> 不夠好！ </p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2> Hashing </h2>
-            <p> 就像我們找東西會先分類一樣，何不先把字串分類？ </p>
-            <p> Want : 一個函數 \( f : \texttt{string} \mapsto \{ 0, 1, \cdots, Q-1\}  \) </p> <br>
-            <p> 要求： <br>
-              <ol>
-                <li> \( f \) 容易求得 </li>
-                <li> \( f \) 均勻 </li>
-              </ol>
-            </p>
-          </section>
-
-          <section>
-            <h2> Hashing </h2>
-
-            <div class="def">
-              我們定義 Rolling Hash Function 為 
-              <div>
-                $$ f(A) = a_0 p^{n-1} + a_1 p^{n-2} + \cdots + a_{n-2} p + a_{n-1} \mod{q} $$
-              </div>
-              其中 \( p, q \) 為挑好的質數
-            </div>
-            <p> 有點像進位制。 </p>
-          </section>
-
-          <section>
-            <p> 好處： 可以滾動(Roll)！ </p>
-            <div class="thm">
-              $$ f(A) \equiv f(A[0, n-2]) p + a_{n-1} \pmod{q} $$
-              並且
-              $$ f(A[i, j]) \equiv f(A[0, j]) - p^{j-i+1} f(A[0, i-1]) \pmod{q} $$
-            </div>
-            <p> 記下所有 \( f(A[0, k]) \) ， 所有 \( f(A[i, j]) \) 都可立刻 ( \( \ord{1} \) )求出！
-            </section>
-
-            <section>
-              <h2> 用 Hashing 來匹配 </h2>
-              <p> 算出 \( f(A), f(B) \) </p>
-              <ul>
-                <li> 如果 \( f(A) \ne f(B) \) ，那必定 \(A \ne B\) 。 </li>
-                <li> 但如果 \( f(A) = f(B) \) ，還必會有 \(A = B\) 嗎？ <br>
-                  &#8594; 不一定，但發生意外的機率極低！</li>
-              </ul>
-              <p> 碰撞的機率是 \( 1/q \) &#8594; 最好 \(q\) 大一點！</p>
-            </section>
-
-            <section>
-              <div class="prob">
-                Klingon Warfare <a href="http://acm.csie.org/ntujudge/problem.php?id=2196"> 2013 Pacific Northwest Region Programming Contest </a> <br>
-                <hr>
-                給兩棵樹，每個節點上有一個字母，並且一個點的子節點是有序的，在兩者分別找一個子樹使得這兩棵子樹相等，並且點的數目最多。 <br>
-                ( 點的數量 \( \abs{V} \leq 10^6 \) )
-              </div>
-              <p> 咦？跟字串有什麼關係？ </p>
-            </section>
-          </section>
-
-          <section>
-            <section>
-              <h2> KMP </h2>
-              <p> Knuth–Morris–Pratt algorithm </p>
-              <p> 應該是最廣為人知的線性單字串匹配演算法 </p>
-            </section>
-
-            <section>
-              <h2> Fail function </h2>
-              <p> 在暴力法時我們每次匹配失敗時，往前一格，繼續匹配 </p>
-              <p>但往前一格真的是必要的嗎？</p>
-              <p> 其實有可能右移 \( 1, 2, \cdots, k-1 \) 都是不必要的，直接右移 \(k\) 就可以了。</p>
-              <p> Want: \( \fail(i) \) 要告訴我們，當我們匹配到 \( B[i] = A[j]\)，卻在 \( B[i+1] \) 的位置匹配失敗，應把
-                \( B[\fail(i)] \) 對齊 \(A[j]\) 繼續匹配。 </p>
-              <div class="quick">
-                \( \fail(0) \) 應該要是多少？ 
-              </div>
-            </section>
-
-            <section>
-              <p> 仔細思考一陣，你會發現如果 \( \fail(i) = k \) ， 那 \( B[0, k] = B[i-k, i] \) </p>
-              <p> 而且 \( \fail(i) \) 還要是滿足此性質的最大質，否則會漏掉一些可能性 </p> 
-              <div class="def">
-                $$ \fail_B(i) = \begin{cases}
-                \max \{ k: P_B(k) = B[0, k] = B[i-k, i] \} \\
-                -1  \\
-                \end{cases}
-                $$
-              </div><br>
-              <p> 那要怎麼求出 \( \fail(i) \) 呢？ </p>
-            </section>
-
-            <section>
-              <h3> Fail function 的遞回 </h3>
-              <p> 利用 \( \fail(k) : k \le i \) ， 我們可以求出 \( \fail(i) \) ！ </p>
-              <p> 不段嘗試 \( \fail(i), \fail^2(i), \fail^3(i), \cdots \) </p>
-            </section>
-
-            <section>
-              <h3> Sample Code </h3>
-              <pre><code data-trim>
-void build_fail_function(string B, int *fail) {
-    int len = B.length(), current_pos;
-    current_pos = fail[0] = -1; //Specially fail[0] = -1
-    for( int i = 1 ; i < len ; i ++ ) {
-        while( current_pos != -1
-               && B[current_pos + 1] != B[i] ) {
-            current_pos = fail[current_pos];
-        }
-        if( B[ current_pos + 1 ] == B[i] ) current_pos ++;
-        fail[i] = current_pos;
-    }
-}
-                </code></pre>
-            </section>
-            <section>
-              <h3> Sample Code </h3>
-              <pre><code data-trim>
-void match(string A, string B, int *fail) {
-    int lenA = A.length(), lenB = B.length();
-    int current_pos = -1;
-    for( int i = 0 ; i < lenA ; i ++ ) {
-        while( current_pos != -1 
-               && B[current_pos + 1] != A[i] ) {
-            current_pos = fail[current_pos];
-        }
-        if( B[current_pos + 1] == A[i] ) current_pos ++;
-        if( current_pos == lenB - 1 ) {
-            // Match ! A[i - lenB + 1, i] = B
-            current_pos = fail[current_pos];
-        }
-    }
-}
-                </code></pre>
-            </section>
-
-            <section>
-              <div class="prob">
-                字串的周期 <a> 經典問題 </a> <br>
-                <hr>
-                對一個字串 \( A \) ，如果 \( A[i] = A[i+k] \) ， 我們就稱 \( k \) 是 \( A \) 的周期。 請找出 \( A \) 所有的周期。
-                (  \( \ord{\abs{A}} \) )
-              </div>
-            </section>
-
-            <section>
-              <div class="prob">
-                ABA  <a> 經典問題 </a> <br>
-                <hr>
-                對一個字串 \( S \) ，請找一個最長的 \(A\) 使得 \( S = ABA \)
-                (  \( \ord{\abs{S}} \) )
-              </div>
-            </section>
-
-
-          </section>
-
-          <section>
-            <section>
-              <h3> Z algorithm </h3>
-              <p> 光是名字聽起來就很潮 </p>
-              <div class="def">
-                \( Z(i) \) 表示 \( A[i, n-1] \) 可以和 \( A \) 匹配多長，也就是 \( A[i, i+Z(i)-1] = A[0, Z(i)-1] \)。<br>
-                特別令 \( Z(0) = 0 \)。
-              </div>
-
-              <div class="quick">
-                \( A = \str{abaab} , Z_A(i) = ? \)
-              </div>
-            </section>
-
-
-
-            <section>
-              <h3> 如何求得 Z-Value ? </h3>
-              <p>利用已知的資訊！</p>
-              <script type="text/paperscript" canvas="myCanvas">
-                var start = new Point(10, 100);
-                var end = start + [400, 0];
-                var path = new CompoundPath({
-                  children: [
-                    new Path.Line(start, end), 
-                    new Path.Line(start - [0, 20], start + [0, 20]), 
-                    new Path.Line(end - [0, 20], end + [0, 20]), 
-                  ],
-                });
-                path.style = {
-                  strokeColor: 'black',
-                  strokeWidth: 5,
-                };
-                var rect1 = new Rectangle(start - [0, 20], start + [100, 20]);
-                var pathRec = new Path.RoundRectangle(rect1, 5);
-                pathRec.style = {
-                  fillColor: 'blue',
-                };
-              </script>
-              <canvas id="myCanvas" width="450" height="300"></canvas>
-            </section>
-
-            <section>
-              <h3> 如何求得 Z-Value ? </h3>
-              <p>利用已知的資訊！</p>
-            </section>
-
-            <section>
-              <h3> 和匹配有什麼關係? </h3>
-              <p> 把兩個字串接起來， \( B \) 在前，\( A \) 在後，<br>中間用一個沒有出現過的字元連接。</p>
-              <p> 如 \( A = \str{abaab}, B = \str{aab} \) ， 便令 \( S = \str{aab\$abaab} \) 。 </p>
-              <p> &#8594; 你會發現 \( B \) 是否能在 \( A \) 的某個位置被匹配， <br> 
-                只要看那個位置的 Z-value 是否等於 \( B \) 的長度</p>
-            </section>
-
-            <section>
-              <div class="prob">
-                Template <a href="http://main.edu.pl/en/archive/oi/12/sza"> POI XII </a> <br>
-                <hr>
-                給定字串 \( S \)，求出最短的 \( A \) 使得 \( A \) 可以覆蓋 \( S \) 。 <br>
-                (  \( \abs{S} \leq 500000 \) )
-              </div>
-            </section>
-          </section>
-
-          <section>
-            <section>
-              <h3> Suffix Array </h3>
-              <p> 又稱作後綴數組。 </p>
-              <p> 非常強大的一個工具，匹配、計數…樣樣都行。 </p>
-            </section>
-
-            <section>
-              <p> 在看一次這句廢話： </p>
-              <div class="thm"> 
-                一個字串 \( A \) 的子字串一定是他某個後綴的前綴 。
-              </div>
-              <p> 從頭開始比對兩個字串： Easy</p>
-              <p> 但不知道起始位置，只知道一個字串<br>出現在另一個字串中間： Not so easy</p>
-              <p> &#8594; 乾脆把所有後綴都抓出來！ </p>
-            </section>
-            <section>
-              <h3> Suffix Array </h3>
-              <p> 把所有的後綴全部抓出來排序。 </p>
-              <p> 好處：
-                <ul>
-                  <li> 相像的後綴會被排在一起。</li>
-                  <li> 要匹配一個字串，只要二分搜，看哪個跟他最像，從頭比對！</li>
-                </ul>
-              </p>
-            </section>
-            <section>
-              <h3> Suffix Array </h3>
-              <p> 問題來了，怎麼排序？ </p>
-              <p> 真的直接抓出來硬排， \( \ord{N^2} \) 起跳 ， GG </p>
-              <p> 有不少線性的做法 DC3, SAIS ， 但不好寫。 </p>
-              <p> 這裡只介紹最基本的倍增算法， \( \ord{N \log N} \) 。 </p>
-            </section>
-
-            <section>
-              <h3> 倍增算法 </h3>
-              <p> 現在有兩個字串 \( A \lt B \) ，把兩個對半切，變成 \( A_1 A_2, B_1 B_2 \) </p>
-              <p> 只有兩種可能：
-                <ol>
-                  <li> \( A_1 \lt B_1 \) </li>
-                  <li> \( A_1 = B_1 \; \land \; A_2 \lt B_2 \) </li>
-                </ol>
-              </p>
-              <p> 也就是 \( B \) 不可能會輸，頂多在第一階段平手。 </p>
-            </section>
-
-            <section>
-              <h3> 倍增算法 </h3>
-              <p> Want: 對每個後綴，我先只比較前 \( 1 \) 個字元，用此得到的資訊求出只比前 \( 2 \) 個字元的大小關係，
-                再用此求出只比前 \( 4 \) 個字元的大小關係 … </p>
-              <p> 
-              </p>
-              <p> 也就是 \( B \) 不可能會輸，頂多在第一階段平手。 </p>
-            </section>
-
-            <section>
-              <h3> Height Array </h3>
-              <p> 前面說過， Suffix Array 會把相像的後綴排在一起。 </p>
-              <div class="def"> 
-
-              </div>
-              <p> </p>
-            </section>
-
-            <section>
-              <div class="prob"> 
-                Nessaj, the Chaos Knight <a href="http://main.edu.pl/en/archive/oi/12/sza"> 2013 NTU Final(簡化版) </a> <br>
-                <hr>
-                現在有一個七段顯示器，你只知道他會從 \( [1, M] \) 中的某一秒開始倒數。 現在有一個人他把七段顯示器的
-              </div>
-            </section>
-
-          </section>
-        </div>
       </div>
 
       <script src="lib/js/head.min.js"></script>
