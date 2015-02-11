@@ -31,7 +31,6 @@
       link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
       document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.3/jsxgraphcore.js"></script>
 
 
     <!--[if lt IE 9]>
@@ -70,7 +69,28 @@
 
         <section>
           <section>
-            =DD
+            <h3> WHO AMD I?</h3>
+            <ul>
+              <li class="fragment"> 黃凱祺 / STEP5 / kevin00050 / 衄 </li>
+              <li class="fragment"> <b><font color="blue">bcw</font></b>0x1bd2 (<font color="blue">$\beta$</font>obogei / kai-<font color="blue">$\varsigma$</font>hi / hanhan<font color="blue">$\omega$</font>) </li>
+              <li class="fragment"> $\alpha \beta \gamma \delta \epsilon \ \zeta \eta \theta \iota \ \kappa \lambda \mu \nu \xi \omicron \ \pi \rho \sigma \tau \upsilon \ \phi \chi \psi \omega$</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 計算幾何能吃嗎？</h3>
+            <ul>
+              <li class="fragment"> 不能 </li>
+              <li class="fragment"> 用程式來計算一些幾何問題 </li>
+              <li class="fragment"> IOI 通常不會出 </li>
+              <li class="fragment"> ACM 通常一定會出 </li>
+              <li class="fragment"> code 通常很難寫 </li>
+              <li class="fragment"> 200 行是正常現象(?) </li>
+              <li class="fragment"> 各種機八 Case </li>
+              <li class="fragment"> <font color="red">WA</font> 到你不想寫... </li>
+            </ul>
           </section>
         </section>
 
@@ -82,8 +102,8 @@
           <section>
             <h3> 解析幾何 </h3>
             <ul>
-              <li> 純幾何：長度、角度、形狀、全等、相似...</li>
-              <li> <b>解析</b>幾何：座標、向量、內積、外積、行列式...難算到要人命</li>
+              <li class="fragment"> 純幾何：長度、角度、形狀、全等、相似...</li>
+              <li class="fragment"> <b>解析</b>幾何：座標、向量、內積、外積、行列式...難算到要人命</li>
             </ul>
             <p> 電腦上只能做四則運算... </p>
             <p> 還是用解析幾何吧!</p>
@@ -96,8 +116,10 @@
             <p> 這輕鬆! 只需要兩個數字$(x, y)$</p>
             <div id="box" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-5, 5, 10, -5], axis:true});
-              board.create('point', [5,3], {name:'(5, 3)', strokecolor:'red'});
+              {
+                var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-5, 5, 10, -5], axis:true});
+                board.create('point', [5,3], {name:'(5, 3)', strokecolor:'red'});
+              }
             </script>
           </section>
           <section>
@@ -107,19 +129,21 @@
             <p><b>位置向量</b>：從原點指到$(x, y)$的向量</p>
             <div id="box2" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box2', {boundingbox: [-5, 5, 10, -5], axis:true});
-              var pt = board.create('point', [5,3], {name:'(5, 3)', strokecolor:'red'});
-              var li3 = board.create('line', [[0,0],pt], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true});
+              {
+                var board = JXG.JSXGraph.initBoard('box2', {boundingbox: [-5, 5, 10, -5], axis:true});
+                var pt = board.create('point', [5,3], {name:'(5, 3)', strokecolor:'red'});
+                var li3 = board.create('line', [[0,0],pt], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true});
+              }
             </script>
           </section>
           <section>
             <h3> 向量運算 </h3>
             <ul>
-              <li> 加法 </li>
-              <li> 減法 </li>
-              <li> 內積 : $(x_1, y_1) \cdot (x_2, y_2) = x_1y_1+x_2y_2$ </li>
-              <li> 外積 : $(x_1, y_1) \times (x_2, y_2) = x_1y_2 - x_2y_1$ </li>
-              <li> 除法? A__A</li>
+              <li class="fragment"> 加法 </li>
+              <li class="fragment"> 減法 </li>
+              <li class="fragment"> 內積 : $(x_1, y_1) \cdot (x_2, y_2) = x_1y_1+x_2y_2$ </li>
+              <li class="fragment"> 外積 : $(x_1, y_1) \times (x_2, y_2) = x_1y_2 - x_2y_1$ </li>
+              <li class="fragment"> 除法? A__A</li>
             </ul>
           </section>
 
@@ -159,12 +183,14 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> 就說向量比較好用吧..</p>
             <div id="box3" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box3', {boundingbox: [-5, 5, 10, -5], axis:true});
-              var A = [1, 1];
-              var B = [8, 3];
-              board.create('point', A, {name:'P0', strokecolor:'red'});
-              board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
-              board.create('line', [A,B], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+              {
+                var board = JXG.JSXGraph.initBoard('box3', {boundingbox: [-5, 5, 10, -5], axis:true});
+                var A = [1, 1];
+                var B = [8, 3];
+                board.create('point', A, {name:'P0', strokecolor:'red'});
+                board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
+                board.create('line', [A,B], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+              }
             </script>
           </section>
           <section>
@@ -174,12 +200,14 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> $\vec{d} = P_2 - P_1$ : <b>方向</b>向量 </p>
             <div id="box4" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box4', {boundingbox: [-5, 5, 10, -5], axis:true});
-              var A = [1, 1];
-              var B = [8, 3];
-              board.create('point', A, {name:'P1', strokecolor:'red'});
-              board.create('point', B, {name:'P2', strokecolor:'red'});
-              board.create('segment', [A,B], {strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+              {
+                var board = JXG.JSXGraph.initBoard('box4', {boundingbox: [-5, 5, 10, -5], axis:true});
+                var A = [1, 1];
+                var B = [8, 3];
+                board.create('point', A, {name:'P1', strokecolor:'red'});
+                board.create('point', B, {name:'P2', strokecolor:'red'});
+                board.create('segment', [A,B], {strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+              }
             </script>
           </section>
           <section>
@@ -189,12 +217,14 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> $\overline{P_1P_2}, \overline{P_2P_3}, \cdots, \overline{P_NP_1}$ </p>
             <div id="box5" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box5', {boundingbox: [-5, 5, 10, -5]});
-              var poly = [[0, 4], [3, 2], [3, -1], [2, 0], [-2, -2], [-3, 1]];
-              board.create('polygon', poly);
-              for(i=0; i<6; i++)
               {
-                board.create('point', poly[i], {name:'P'+(6-i), strokecolor:'red'});
+                var board = JXG.JSXGraph.initBoard('box5', {boundingbox: [-5, 5, 10, -5]});
+                var poly = [[0, 4], [3, 2], [3, -1], [2, 0], [-2, -2], [-3, 1]];
+                board.create('polygon', poly);
+                for(i=0; i<6; i++)
+                {
+                  board.create('point', poly[i], {name:'P'+(6-i), strokecolor:'red'});
+                }
               }
             </script>
           </section>
@@ -206,12 +236,14 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             $$ (x, y) = P_0 + t \cdot \color{green}{\vec{d}}, \ t \in \mathbb{R}$$
             <div id="box6" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box6', {boundingbox: [-5, 5, 10, -5]});
-              var A = [1, 1];
-              var B = [8, 3];
-              board.create('point', A, {name:'P0', strokecolor:'red'});
-              board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
-              board.create('line', [A,B], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+              {
+                var board = JXG.JSXGraph.initBoard('box6', {boundingbox: [-5, 5, 10, -5]});
+                var A = [1, 1];
+                var B = [8, 3];
+                board.create('point', A, {name:'P0', strokecolor:'red'});
+                board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
+                board.create('line', [A,B], {straightFirst:false, straightLast:false, strokeWidth:2, lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}});
+              }
             </script>
 
           </section>
@@ -223,20 +255,22 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               $\color{green}{\vec{d}} \times \vec{P_0P} \color{red}{&lt;} 0$</p>
             <div id="box7" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box7', {boundingbox: [-5, 5, 10, -5]});
-              var A = [1, 1];
-              var B = [8, 3];
-              var C = [1, 4];
-              var D = [6, -2];
-              board.create('point', A, {name:'P0', strokecolor:'red'});
-              board.create('point', C, {name:'P', strokecolor:'red'});
-              board.create('point', D, {name:'P', strokecolor:'red'});
-              board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
-              var l = board.create('segment', [A,B], {lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}, strokeColor:'green'});
-              var l2 = board.create('segment', [A,C], {lastArrow:true});
-              var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
-              ineq = board.create('inequality', [l]);
-              ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
+              {
+                var board = JXG.JSXGraph.initBoard('box7', {boundingbox: [-5, 5, 10, -5]});
+                var A = [1, 1];
+                var B = [8, 3];
+                var C = [1, 4];
+                var D = [6, -2];
+                board.create('point', A, {name:'P0', strokecolor:'red'});
+                board.create('point', C, {name:'P', strokecolor:'red'});
+                board.create('point', D, {name:'P', strokecolor:'red'});
+                board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
+                var l = board.create('segment', [A,B], {lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}, strokeColor:'green'});
+                var l2 = board.create('segment', [A,C], {lastArrow:true});
+                var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
+                ineq = board.create('inequality', [l]);
+                ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
+              }
             </script>
           </section>
           <section>
@@ -248,20 +282,22 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             $$ \vec{BA} \cdot \vec{BC} = |BA||BC| \cos(\angle ABC)$$
             <div id="box8" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box8', {boundingbox: [-5, 5, 10, -5]});
-              var A = [1, 1];
-              var B = [8, 3];
-              var C = [1, 4];
-              var D = [6, -2];
-              board.create('point', A, {name:'B', strokecolor:'red'});
-              board.create('point', B, {name:'A', strokecolor:'red'});
-              board.create('point', C, {name:'C', strokecolor:'red'});
-              board.create('point', D, {name:'C', strokecolor:'red'});
-              var l = board.create('segment', [A,B], {lastArrow:true, strokeColor:'green'});
-              var l2 = board.create('segment', [A,C], {lastArrow:true});
-              var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
-              var a1 = board.create('angle', [B,A,C], {strokeColor:'blue', fillColor:'blue', radius:1, withLabel:false});
-              var a2 = board.create('angle', [D,A,B], {strokeColor:'red', fillColor:'red', radius:1, withLabel:false});
+              {
+                var board = JXG.JSXGraph.initBoard('box8', {boundingbox: [-5, 5, 10, -5]});
+                var A = [1, 1];
+                var B = [8, 3];
+                var C = [1, 4];
+                var D = [6, -2];
+                board.create('point', A, {name:'B', strokecolor:'red'});
+                board.create('point', B, {name:'A', strokecolor:'red'});
+                board.create('point', C, {name:'C', strokecolor:'red'});
+                board.create('point', D, {name:'C', strokecolor:'red'});
+                var l = board.create('segment', [A,B], {lastArrow:true, strokeColor:'green'});
+                var l2 = board.create('segment', [A,C], {lastArrow:true});
+                var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
+                var a1 = board.create('angle', [B,A,C], {strokeColor:'blue', fillColor:'blue', radius:1, withLabel:false});
+                var a2 = board.create('angle', [D,A,B], {strokeColor:'red', fillColor:'red', radius:1, withLabel:false});
+              }
             </script>
           </section>
           <section>
@@ -270,27 +306,29 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             \mathrm{sign}(\vec{P_1P_2} \times \vec{P_1P_3})$$
             <p> 
               <ul>
-                <li> $1$ : $P_3$ 在 $\vec{P_1P_2}$ <font color="blue">左</font>邊</li>
-                <li> $-1$ : $P_3$ 在 $\vec{P_1P_2}$ <font color="red">右</font>邊</li>
-                <li> $0$ : $P_1, P_2, P_3$ 三點共線</li>
+                <li class="fragment"> $1$ : $P_3$ 在 $\vec{P_1P_2}$ <font color="blue">左</font>邊</li>
+                <li class="fragment"> $-1$ : $P_3$ 在 $\vec{P_1P_2}$ <font color="red">右</font>邊</li>
+                <li class="fragment"> $0$ : $P_1, P_2, P_3$ 三點共線</li>
               </ul>
             </p>
             <div id="box9" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box9', {boundingbox: [-5, 5, 10, -5]});
-              var A = [1, 1];
-              var B = [8, 3];
-              var C = [1, 4];
-              var D = [6, -2];
-              board.create('point', A, {name:'P1', strokecolor:'red'});
-              board.create('point', B, {name:'P2', strokecolor:'red'});
-              board.create('point', C, {name:'P3', strokecolor:'red'});
-              board.create('point', D, {name:'P3', strokecolor:'red'});
-              var l = board.create('segment', [A,B], {lastArrow:true, strokeColor:'green'});
-              var l2 = board.create('segment', [A,C], {lastArrow:true});
-              var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
-              var a1 = board.create('angle', [B,A,C], {strokeColor:'blue', fillColor:'blue', radius:1, withLabel:false});
-              var a2 = board.create('angle', [D,A,B], {strokeColor:'red', fillColor:'red', radius:1, withLabel:false});
+              {
+                var board = JXG.JSXGraph.initBoard('box9', {boundingbox: [-5, 5, 10, -5]});
+                var A = [1, 1];
+                var B = [8, 3];
+                var C = [1, 4];
+                var D = [6, -2];
+                board.create('point', A, {name:'P1', strokecolor:'red'});
+                board.create('point', B, {name:'P2', strokecolor:'red'});
+                board.create('point', C, {name:'P3', strokecolor:'red'});
+                board.create('point', D, {name:'P3', strokecolor:'red'});
+                var l = board.create('segment', [A,B], {lastArrow:true, strokeColor:'green'});
+                var l2 = board.create('segment', [A,C], {lastArrow:true});
+                var l3 = board.create('segment', [A,D], {lastArrow:true, strokeColor:'red'});
+                var a1 = board.create('angle', [B,A,C], {strokeColor:'blue', fillColor:'blue', radius:1, withLabel:false});
+                var a2 = board.create('angle', [D,A,B], {strokeColor:'red', fillColor:'red', radius:1, withLabel:false});
+              }
             </script>
           </section>
           <section>
@@ -299,18 +337,20 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             $$ \Delta ABC = \frac{1}{2} \vec{BA} \times \vec{BC}$$
             <div id="box10" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box10', {boundingbox: [-5, 5, 10, -5]});
-              var A = [1, -3];
-              var B = [8, 3];
-              var C = [1, 4];
-              board.create('point', A, {name:'B', strokecolor:'red'});
-              board.create('point', B, {name:'A', strokecolor:'red'});
-              board.create('point', C, {name:'C', strokecolor:'red'});
-              var l = board.create('segment', [A,B], {lastArrow:true});
-              var l2 = board.create('segment', [A,C], {lastArrow:true});
-              var l3 = board.create('segment', [B,C], {});
-              var poly = board.create('polygon', [A,B,C], {fillColor:'blue'});
-              var t = board.create('text', [3, 3, '+'], {fontSize: 36});
+              {
+                var board = JXG.JSXGraph.initBoard('box10', {boundingbox: [-5, 5, 10, -5]});
+                var A = [1, -3];
+                var B = [8, 3];
+                var C = [1, 4];
+                board.create('point', A, {name:'B', strokecolor:'red'});
+                board.create('point', B, {name:'A', strokecolor:'red'});
+                board.create('point', C, {name:'C', strokecolor:'red'});
+                var l = board.create('segment', [A,B], {lastArrow:true});
+                var l2 = board.create('segment', [A,C], {lastArrow:true});
+                var l3 = board.create('segment', [B,C], {});
+                var poly = board.create('polygon', [A,B,C], {fillColor:'blue'});
+                var t = board.create('text', [3, 3, '+'], {fontSize: 36});
+              }
             </script>
           </section>
           <section>
@@ -318,19 +358,21 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> <b>凸多邊形</b>的有向面積</p>
             <p> 切割成$N$個三角形!</p>
             $$ \mathrm{Area}(P_1P_2\cdots P_N) = \Delta P_1AP_2 + \Delta P_2AP_3
-             + \cdots + \Delta P_NAP_1$$
+            + \cdots + \Delta P_NAP_1$$
             <div id="box11" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box11', {boundingbox: [-5, 5, 5, -5]});
-              var A = [0, 0];
-              var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
-              board.create('point', A, {name:'A'});
-              board.create('polygon', poly);
-              for(i=0; i<5; i++)
               {
-                board.create('point', poly[i], {name:'P'+(i+1)});
-                board.create('segment', [poly[i],poly[(i+1)%5]], {lastArrow:true});
-                board.create('segment', [A, poly[i]], {lastArrow:true});
+                var board = JXG.JSXGraph.initBoard('box11', {boundingbox: [-5, 5, 5, -5]});
+                var A = [0, 0];
+                var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+                board.create('point', A, {name:'A'});
+                board.create('polygon', poly);
+                for(i=0; i<5; i++)
+                {
+                  board.create('point', poly[i], {name:'P'+(i+1)});
+                  board.create('segment', [poly[i],poly[(i+1)%5]], {lastArrow:true});
+                  board.create('segment', [A, poly[i]], {lastArrow:true});
+                }
               }
             </script>
           </section>
@@ -341,16 +383,18 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> <b>有向</b>面積的好處 : 正負會抵消掉</p>
             <div id="box12" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box12', {boundingbox: [-5, 5, 5, -5]});
-              var A = [0, 0];
-              var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
-              board.create('point', A, {name:'A'});
-              board.create('polygon', poly);
-              for(i=0; i<5; i++)
               {
-                board.create('point', poly[i], {name:'P'+(i+1)});
-                board.create('segment', [poly[i],poly[(i+1)%5]], {lastArrow:true});
-                board.create('segment', [A, poly[i]], {lastArrow:true});
+                var board = JXG.JSXGraph.initBoard('box12', {boundingbox: [-5, 5, 5, -5]});
+                var A = [0, 0];
+                var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+                board.create('point', A, {name:'A'});
+                board.create('polygon', poly);
+                for(i=0; i<5; i++)
+                {
+                  board.create('point', poly[i], {name:'P'+(i+1)});
+                  board.create('segment', [poly[i],poly[(i+1)%5]], {lastArrow:true});
+                  board.create('segment', [A, poly[i]], {lastArrow:true});
+                }
               }
             </script>
           </section>
@@ -367,22 +411,32 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> 真的嗎...^_^;;</p>
             <div id="box13" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box13', {boundingbox: [-5, 5, 5, -5]});
-              var poly = [[3, 0], [-2, 3], [-1, -3], [3, -1], [-3, 2], [-4,-4]];
-              board.create('polygon', poly);
+              {
+                var board = JXG.JSXGraph.initBoard('box13', {boundingbox: [-5, 5, 5, -5]});
+                var poly2 = [];
+                for(i=0; i<20; i++)
+                {
+                  var x = Math.random()*9-4.5;
+                  var y = Math.random()*9-4.5;
+                  poly2.push([x, y]);
+                }
+                board.create('polygon', poly2, {fillColor: 'yellow'});
+              }
             </script>
           </section>
           <section>
             <h3> 簡單多邊形 </h3>
             <ul>
-              <li> 邊不相交 </li>
+              <li class="fragment"> 邊不相交 </li>
             </ul>
             <br>
             <div id="box14" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box14', {boundingbox: [-5, 5, 5, -5]});
-              var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
-              board.create('polygon', poly);
+              {
+                var board = JXG.JSXGraph.initBoard('box14', {boundingbox: [-5, 5, 5, -5]});
+                var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
+                board.create('polygon', poly);
+              }
             </script>
           </section>
           <section>
@@ -404,13 +458,15 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             </div>
             <div id="box15" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box15', {boundingbox: [-5, 5, 5, -5]});
-              var P1 = board.create('point', [-2, -1], {name: 'P1'});
-              var P2 = board.create('point', [2, 3], {name: 'P2'});
-              var P3 = board.create('point', [-3, 2], {name: 'P3'});
-              var P4 = board.create('point', [2, -2], {name: 'P4'});
-              board.create('segment', [P1, P2]);
-              board.create('segment', [P3, P4]);
+              {
+                var board = JXG.JSXGraph.initBoard('box15', {boundingbox: [-5, 5, 5, -5]});
+                var P1 = board.create('point', [-2, -1], {name: 'P1'});
+                var P2 = board.create('point', [2, 3], {name: 'P2'});
+                var P3 = board.create('point', [-3, 2], {name: 'P3'});
+                var P4 = board.create('point', [2, -2], {name: 'P4'});
+                board.create('segment', [P1, P2]);
+                board.create('segment', [P3, P4]);
+              }
             </script>
           </section>
           <section>
@@ -421,96 +477,116 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             </div>
             <div id="box16" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box16', {boundingbox: [-5, 5, 5, -5]});
-              var P1 = board.create('point', [-2, -1], {name: 'P1'});
-              var P2 = board.create('point', [2, 3], {name: 'P2'});
-              var P3 = board.create('point', [-3, 2], {name: 'P3'});
-              var P4 = board.create('point', [2, -2], {name: 'P4'});
-              board.create('line', [P1, P2], {strokeColor:'lightgreen'});
-              board.create('line', [P3, P4], {strokeColor:'lightgreen'});
-              board.create('segment', [P1, P2]);
-              board.create('segment', [P3, P4]);
+              {
+                var board = JXG.JSXGraph.initBoard('box16', {boundingbox: [-5, 5, 5, -5]});
+                var P1 = board.create('point', [-2, -1], {name: 'P1'});
+                var P2 = board.create('point', [2, 3], {name: 'P2'});
+                var P3 = board.create('point', [-3, 2], {name: 'P3'});
+                var P4 = board.create('point', [2, -2], {name: 'P4'});
+                board.create('line', [P1, P2], {strokeColor:'lightgreen'});
+                board.create('line', [P3, P4], {strokeColor:'lightgreen'});
+                board.create('segment', [P1, P2]);
+                board.create('segment', [P3, P4]);
+              }
             </script>
           </section>
           <section>
             <h3> 直線相交 </h3>
             <p> 好像還蠻簡單的... </p>
             <ul>
-              <li> 兩直線不平行 : 肯定有交點! </li>
-              <li> 兩直線平行 : 不相交 or 完全重合</li>   
+              <li class="fragment"> 兩直線不平行 : 肯定有交點! </li>
+              <li class="fragment"> 兩直線平行 : 不相交 or 完全重合</li>   
             </ul>
           </section>
           <section>
             <h3> 直線求交點 </h3>
             <ul style="line-height: 150%">
-              <li> $ \vec{d_1} = \vec{P_1P_2}, \vec{d_2} = \vec{P_3P_4}$ </li>
-              <li> 交點 $ x = P_1 + t\vec{d_1} = P_3 + s\vec{d_2}$ </li>
-              <li> $ t\vec{d_1} = \vec{P_1P_3} + s\vec{d_2}$ </li>
-              <li> $ t\vec{d_1} \times \vec{d_2} = \vec{P_1P_3} \times \vec{d_2}$ </li>
-              <li> $\displaystyle t = \frac{\vec{P_1P_3} \times \vec{d_2}}{\vec{d_1} \times \vec{d_2}}$ </li>
+              <li class="fragment"> $ \vec{d_1} = \vec{P_1P_2}, \vec{d_2} = \vec{P_3P_4}$ </li>
+              <li class="fragment"> 交點 $ x = P_1 + t\vec{d_1} = P_3 + s\vec{d_2}$ </li>
+              <li class="fragment"> $ t\vec{d_1} = \vec{P_1P_3} + s\vec{d_2}$ </li>
+              <li class="fragment"> $ t\vec{d_1} \times \vec{d_2} = \vec{P_1P_3} \times \vec{d_2}$ </li>
+              <li class="fragment"> $\displaystyle t = \frac{\vec{P_1P_3} \times \vec{d_2}}{\vec{d_1} \times \vec{d_2}}$ </li>
               <br>
-              <li> $\vec{d_1} \times \vec{d_2} \neq 0$ (為什麼?)</li>
+              <li class="fragment"> $\vec{d_1} \times \vec{d_2} \neq 0$ (為什麼?)</li>
             </ul>
-            (左邊一張圖)
+            <div id="box16.5" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box16.5', {boundingbox: [-5, 5, 5, -5]});
+                var P1 = board.create('point', [-2, -1], {name: 'P1'});
+                var P2 = board.create('point', [2, 3], {name: 'P2'});
+                var P3 = board.create('point', [-3, 2], {name: 'P3'});
+                var P4 = board.create('point', [2, -2], {name: 'P4'});
+                var ln1 = board.create('segment', [P1, P2], {lastArrow:true, withLabel:true, label:{position:'top'}, name:'d1'});
+                var ln2 = board.create('segment', [P3, P4], {lastArrow:true, withLabel:true, label:{position:'top'}, name:'d2'});
+                var Pp = board.create('intersection', [ln1, ln2], {name:'x', strokeColor:'green'});
+              }
+            </script>
           </section>
           <section>
             <h3> 線段求交點 </h3>
             <ul>
-              <li> 類似的方法可以求出 $s$  </li>
-              <li> $0 \le t \le 1$ and $0 \le s \le 1$ : 兩<b>線段</b>有交點!</li>   
+              <li class="fragment"> 類似的方法可以求出 $s$  </li>
+              <li class="fragment"> $0 \le t \le 1$ and $0 \le s \le 1$ : 兩<b>線段</b>有交點!</li>   
             </ul>
           </section>
           <section>
             <h3> 另一種方法 </h3>
             <ul>
-              <li> 如果 $\overline{P_1P_2}$ 和 $\overline{P_3P_4}$ 有交點的話 ... </li>
-              <li> $P_3$ 和 $P_4$ 在 $\vec{P_1P_2}$ 的<b>異側</b> </li>   
-              <li> $P_1$ 和 $P_2$ 在 $\vec{P_3P_4}$ 的<b>異側</b> </li>   
-              <li> $\mathrm{ori}(P_1, P_2, P_3) \cdot \mathrm{ori}(P_1, P_2, P_4) &lt; 0$ </li>   
-              <li> $\mathrm{ori}(P_3, P_4, P_1) \cdot \mathrm{ori}(P_3, P_4, P_2) &lt; 0$ </li>   
+              <li class="fragment"> 如果 $\overline{P_1P_2}$ 和 $\overline{P_3P_4}$ 有交點的話 ... </li>
+              <li class="fragment"> $P_3$ 和 $P_4$ 在 $\vec{P_1P_2}$ 的<b>異側</b> </li>   
+              <li class="fragment"> $P_1$ 和 $P_2$ 在 $\vec{P_3P_4}$ 的<b>異側</b> </li>   
+              <li class="fragment"> $\mathrm{ori}(P_1, P_2, P_3) \cdot \mathrm{ori}(P_1, P_2, P_4) &lt; 0$ </li>   
+              <li class="fragment"> $\mathrm{ori}(P_3, P_4, P_1) \cdot \mathrm{ori}(P_3, P_4, P_2) &lt; 0$ </li>   
             </ul>
             <div id="box17" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box17', {boundingbox: [-5, 5, 5, -5]});
-              var P1 = board.create('point', [-2, -1], {name: 'P1'});
-              var P2 = board.create('point', [2, 3], {name: 'P2'});
-              var P3 = board.create('point', [-3, 2], {name: 'P3'});
-              var P4 = board.create('point', [2, -2], {name: 'P4'});
-              board.create('segment', [P1, P2]);
-              board.create('segment', [P3, P4]);
+              {
+                var board = JXG.JSXGraph.initBoard('box17', {boundingbox: [-5, 5, 5, -5]});
+                var P1 = board.create('point', [-2, -1], {name: 'P1'});
+                var P2 = board.create('point', [2, 3], {name: 'P2'});
+                var P3 = board.create('point', [-3, 2], {name: 'P3'});
+                var P4 = board.create('point', [2, -2], {name: 'P4'});
+                board.create('segment', [P1, P2]);
+                board.create('segment', [P3, P4]);
+              }
             </script>
           </section>
           <section>
             <h3> 慘了了 </h3>
             <div id="box18" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box18', {boundingbox: [-5, 5, 5, -5]});
-              var P1 = board.create('point', [-2, -1], {name: 'P1'});
-              var P2 = board.create('point', [2, 3], {name: 'P2'});
-              var P3 = board.create('point', [-1, 0], {name: 'P3'});
-              var P4 = board.create('point', [2, -2], {name: 'P4'});
-              board.create('segment', [P1, P2]);
-              board.create('segment', [P3, P4]);
+              {
+                var board = JXG.JSXGraph.initBoard('box18', {boundingbox: [-5, 5, 5, -5]});
+                var P1 = board.create('point', [-2, -1], {name: 'P1'});
+                var P2 = board.create('point', [2, 3], {name: 'P2'});
+                var P3 = board.create('point', [-1, 0], {name: 'P3'});
+                var P4 = board.create('point', [2, -2], {name: 'P4'});
+                board.create('segment', [P1, P2]);
+                board.create('segment', [P3, P4]);
+              }
             </script>
           </section>
           <section>
             <h3> 線段相交 </h3>
             <ul>
-              <li> 兩線段無交點 $\Leftrightarrow P_3, P_4$ 在 $\vec{P_1P_2}$ 同側
+              <li class="fragment"> 兩線段無交點 $\Leftrightarrow P_3, P_4$ 在 $\vec{P_1P_2}$ 同側
                 <font color="red">或</font> $P_1, P_2$ 在 $\vec{P_3P_4}$ 同側</li>
-              <li> 萬一兩線段平行呢?</li>
-              <li> 延伸的直線不重合 : 無交點</li>
-              <li> 延伸的直線重合 : 一維的判斷交點</li>
+              <li class="fragment"> 萬一兩線段平行呢?</li>
+              <li class="fragment"> 延伸的直線不重合 : 無交點</li>
+              <li class="fragment"> 延伸的直線重合 : 一維的判斷交點</li>
             </ul>
             <div id="box19" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box19', {boundingbox: [-5, 5, 5, -5]});
-              var P1 = board.create('point', [-2, 0], {name: 'P1'});
-              var P2 = board.create('point', [0, 0], {name: 'P2'});
-              var P3 = board.create('point', [1, 0], {name: 'P3'});
-              var P4 = board.create('point', [4, 0], {name: 'P4'});
-              board.create('segment', [P1, P2]);
-              board.create('segment', [P3, P4]);
+              {
+                var board = JXG.JSXGraph.initBoard('box19', {boundingbox: [-5, 5, 5, -5]});
+                var P1 = board.create('point', [-2, 0], {name: 'P1'});
+                var P2 = board.create('point', [0, 0], {name: 'P2'});
+                var P3 = board.create('point', [1, 0], {name: 'P3'});
+                var P4 = board.create('point', [4, 0], {name: 'P4'});
+                board.create('segment', [P1, P2]);
+                board.create('segment', [P3, P4]);
+              }
             </script>
             <p><b> 好麻煩喔 QQQQ </b></p>
           </section>
@@ -524,94 +600,102 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             </div>
             <div id="box20" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box20', {boundingbox: [-5, 5, 5, -5]});
-              var A = [-0.5, 2];
-              var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
-              board.create('point', A, {name:'A', strokeColor:'green'});
-              board.create('polygon', poly);
+              {
+                var board = JXG.JSXGraph.initBoard('box20', {boundingbox: [-5, 5, 5, -5]});
+                var A = [-0.5, 2];
+                var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
+                board.create('point', A, {name:'A', strokeColor:'green'});
+                board.create('polygon', poly);
+              }
             </script>
           </section>
           <section>
             <h3> 多邊形內外判斷</h3>
             <ul>
-              <li> 想辦法往外走，不能越過多邊形邊界，走得到外面就是外部 </li>
-              <li> 時間複雜度 : $O(?)$ </li>
+              <li class="fragment"> 想辦法往外走，不能越過多邊形邊界，走得到外面就是外部 </li>
+              <li class="fragment"> 時間複雜度 : $O(?)$ </li>
             </ul>
           </section>
           <section>
             <h3> 多邊形內外判斷</h3>
             <ul>
-              <li> 開外掛穿牆(?) </li>
-              <li> 往一個方向一直走 </li>
-              <li> 每穿過一次牆，內部變外部，外部變內部 </li>
-              <li> 走到無限遠處... 這下總是外部了吧! </li>
-              <li> 計算總共穿幾次牆 </li>
-              <li> 偶數次 : 原本的點在<b>外部</b> </li>
-              <li> 奇數次 : 原本的點在<b>內部</b> </li>
+              <li class="fragment"> 開外掛穿牆(?) </li>
+              <li class="fragment"> 往一個方向一直走 </li>
+              <li class="fragment"> 每穿過一次牆，內部變外部，外部變內部 </li>
+              <li class="fragment"> 走到無限遠處... 這下總是外部了吧! </li>
+              <li class="fragment"> 計算總共穿幾次牆 </li>
+              <li class="fragment"> 偶數次 : 原本的點在<b>外部</b> </li>
+              <li class="fragment"> 奇數次 : 原本的點在<b>內部</b> </li>
             </ul>
             <div id="box21" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box21', {boundingbox: [-5, 5, 5, -5]});
-              var A = [-0.5, 2];
-              var B = [6, 3];
-              var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
-              board.create('point', A, {name:'A', strokeColor:'green'});
-              board.create('polygon', poly);
-              board.create('segment', [A,B]);
+              {
+                var board = JXG.JSXGraph.initBoard('box21', {boundingbox: [-5, 5, 5, -5]});
+                var A = [-0.5, 2];
+                var B = [6, 3];
+                var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
+                board.create('point', A, {name:'A', strokeColor:'green'});
+                board.create('polygon', poly);
+                board.create('segment', [A,B]);
+              }
             </script>
           </section>
           <section>
             <h3> 多邊形內外判斷</h3>
             <ul>
-              <li> 要怎麼計算穿牆次數呢？ </li>
-              <li> 線段相交! </li>
-              <li> 把多邊形的 $N$ 條邊都檢查一次</li>
-              <li> 時間複雜度 : $O(N)$</li>
+              <li class="fragment"> 要怎麼計算穿牆次數呢？ </li>
+              <li class="fragment"> 線段相交! </li>
+              <li class="fragment"> 把多邊形的 $N$ 條邊都檢查一次</li>
+              <li class="fragment"> 時間複雜度 : $O(N)$</li>
             </ul>
           </section>
           <section>
             <h3> 慘了了</h3>
             <ul>
-              <li> 萬一剛好交到邊、頂點上呢？ </li>
-              <li> 可能會重複算到次數 </li>
-              <li> 隨機取一個方向射線，交到邊、頂點的機率很低 (為什麼?) </li>
-              <li> 座標都是整數(範圍 $W$ )的話，外面的點取 $(W, W+1)$，肯定不會交到邊點 </li>
+              <li class="fragment"> 萬一剛好交到邊、頂點上呢？ </li>
+              <li class="fragment"> 可能會重複算到次數 </li>
+              <li class="fragment"> 隨機取一個方向射線，交到邊、頂點的機率很低 (為什麼?) </li>
+              <li class="fragment"> 座標都是整數(範圍 $W$ )的話，外面的點取 $(W, W+1)$，肯定不會交到邊點 </li>
             </ul>
             <div id="box22" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box22', {boundingbox: [-5, 5, 5, -5]});
-              var A = [-0.5, 2];
-              var B = [2, 7];
-              var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
-              board.create('point', A, {name:'A', strokeColor:'green'});
-              board.create('polygon', poly);
-              board.create('segment', [A,B]);
+              {
+                var board = JXG.JSXGraph.initBoard('box22', {boundingbox: [-5, 5, 5, -5]});
+                var A = [-0.5, 2];
+                var B = [2, 7];
+                var poly = [[3, 0], [0, 3], [1, 1], [-1, 3], [-1, -2], [0, 1], [1, -4], [1, 0]];
+                board.create('point', A, {name:'A', strokeColor:'green'});
+                board.create('polygon', poly);
+                board.create('segment', [A,B]);
+              }
             </script>
           </section>
           <section>
             <h3> 多邊形內外判斷</h3>
             <ul>
-              <li> 如果是<b>凸</b>多邊形呢？ </li>
-              <li> 中間找一個點 $A$，連線到每個頂點 </li>
-              <li> 把一圈分成 $N$ 個角度區間 </li>
-              <li> 查詢時，先二分搜出在哪個區間，再檢查是否在三角形內</li>
-              <li> 時間複雜度 : 預處理 $O(N)$，查詢$O(\log N)$</li>
+              <li class="fragment"> 如果是<b>凸</b>多邊形呢？ </li>
+              <li class="fragment"> 中間找一個點 $A$，連線到每個頂點 </li>
+              <li class="fragment"> 把一圈分成 $N$ 個角度區間 </li>
+              <li class="fragment"> 查詢時，先二分搜出在哪個區間，再檢查是否在三角形內</li>
+              <li class="fragment"> 時間複雜度 : 預處理 $O(N)$，查詢$O(\log N)$</li>
             </ul>
             <div id="box23" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box23', {boundingbox: [-5, 5, 5, -5]});
-              var A = [0, 0];
-              var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
-              board.create('point', A, {name:'A'});
-              board.create('point', [2,1], {name:'P'});
-              board.create('polygon', poly);
-              for(i=0; i<5; i++)
               {
-                board.create('point', poly[i], {name:'P'+(i+1)});
-                board.create('segment', [A, poly[i]], {lastArrow:true});
+                var board = JXG.JSXGraph.initBoard('box23', {boundingbox: [-5, 5, 5, -5]});
+                var A = [0, 0];
+                var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+                board.create('point', A, {name:'A'});
+                board.create('point', [2,1], {name:'P'});
+                board.create('polygon', poly);
+                for(i=0; i<5; i++)
+                {
+                  board.create('point', poly[i], {name:'P'+(i+1)});
+                  board.create('segment', [A, poly[i]], {lastArrow:true});
+                }
+                board.create('segment', [A, 'P'], {lastArrow:true, strokeColor:'yellow'});
+                board.create('polygon', [A,poly[0],poly[1]], {fillColor:'blue'});
               }
-              board.create('segment', [A, 'P'], {lastArrow:true, strokeColor:'yellow'});
-              board.create('polygon', [A,poly[0],poly[1]], {fillColor:'blue'});
             </script>
           </section>
         </section>
@@ -624,81 +708,89 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             </div>
             <div id="box24" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box24', {boundingbox: [-5, 5, 5, -5]});
-              var poly = [[3, 0], [1, 0], [1, 2], [-1, 2], [-1, 0], [-3, 0], [-3, -2], [3, -2]];
-              var poly2 = [[3, 0], [1, 2], [-1, 2], [-3, 0], [-3, -2], [3, -2]];
-              board.create('polygon', poly);
-              board.create('polygon', poly2, {fillColor: 'yellow'});
+              {
+                var board = JXG.JSXGraph.initBoard('box24', {boundingbox: [-5, 5, 5, -5]});
+                var poly = [[3, 0], [1, 0], [1, 2], [-1, 2], [-1, 0], [-3, 0], [-3, -2], [3, -2]];
+                var poly2 = [[3, 0], [1, 2], [-1, 2], [-3, 0], [-3, -2], [3, -2]];
+                board.create('polygon', poly);
+                board.create('polygon', poly2, {fillColor: 'yellow'});
+              }
             </script>
           </section>
           <section>
             <h3> "凸"多邊形? </h3>
             <ul>
-              <li> 內角皆小於 $180^\circ$ </li>
-              <li> 兩點連線包含在多邊形內 </li>
+              <li class="fragment"> 內角皆小於 $180^\circ$ </li>
+              <li class="fragment"> 兩點連線包含在多邊形內 </li>
             </ul>
             <div id="box25" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box25', {boundingbox: [-5, 5, 5, -5]});
-              var poly2 = [[3, 0], [1, 2], [-1, 2], [-3, 0], [-3, -2], [3, -2]];
-              board.create('polygon', poly2, {fillColor: 'yellow'});
+              {
+                var board = JXG.JSXGraph.initBoard('box25', {boundingbox: [-5, 5, 5, -5]});
+                var poly2 = [[3, 0], [1, 2], [-1, 2], [-3, 0], [-3, -2], [3, -2]];
+                board.create('polygon', poly2, {fillColor: 'yellow'});
 
-              var A = board.create('point', [-2, -1]);
-              var B = board.create('point', [-1, 1]);
-              var l = board.create('segment', [A, B]);
+                var A = board.create('point', [-2, -1]);
+                var B = board.create('point', [-1, 1]);
+                var l = board.create('segment', [A, B]);
+              }
             </script>
           </section>
           <section>
             <h3> 捲包裹法 </h3>
             <ul>
-              <li> 先找一個必定在凸包上的點 (怎麼找?)</li>
-              <li> 每次找最靠右邊的，加入凸包</li>
-              <li> 時間複雜度 : $O(N^2)$</li>
+              <li class="fragment"> 先找一個必定在凸包上的點 (怎麼找?)</li>
+              <li class="fragment"> 每次找最靠右邊的，加入凸包</li>
+              <li class="fragment"> 時間複雜度 : $O(N^2)$</li>
             </ul>
             <div id="box26" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box26', {boundingbox: [-5, 5, 5, -5]});
-              var poly2 = [];
-              for(i=0; i<20; i++)
               {
-                var x = Math.random()*9-4.5;
-                var y = Math.random()*9-4.5;
-                poly2.push([x, y]);
+                var board = JXG.JSXGraph.initBoard('box26', {boundingbox: [-5, 5, 5, -5]});
+                var poly2 = [];
+                for(i=0; i<20; i++)
+                {
+                  var x = Math.random()*9-4.5;
+                  var y = Math.random()*9-4.5;
+                  poly2.push([x, y]);
+                }
+                board.create('polygon', poly2, {fillColor: 'yellow'});
               }
-              board.create('polygon', poly2, {fillColor: 'yellow'});
             </script>
           </section>
           <section>
             <h3> Monotone Chain </h3>
             <ul>
-              <li> 每次都重新排序，太辛苦了!</li>
-              <li> 一次從左到右排序好，一個一個點慢慢加</li>
-              <li> 每多加一個點時，檢查看會不會影響凸包</li>
+              <li class="fragment"> 每次都重新排序，太辛苦了!</li>
+              <li class="fragment"> 一次從左到右排序好，一個一個點慢慢加</li>
+              <li class="fragment"> 每多加一個點時，檢查看會不會影響凸包</li>
             </ul>
           </section>
           <section>
             <h3> Monotone Chain </h3>
             <p> 檢查新增的點與目前凸包最後2個點的夾角:</p>
             <ul>
-              <li> $&lt; 180^\circ$ : 加入凸包</li>
-              <li> $\ge 180^\circ$ : 中間那個點刪掉</li>
-              <li> 用外積判斷夾角</li>
-              <li> 凸包根本沒有2個點? 那直接加入</li>
+              <li class="fragment"> $&lt; 180^\circ$ : 加入凸包</li>
+              <li class="fragment"> $\ge 180^\circ$ : 中間那個點刪掉</li>
+              <li class="fragment"> 用外積判斷夾角</li>
+              <li class="fragment"> 凸包根本沒有2個點? 那直接加入</li>
             </ul>
             <div id="box27" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box27', {boundingbox: [-5, 5, 5, -5]});
-              var A = board.create('point', [-4, 1], {name:'A'});
-              var B = board.create('point', [-3, 0], {name:'B'});
-              var C = board.create('point', [-1, 1], {name:'C'});
-              board.create('segment', [A,B]);
-              board.create('segment', [B,C], {dash:true});
-              var D = board.create('point', [0, -1], {name:'A'});
-              var E = board.create('point', [1, 0], {name:'B'});
-              var F = board.create('point', [3, -2], {name:'C'});
-              board.create('segment', [D,E]);
-              board.create('segment', [E,F], {dash:true});
-              board.create('line', [[-0.5,-6],[-0.5,6]], {dash:true, strokeColor:'lightgreen'});
+              {
+                var board = JXG.JSXGraph.initBoard('box27', {boundingbox: [-5, 5, 5, -5]});
+                var A = board.create('point', [-4, 1], {name:'A'});
+                var B = board.create('point', [-3, 0], {name:'B'});
+                var C = board.create('point', [-1, 1], {name:'C'});
+                board.create('segment', [A,B]);
+                board.create('segment', [B,C], {dash:true});
+                var D = board.create('point', [0, -1], {name:'A'});
+                var E = board.create('point', [1, 0], {name:'B'});
+                var F = board.create('point', [3, -2], {name:'C'});
+                board.create('segment', [D,E]);
+                board.create('segment', [E,F], {dash:true});
+                board.create('line', [[-0.5,-6],[-0.5,6]], {dash:true, strokeColor:'lightgreen'});
+              }
             </script>
           </section>
           <section>
@@ -708,12 +800,12 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           <section>
             <h3> Monotone Chain </h3>
             <ul>
-              <li> 用 stack 維護目前凸包 </li>
-              <li> 每個點會被加入 1 次</li>
-              <li> 每個點<b>最多</b>被刪除 1 次</li>
-              <li> 時間複雜度 : $O(N \log N) + O(N)$</li>
-              <li> 這樣找到的是<b>下</b>凸包</li>
-              <li> 從右到左排序再做一次，接起來才是完整的凸包</li>
+              <li class="fragment"> 用 stack 維護目前凸包 </li>
+              <li class="fragment"> 每個點會被加入 1 次</li>
+              <li class="fragment"> 每個點<b>最多</b>被刪除 1 次</li>
+              <li class="fragment"> 時間複雜度 : $O(N \log N) + O(N)$</li>
+              <li class="fragment"> 這樣找到的是<b>下</b>凸包</li>
+              <li class="fragment"> 從右到左排序再做一次，接起來才是完整的凸包</li>
             </ul>
           </section>
         </section>
@@ -725,28 +817,30 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             <p> 實作上就只是把點照 $x$ 座標排序 </p>
             <div id="box29" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box29', {boundingbox: [-5, 5, 5, -5]});
-              var poly2 = [];
-              for(i=0; i<20; i++)
               {
-                var x = Math.random()*9-4.5;
-                var y = Math.random()*9-4.5;
-                poly2.push([x, y]);
-                board.create('point', poly2[i], {withLabel:false});
+                var board = JXG.JSXGraph.initBoard('box29', {boundingbox: [-5, 5, 5, -5]});
+                var poly2 = [];
+                for(i=0; i<20; i++)
+                {
+                  var x = Math.random()*9-4.5;
+                  var y = Math.random()*9-4.5;
+                  poly2.push([x, y]);
+                  board.create('point', poly2[i], {withLabel:false});
+                }
+
+                var P = board.create('point', [-5,-6]);
+                var Q = board.create('point', [-5,6]);
+                var li = board.create('line', [P, Q]);
+
+                var f = function(){
+                  P.moveTo([5, -6], 2000);
+                  Q.moveTo([5, 6], 2000);
+                  P.moveTo([-5, -6], 1);
+                  Q.moveTo([-5, 6], 1);
+                  setTimeout(f, 3000);
+                };
+                f();
               }
-
-              var P = board.create('point', [-5,-6]);
-              var Q = board.create('point', [-5,6]);
-              var li = board.create('line', [P, Q]);
-
-              var f = function(){
-                P.moveTo([5, -6], 2000);
-                Q.moveTo([5, 6], 2000);
-                P.moveTo([-5, -6], 1);
-                Q.moveTo([-5, 6], 1);
-                setTimeout(f, 3000);
-              };
-              f();
             </script>
           </section>
           <section>
@@ -756,49 +850,90 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             </div>
             <div id="box30" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box30', {boundingbox: [-5, 5, 5, -5]});
-              var poly2 = [];
-              for(i=0; i<10; i++)
               {
-                var x = Math.random()*9-4.5;
-                var y = Math.random()*9-4.5;
-                poly2.push([x, y]);
-                board.create('point', poly2[i], {withLabel:false});
+                var board = JXG.JSXGraph.initBoard('box30', {boundingbox: [-5, 5, 5, -5]});
+                var poly2 = [];
+                for(i=0; i<10; i++)
+                {
+                  var x = Math.random()*9-4.5;
+                  var y = Math.random()*9-4.5;
+                  poly2.push([x, y]);
+                  board.create('point', poly2[i], {withLabel:false});
+                }
+                for(i=0;i<5;i++)
+                {
+                  var x1 = Math.random()*9-4.5;
+                  var y1 = Math.random()*9-4.5;
+                  var x2 = Math.random()*9-4.5;
+                  var y2 = Math.random()*9-4.5;
+                  board.create('polygon', [[x1,y1],[x1,y2],[x2,y2],[x2,y1]], {vertices:{visible:false}});
+                }
               }
-              for(i=0;i<5;i++)
-              {
-                var x1 = Math.random()*9-4.5;
-                var y1 = Math.random()*9-4.5;
-                var x2 = Math.random()*9-4.5;
-                var y2 = Math.random()*9-4.5;
-                board.create('polygon', [[x1,y1],[x1,y2],[x2,y2],[x2,y1]], {vertices:{visible:false}});
-              }
-
             </script>
           </section>
           <section>
             <h3> 矩形覆蓋次數  </h3>
             <p>從左掃到右，會經歷一些<b>事件</b></p>
             <ul>
-              <li> 矩形的左邊界</li>
-              <li> 矩形的右邊界</li>
-              <li> 查詢點</li>
+              <li class="fragment"> 矩形的左邊界</li>
+              <li class="fragment"> 矩形的右邊界</li>
+              <li class="fragment"> 查詢點</li>
             </ul>
             <p>兩個事件之間，什麼都不會發生!</p>
-            (圖)
+            <div id="box31" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box31', {boundingbox: [-5, 5, 5, -5]});
+                var poly2 = [];
+                var xco = [];
+                for(i=0; i<10; i++)
+                {
+                  var x = Math.random()*9-4.5;
+                  var y = Math.random()*9-4.5;
+                  poly2.push([x, y]);
+                  xco.push(x);
+                  board.create('point', poly2[i], {withLabel:false});
+                }
+                for(i=0;i<5;i++)
+                {
+                  var x1 = Math.random()*9-4.5;
+                  var y1 = Math.random()*9-4.5;
+                  var x2 = Math.random()*9-4.5;
+                  var y2 = Math.random()*9-4.5;
+                  xco.push(x1);
+                  xco.push(x2);
+                  board.create('polygon', [[x1,y1],[x1,y2],[x2,y2],[x2,y1]], {vertices:{visible:false}});
+                }
+
+                xco.sort(function(x, y){return x-y;});
+                console.log(xco);
+                sz = xco.length;
+                var pos = sz-1;
+
+                var AA = board.create('point', [-5, -6]);
+                var AB = board.create('point', [-5, 6]);
+                var li = board.create('line', [AA, AB]);
+
+                setInterval(function(){
+                  pos = (pos + 1) % sz;
+                  AA.moveTo([xco[pos], -6]);
+                  AB.moveTo([xco[pos], 6]);
+                  console.log(xco[pos]);
+                }, 500);
+              }
+            </script>
           </section>
           <section>
             <h3> 矩形覆蓋次數  </h3>
             <ul>
-              <li> 掃描線 : 1 維 </li>
-              <li> 維護每個 $y$ 座標被多少矩形覆蓋</li>
-              <li> 線段樹! </li>
-              <li> 左邊界 : $y$ 區間 +1 </li>
-              <li> 右邊界 : $y$ 區間 -1 </li>
-              <li> 查詢點 : 某詢某 $y$ 數值 </li>
-              <li> 時間複雜度 : $O((M+N) \log N)$ </li>
+              <li class="fragment"> 掃描線 : 1 維 </li>
+              <li class="fragment"> 維護每個 $y$ 座標被多少矩形覆蓋</li>
+              <li class="fragment"> 線段樹! </li>
+              <li class="fragment"> 左邊界 : $y$ 區間 +1 </li>
+              <li class="fragment"> 右邊界 : $y$ 區間 -1 </li>
+              <li class="fragment"> 查詢點 : 某詢某 $y$ 數值 </li>
+              <li class="fragment"> 時間複雜度 : $O((M+N) \log N)$ </li>
             </ul>
-            (圖)
           </section>
         </section>
 
@@ -806,94 +941,335 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           <section>
             <h3> 旋轉卡尺 </h3>
             <ul>
-              <li>類似掃描線，不過是用轉的!</li>
-              <li> 通常用在凸多邊形上 </li>
+              <li class="fragment">類似掃描線，不過是用轉的!</li>
+              <li class="fragment"> 通常用在凸多邊形上 </li>
             </ul>
-            (圖)
+            <div id="box32" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box32', {boundingbox: [-5, 5, 5, -5]});
+                var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+                board.create('polygon', poly, {vertices:{size:2}});
+
+                var la = board.create('point', [0, 0], {visible:false});
+                var lb = board.create('point', [0, 0], {visible:false});
+                var line1 = board.create('line', [la, lb]);
+                var theta = 0.0;
+                frot = function()
+                {
+                  theta += 0.02;
+                  var dx = Math.cos(theta), dy = Math.sin(theta);
+                  var nx = -dy, ny = dx;
+                  var minp = 0, maxp = 0;
+                  var minv = 1E10, maxv = -1E10;
+                  for(i=0; i<poly.length; i++)
+                  {
+                    var val = dx * poly[i][0] + dy * poly[i][1];
+                    if(val < minv){
+                      minv = val;
+                      minp = i;
+                    }
+                    if(val > maxv){
+                      maxv = val;
+                      maxp = i;
+                    }
+                  }
+                  la.moveTo(poly[minp]);
+                  lb.moveTo([poly[minp][0] + nx, poly[minp][1] + ny]);
+                };
+
+                setInterval(frot, 30);
+              }
+            </script>
           </section>
           <section>
             <h3> 凸多邊形最窄寬度 </h3>
-            <div class="ques">
+            <div class="prob">
               給定一個凸多邊形 $P$，計算他的最窄寬度(也就是用距離最短的直線夾住)。
             </div>
-              (圖)
+            <div id="box33" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box33', {boundingbox: [-5, 5, 5, -5]});
+                var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+                board.create('polygon', poly, {vertices:{size:2}});
+                board.create('line', [poly[2], poly[3]]);
+                board.create('line', [poly[0], [4, 2]]);
+              }
+            </script>
           </section>
           <section>
             <h3> 凸多邊形最窄寬度 </h3>
             <ul>
-              <li> 轉一圈，總會遇到最小值 </li>
-              <li> <b>事件</b> : 其中一條卡尺貼到邊 </li>
-              <li> 點到直線的距離？外積! </li>
-              <li> 距離最遠的點即為對面的切點 </li>
-              <li> 跑過所有的事件一次，取最小值 </li>
-              <li> 枚舉一條邊，再計算另一個多邊形上的切點 </li>
-              <li> 時間複雜度 : $O(N^2)$ :( </li>
+              <li class="fragment"> 轉一圈，總會遇到最小值 </li>
+              <li class="fragment"> <b>事件</b> : 其中一條卡尺貼到邊 </li>
+              <li class="fragment"> 點到直線的距離？外積! </li>
+              <li class="fragment"> 距離最遠的點即為對面的切點 </li>
+              <li class="fragment"> 跑過所有的事件一次，取最小值 </li>
+              <li class="fragment"> 枚舉一條邊，再計算另一個多邊形上的切點 </li>
+              <li class="fragment"> 時間複雜度 : $O(N^2)$ :( </li>
             </ul>
-            (圖)
+            <div id="box34" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box34', {boundingbox: [-5, 5, 5, -5]});
+                var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+                board.create('polygon', poly, {vertices:{size:2}});
+
+                var laa = board.create('point', [0, 0], {visible:false});
+                var lab = board.create('point', [0, 0], {visible:false});
+                var lac = board.create('point', [0, 0], {visible:false});
+                var lad = board.create('point', [0, 0], {visible:false});
+                var line1 = board.create('line', [laa, lab]);
+                var line2 = board.create('line', [lac, lad]);
+                var theta = 0.0;
+                frot = function()
+                {
+                  theta += 0.02;
+                  var dx = Math.cos(theta), dy = Math.sin(theta);
+                  var nx = -dy, ny = dx;
+                  var minp = 0, maxp = 0;
+                  var minv = 1E10, maxv = -1E10;
+                  for(i=0; i<poly.length; i++)
+                  {
+                    var val = dx * poly[i][0] + dy * poly[i][1];
+                    if(val < minv){
+                      minv = val;
+                      minp = i;
+                    }
+                    if(val > maxv){
+                      maxv = val;
+                      maxp = i;
+                    }
+                  }
+                  laa.moveTo(poly[minp]);
+                  lab.moveTo([poly[minp][0] + nx, poly[minp][1] + ny]);
+                  lac.moveTo(poly[maxp]);
+                  lad.moveTo([poly[maxp][0] + nx, poly[maxp][1] + ny]);
+                };
+
+                setInterval(frot, 30);
+              }
+            </script>
           </section>
           <section>
             <h3> 凸多邊形最窄寬度 </h3>
             <ul>
-              <li> <b>逆時針</b>枚舉貼的邊 </li>
-              <li> 另一邊的切點？可能會移動好幾個點，但只會<b>逆時針</b>移動!</li>
-              <li> 貼的邊繞一圈 $\to$ 切點也只會繞一圈 </li>
-              <li> 時間複雜度 : $O(N)$ </li>
+              <li class="fragment"> <b>逆時針</b>枚舉貼的邊 </li>
+              <li class="fragment"> 另一邊的切點？可能會移動好幾個點，但只會<b>逆時針</b>移動!</li>
+              <li class="fragment"> 貼的邊繞一圈 $\to$ 切點也只會繞一圈 </li>
+              <li class="fragment"> 時間複雜度 : $O(N)$ </li>
             </ul>
-              (圖)
+            <div id="box35" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box35', {boundingbox: [-5, 5, 5, -5]});
+                var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+                board.create('polygon', poly, {vertices:{size:2}});
+
+                var fA = board.create('point', poly[0], {visible:false});
+                var fB = board.create('point', poly[1], {visible:false});
+                var fP = board.create('point', poly[3], {withLabel: false, size:5, strokeColor:'green'});
+                var fll = board.create('line', [fA, fB]);
+                board.create('perpendicularsegment', [fll, fP], {dash:true});
+
+                var nowpos = 0;
+                var fff = function(){
+                  nowpos = (nowpos + 1) % poly.length;
+                  var n2 = (nowpos + 1) % poly.length;
+                  var n3 = (nowpos + 3) % poly.length;
+                  fA.moveTo(poly[nowpos]);
+                  fB.moveTo(poly[n2]);
+                  fP.moveTo(poly[n3]);
+                };
+
+                setInterval(fff, 1000);
+              }
+            </script>
           </section>
           <section>
             <h3> 凸多邊形最窄寬度 </h3>
             <ul>
-              <li> 那事件與事件之間呢？(兩個卡尺皆沒有貼到邊)</li>
-              <li> 卡尺繞著兩個點轉 </li>
-              <li> 不可能發生極小值! </li>
+              <li class="fragment"> 那事件與事件之間呢？(兩個卡尺皆沒有貼到邊)</li>
+              <li class="fragment"> 卡尺繞著兩個點轉 </li>
+              <li class="fragment"> 不可能發生極小值! </li>
             </ul>
-              (圖)
+            <div id="box36" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box36', {boundingbox: [-5, 5, 5, -5]});
+                var poly = [[3, 0], [2, 3], [-1, 3], [-3, -1], [0, -2]];
+                board.create('polygon', poly, {vertices:{size:2}});
+                board.create('line', [poly[2], [0, 4]]);
+                var xx = board.create('line', [poly[0], [4, 1]]);
+                board.create('segment', [poly[0], poly[2]]);
+                var nu = board.create('point', poly[2], {visible:false});
+                board.create('perpendicularsegment', [xx, nu], {dash:true});
+              }
+            </script>
           </section>
           <section>
             <h3> 兩點集最寬分割直線 </h3>
-            <div class="ques">
-              給定兩個點集 $A, B$，請用一條最寬的直線把這兩個點集分成兩邊。
+            <div class="prob">
+              給定兩個點集 $A, B$，請用兩條距離最遠的直線把這兩個點集分成兩邊。
             </div>
-              (圖)
+            <div id="box37" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box37', {boundingbox: [-5, 5, 5, -5]});
+                var poly1 = [[-3, 0], [2, -3], [0, 0], [-3, -1], [0, -2]];
+                var poly2 = [[3, 4], [2, 3], [1, 3], [3, -1], [0, 2]];
+                for(i=0; i<poly1.length; i++)
+                  board.create('point', poly1[i], {withLabel:false});
+                for(i=0; i<poly2.length; i++)
+                  board.create('point', poly2[i], {withLabel:false, strokeColor:'green'});
+
+                board.create('line', [poly2[3], poly2[4]]);
+                board.create('line', [poly1[2], [-1,1]]);
+                board.create('polygon', [[-10,10], [10,-10], [10,-8], [-8,10]]);
+              }
+            </script>
           </section>
           <section>
             <h3> 兩點集最寬分割直線 </h3>
             <ul>
-              <li> 中間的點沒有用</li>
-              <li> 直線必定只會碰到凸包! </li>
-              <li> 先求凸包 </li>
+              <li class="fragment"> 中間的點沒有用</li>
+              <li class="fragment"> 直線必定只會碰到凸包! </li>
+              <li class="fragment"> 先求凸包 </li>
             </ul>
-            (圖)
+            <div id="box38" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box38', {boundingbox: [-5, 5, 5, -5]});
+                var poly1 = [[-3, 0], [2, -3], [0, 0], [-3, -1], [0, -2]];
+                var poly2 = [[3, 4], [2, 3], [1, 3], [3, -1], [0, 2]];
+                var poly3 = [[-3, 0], [0,0], [2, -3], [-3, -1]];
+                var poly4 = [[3, 4], [1, 3], [0,2],[3, -1]];
+                for(i=0; i<poly1.length; i++)
+                  board.create('point', poly1[i], {withLabel:false});
+                for(i=0; i<poly2.length; i++)
+                  board.create('point', poly2[i], {withLabel:false, strokeColor:'green'});
+
+                board.create('line', [poly2[3], poly2[4]]);
+                board.create('line', [poly1[2], [-1,1]]);
+                board.create('polygon', [[-10,10], [10,-10], [10,-8], [-8,10]]);
+                board.create('polygon', poly3, {fillColor:'red', vertices:{visible:false}});
+                board.create('polygon', poly4, {fillColor:'yellow', vertices:{visible:false}});
+              }
+            </script>
           </section>
           <section>
             <h3> 兩凸包最近距離 </h3>
             <div class="ques">
               給定兩個凸多邊形 $A, B$，求他們間的最近距離。
             </div>
-              (圖)
+            <div id="box39" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box39', {boundingbox: [-5, 5, 5, -5]});
+                var poly1 = [[-3, 0], [2, -3], [0, 0], [-3, -1], [0, -2]];
+                var poly2 = [[3, 4], [2, 3], [1, 3], [3, -1], [0, 2]];
+                var poly3 = [[-3, 0], [0,0], [2, -3], [-3, -1]];
+                var poly4 = [[3, 4], [1, 3], [0,2],[3, -1]];
+                
+                var lq = board.create('line', [poly2[3], poly2[4]]);
+                board.create('line', [poly1[2], [-1,1]]);
+                board.create('polygon', [[-10,10], [10,-10], [10,-8], [-8,10]]);
+                board.create('polygon', poly3, {fillColor:'red', vertices:{visible:false}});
+                board.create('polygon', poly4, {fillColor:'yellow', vertices:{visible:false}});
+                var pq = board.create('point', poly1[2], {visible:false});
+                board.create('perpendicularsegment', [lq, pq], {dash:true});
+              }
+            </script>
           </section>
           <section>
             <h3> 兩凸包最近距離 </h3>
             <ul>
-              <li> 兩條反向的平行卡尺</li>
-              <li> 繞一圈，找最小距離</li>
-              <li> <b>事件</b> : 其中一條卡尺貼到邊 </li>
-              <li> 記得枚舉兩邊的貼邊! </li>
-              <li> 距離為負 $\to$ 凸多邊形相交 </li>
+              <li class="fragment"> 兩條反向的平行卡尺</li>
+              <li class="fragment"> 繞一圈，找最小距離</li>
+              <li class="fragment"> <b>事件</b> : 其中一條卡尺貼到邊 </li>
+              <li class="fragment"> 記得枚舉兩邊的貼邊! </li>
+              <li class="fragment"> 距離為負 $\to$ 凸多邊形相交 </li>
             </ul>
-              (圖)
+            <div id="box40" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box40', {boundingbox: [-5, 5, 5, -5]});
+                var poly1 = [[-3, 0], [2, -3], [0, 0], [-3, -1], [0, -2]];
+                var poly2 = [[3, 4], [2, 3], [1, 3], [3, -1], [0, 2]];
+                var poly3 = [[-3, 0], [0,0], [2, -3], [-3, -1]];
+                var poly4 = [[3, 4], [1, 3], [0,2],[3, -1]];
+                
+                board.create('polygon', poly3, {fillColor:'red', vertices:{visible:false}});
+                board.create('polygon', poly4, {fillColor:'yellow', vertices:{visible:false}});
+
+                var lba = board.create('point', [0, 0], {visible:false});
+                var lbb = board.create('point', [0, 0], {visible:false});
+                var lbc = board.create('point', [0, 0], {visible:false});
+                var lbd = board.create('point', [0, 0], {visible:false});
+                var line1 = board.create('line', [lba, lbb]);
+                var line2 = board.create('line', [lbc, lbd]);
+                var theta2 = 0.0;
+                frot2 = function()
+                {
+                  theta2 += 0.01;
+                  var dx = Math.cos(theta2), dy = Math.sin(theta2);
+                  var nx = -dy, ny = dx;
+                  var minp = 0, maxp = 0;
+                  var minv = 1E10, maxv = -1E10;
+                  for(i=0; i<poly1.length; i++)
+                  {
+                    var val = dx * poly1[i][0] + dy * poly1[i][1];
+                    if(val < minv){
+                      minv = val;
+                      minp = i;
+                    }
+                  }
+                  for(i=0; i<poly2.length; i++)
+                  {
+                    var val = dx * poly2[i][0] + dy * poly2[i][1];
+                    if(val > maxv){
+                      maxv = val;
+                      maxp = i;
+                    }
+                  }
+                  lba.moveTo(poly1[minp]);
+                  lbb.moveTo([poly1[minp][0] + nx, poly1[minp][1] + ny]);
+                  lbc.moveTo(poly2[maxp]);
+                  lbd.moveTo([poly2[maxp][0] + nx, poly2[maxp][1] + ny]);
+                };
+
+                setInterval(frot2, 30);
+              }
+            </script>
           </section>
           <section>
             <h3> 兩凸包最近距離 </h3>
             <ul>
-              <li> 事件與事件之間，不會有極值 </li>
-              <li> ...嗎？</li>
-              <li> 還要考慮卡尺旋轉過程，切到兩點的直線距離 </li>
-              <li> 每個事件之間 $O(1)$ 檢查，總複雜度不變</li>
-              <li> 直線距離一定合法嗎? </li>
+              <li class="fragment"> 事件與事件之間，不會有極值 </li>
+              <li class="fragment"> ...嗎？</li>
+              <li class="fragment"> 還要考慮卡尺旋轉過程，切到兩點的直線距離 </li>
+              <li class="fragment"> 每個事件之間 $O(1)$ 檢查，總複雜度不變</li>
+              <li class="fragment"> 直線距離一定合法嗎? </li>
             </ul>
-              (圖)
+            <div id="box41" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box41', {boundingbox: [-5, 5, 5, -5]});
+                var poly1 = [[-3, 0], [2, -3], [0, 0], [-3, -1], [0, -2]];
+                var poly2 = [[3, 4], [2, 3], [1, 3], [3, -1], [0, 2]];
+                var poly3 = [[-3, 0], [0,0], [2, -3], [-3, -1]];
+                var poly4 = [[3, 4], [1, 3], [1,1]];
+                
+                var lq = board.create('line', [poly2[3], poly2[4]]);
+                board.create('line', [poly1[2], [-1,1]]);
+                board.create('polygon', [[-10,10], [10,-10], [10,-8], [-8,10]]);
+                board.create('polygon', poly3, {fillColor:'red', vertices:{visible:false}});
+                board.create('polygon', poly4, {fillColor:'yellow', vertices:{visible:false}});
+                var pq = board.create('point', poly1[2], {visible:false});
+                board.create('perpendicularsegment', [lq, pq], {dash:true});
+              }
+            </script>
           </section>
         </section>
 
@@ -913,10 +1289,10 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
 &gt;&gt;&gt;
             </code></pre>
             <ul>
-              <li> double 有效位數 : 約 16 位</li>
-              <li> 該怎麼辦呢？</li>
-              <li> 改用整數計算</li>
-              <li> <b>寬鬆</b>比對</li>
+              <li class="fragment"> double 有效位數 : 約 16 位</li>
+              <li class="fragment"> 該怎麼辦呢？</li>
+              <li class="fragment"> 改用整數計算</li>
+              <li class="fragment"> <b>寬鬆</b>比對</li>
             </ul>
           </section>
           <section>
@@ -930,60 +1306,62 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
 { return a &gt; b + EPS;}
             </code></pre>
             <ul>
-              <li> EPS : 誤差容忍值</li>
-              <li> 約 $10^{-6}$ ~ $10^{-14}$</li>
-              <li> 視題目性質而定</li>
+              <li class="fragment"> EPS : 誤差容忍值</li>
+              <li class="fragment"> 約 $10^{-6}$ ~ $10^{-14}$</li>
+              <li class="fragment"> 視題目性質而定</li>
             </ul>
           </section>
           <section>
             <h3> 誤差傳遞</h3>
             <ul>
-              <li> 有誤差的數字，經過運算後誤差會累積 </li>
-              <li> $A = 1.0000\color{red}{2}, B = 1.0000\color{red}{1}$</li>
-              <li> $A+B = 2.0000\color{red}{3}$</li>
-              <li> $A \cdot B = 1.0000\color{red}{3}\color{gray}{0002}$</li>
-              <li> $A / B = 1.00000\color{red}{9}\color{gray}{9999\cdots}$</li>
-              <li> $A-B = \color{gray}{0.0000}\color{red}{1}$</li>
+              <li class="fragment"> 有誤差的數字，經過運算後誤差會累積 </li>
+              <li class="fragment"> $A = 1.0000\color{red}{2}, B = 1.0000\color{red}{1}$</li>
+              <li class="fragment"> $A+B = 2.0000\color{red}{3}$</li>
+              <li class="fragment"> $A \cdot B = 1.0000\color{red}{3}\color{gray}{0002}$</li>
+              <li class="fragment"> $A / B = 1.00000\color{red}{9}\color{gray}{9999\cdots}$</li>
+              <li class="fragment"> $A-B = \color{gray}{0.0000}\color{red}{1}$</li>
             </ul>
           </section>
           <section>
             <h3> 誤差傳遞</h3>
             <ul>
-              <li> EPS 要設夠大 </li>
-              <li> <b>減法</b>要特別注意 </li>
+              <li class="fragment"> EPS 要設夠大 </li>
+              <li class="fragment"> <b>減法</b>要特別注意 </li>
             </ul>
           </section>
           <section>
             <h3> 數據精度</h3>
             <ul>
-              <li> EPS 要夠小，不能把不同的數誤判為相同 </li>
-              <li> 輸入座標點為整數，範圍為 $[0, M]$ </li>
-              <li> 不同點間相對誤差約 $O(1/M)$ </li>
+              <li class="fragment"> EPS 要夠小，不能把不同的數誤判為相同 </li>
+              <li class="fragment"> 輸入座標點為整數，範圍為 $[0, M]$ </li>
+              <li class="fragment"> 不同點間相對誤差約 $O(1/M)$ </li>
             </ul>
           </section>
           <section>
             <h3> 數據精度</h3>
             <ul>
-              <li> 機八 Case </li>
-              <li> 角度差 : $O(1/M^2)$ </li>
+              <li class="fragment"> 機八 Case </li>
+              <li class="fragment"> 角度差 : $O(1/M^2)$ </li>
             </ul>
             <div id="box99" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
-              var board = JXG.JSXGraph.initBoard('box99', {boundingbox: [-5, 5, 6, -5], axis:true});
-              var A = board.create('point', [0,0], {name:'O'});
-              var B = board.create('point', [4,3], {name:'(4,3)'});
-              var C = board.create('point', [5,4], {name:'(5,4)'});
-              board.create('segment', [A,B]);
-              board.create('segment', [A,C]);
+              {
+                var board = JXG.JSXGraph.initBoard('box99', {boundingbox: [-5, 5, 6, -5], axis:true});
+                var A = board.create('point', [0,0], {name:'O'});
+                var B = board.create('point', [4,3], {name:'(4,3)'});
+                var C = board.create('point', [5,4], {name:'(5,4)'});
+                board.create('segment', [A,B]);
+                board.create('segment', [A,C]);
+              }
             </script>
           </section>
           <section>
             <h3> 替代方案</h3>
             <ul>
-              <li> 萬一精度就是不夠怎麼辦？ </li>
-              <li> long double : 精度 $10^{-19}$ </li>
-              <li> __float128 : 精度 $10^{-34}$ (但非常慢) </li>
-              <li> 回歸<b>整數</b>運算! </li>
+              <li class="fragment"> 萬一精度就是不夠怎麼辦？ </li>
+              <li class="fragment"> long double : 精度 $10^{-19}$ </li>
+              <li class="fragment"> __float128 : 精度 $10^{-34}$ (但非常慢) </li>
+              <li class="fragment"> 回歸<b>整數</b>運算! </li>
             </ul>
           </section>
         </section>
@@ -998,7 +1376,15 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
           </section>
           <section>
             ... 別唬我了，這根本無法做吧
-            (圖 : 尖函數)
+            <div id="box100" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box100', {boundingbox: [-5, 5, 5, -5], axis:true});
+                board.create('functiongraph', [function(x){
+                  return 2-2*Math.exp(1.0/(1+100*x*x));
+                }, -5, 5]);
+              }
+            </script>
           </section>
           <section>
             <p> 如果函數 $f$ 有一些條件呢？</p>
@@ -1006,74 +1392,100 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
               如果一個函數 $f$ 在 $x_0$ 處有最小值，且在 $x &lt; x_0$ 時嚴格遞減，
               $x &gt; x_0$ 時嚴格遞增，則稱 $f$ 為<b>嚴格單極值函數</b>。              
             </div>
-            (圖)
+            <div id="box101" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box101', {boundingbox: [-5, 5, 5, -5], axis:true});
+                var func = function(x){return 2-2*Math.exp(1.0/(1+x*x));};
+                board.create('functiongraph', [func, -5, 5]);
+                board.create('point', [0, func(0)], {name:'x0'});
+              }
+            </script>
           </section>
           <section>
             <ul>
-              <li> 隨便戳一點 $x$ </li>
-              <li> $f$ 在 $x$ 處遞減 : 極值在 $x$ 右邊 </li>
-              <li> $f$ 在 $x$ 處遞增 : 極值在 $x$ 左邊 </li>
-              <li> 二分搜！ </li>
-              <li> 時間複雜度 : $O(T \log\left(\frac{b-a}{\epsilon}\right))$ </li>
-              <li> $T$ : $f$ 求值一次的時間；$\epsilon$ : 誤差容忍值 </li>
+              <li class="fragment"> 隨便戳一點 $x$ </li>
+              <li class="fragment"> $f$ 在 $x$ 處遞減 : 極值在 $x$ 右邊 </li>
+              <li class="fragment"> $f$ 在 $x$ 處遞增 : 極值在 $x$ 左邊 </li>
+              <li class="fragment"> 二分搜！ </li>
+              <li class="fragment"> 時間複雜度 : $O(T \log\left(\frac{b-a}{\epsilon}\right))$ </li>
+              <li class="fragment"> $T$ : $f$ 求值一次的時間；$\epsilon$ : 誤差容忍值 </li>
             </ul>
-            (圖)
+            <div id="box102" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box102', {boundingbox: [-5, 5, 5, -5], axis:true});
+                var func = function(x){return 2-2*Math.exp(1.0/(1+x*x));};
+                board.create('functiongraph', [func, -5, 5]);
+                var A = board.create('point', [1, func(1)], {name:'x'});
+                var line = board.create('line', [[1,0],[1,1]], {visible:false});
+                var ineq = board.create('inequality', [line]);
+              }
+            </script>
           </section>
           <section>
             <ul>
-              <li> 如何判斷遞增或遞減？ </li>
-              <li> 斜率 $f'(x)$ </li>
-              <li> 取旁邊一個很近的點 $f(x+\epsilon)$ 比大小 </li>
-              <li> 有時候不容易判斷 </li>
+              <li class="fragment"> 如何判斷遞增或遞減？ </li>
+              <li class="fragment"> 斜率 $f'(x)$ </li>
+              <li class="fragment"> 取旁邊一個很近的點 $f(x+\epsilon)$ 比大小 </li>
+              <li class="fragment"> 有時候不容易判斷 </li>
             </ul>
           </section>
           <section>
             <h3> 三分搜尋法</h3>
             <ul>
-              <li> 戳兩點 $l, r$ </li>
-              <li> $f(l) &lt; f(r)$ : 極值在 $[a, r]$ </li>
-              <li> $f(l) &gt; f(r)$ : 極值在 $[l, b]$ </li>
-              <li> $f(l) = f(r)$ ? </li>
-              <li> 時間複雜度 : $O(T \log\left(\frac{b-a}{\epsilon}\right))$ </li>
+              <li class="fragment"> 戳兩點 $l, r$ </li>
+              <li class="fragment"> $f(l) &lt; f(r)$ : 極值在 $[a, r]$ </li>
+              <li class="fragment"> $f(l) &gt; f(r)$ : 極值在 $[l, b]$ </li>
+              <li class="fragment"> $f(l) = f(r)$ ? </li>
+              <li class="fragment"> 時間複雜度 : $O(T \log\left(\frac{b-a}{\epsilon}\right))$ </li>
             </ul>
-            (圖)
+            <div id="box103" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box103', {boundingbox: [-5, 5, 5, -5], axis:true});
+                var func = function(x){return 2-2*Math.exp(1.0/(1+(x-1)*(x-1)));};
+                board.create('functiongraph', [func, -5, 5]);
+                var A = board.create('point', [-1.66, func(-1.66)], {name:'l'});
+                var B = board.create('point', [1.66, func(1.66)], {name:'r'});
+                var l1 = board.create('line', [-1.66, -1, 0], {visible:false});
+                var ineq = board.create('inequality', [l1]);
+              }
+            </script>
           </section>
           <section>
             <h3> 多變數函數 </h3>
             <ul>
-              <li> 二維函數 $f(x, y)$ </li>
-              <li> 二維的單極值函數，要怎麼找極小值？ </li>
-              <li> $\displaystyle \min_{x, y} f(x, y) = \min_y \min_x f(x, y)$ </li>
-              <li> 兩次三分搜 </li>
-              <li> 時間複雜度 : $O(T \log^2\left(\frac{b-a}{\epsilon}\right))$ </li>
-              <li> $d$ 維函數呢？ </li>
+              <li class="fragment"> 二維函數 $f(x, y)$ </li>
+              <li class="fragment"> 二維的單極值函數，要怎麼找極小值？ </li>
+              <li class="fragment"> $\displaystyle \min_{x, y} f(x, y) = \min_y \min_x f(x, y)$ </li>
+              <li class="fragment"> 兩次三分搜 </li>
+              <li class="fragment"> 時間複雜度 : $O(T \log^2\left(\frac{b-a}{\epsilon}\right))$ </li>
+              <li class="fragment"> $d$ 維函數呢？ </li>
             </ul>
-            (圖)
           </section>
           <section>
             <h3> 模擬退火 </h3>
             <ul>
-              <li> 先隨便戳一個點 </li>
-              <li> 一直往下走(函數值小的地方) </li>
-              <li> 總有一天會走到極小值 </li>
+              <li class="fragment"> 先隨便戳一個點 </li>
+              <li class="fragment"> 一直往下走(函數值小的地方) </li>
+              <li class="fragment"> 總有一天會走到極小值 </li>
             </ul>
-            (圖)
           </section>
           <section>
             <h3> 模擬退火 </h3>
             <ul>
-              <li> 可是要怎麼知道哪邊的函數值比較小呢？ </li>
-              <li> 最簡單的方法 : 隨便亂試! </li>
-              <li> 函數值變小 $\to$ 走過去 </li>
-              <li> 函數值變大 $\to$ 不理他 </li>
+              <li class="fragment"> 可是要怎麼知道哪邊的函數值比較小呢？ </li>
+              <li class="fragment"> 最簡單的方法 : 隨便亂試! </li>
+              <li class="fragment"> 函數值變小 $\to$ 走過去 </li>
+              <li class="fragment"> 函數值變大 $\to$ 不理他 </li>
             </ul>
-            (圖)
           </section>
           <section>
             <h3> Gradient Descent </h3>
             <ul>
-              <li> 真的只能亂走嗎? </li>
-              <li> 直接計算出函數值<b>變小</b>的方向! </li>
+              <li class="fragment"> 真的只能亂走嗎? </li>
+              <li class="fragment"> 直接計算出函數值<b>變小</b>的方向! </li>
             </ul>
             <div class="def">
               <b>梯度</b> (Gradient) : 概念上就是多維度的<em>斜率</em>。
@@ -1085,28 +1497,28 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
           <section>
             <h3> Gradient Descent </h3>
             <ul>
-              <li> 每一次往<b>負</b>梯度的方向走一步 </li>
-              <li> $(x, y) \gets (x, y) - \eta \cdot \nabla f(x, y)$ </li>
-              <li> $\eta$ 參數決定了步長(走的速度) </li>
+              <li class="fragment"> 每一次往<b>負</b>梯度的方向走一步 </li>
+              <li class="fragment"> $(x, y) \gets (x, y) - \eta \cdot \nabla f(x, y)$ </li>
+              <li class="fragment"> $\eta$ 參數決定了步長(走的速度) </li>
             </ul>
           </section>
           <section>
             <h3> 步長的選擇 </h3>
             <ul>
-              <li> 步長太短 : 收斂太慢 </li>
-              <li> 步長太長 : 會走過頭 (甚至不收斂) </li>
-              <li> 一開始步長大一點，接著慢慢縮小 </li>
-              <li> 例如 : 每次乘以 $0.999$ 倍 </li>
-              <li> 如果走得很順利，也可以放大 </li>
-              <li> Trial &amp; Error ! </li>
+              <li class="fragment"> 步長太短 : 收斂太慢 </li>
+              <li class="fragment"> 步長太長 : 會走過頭 (甚至不收斂) </li>
+              <li class="fragment"> 一開始步長大一點，接著慢慢縮小 </li>
+              <li class="fragment"> 例如 : 每次乘以 $0.999$ 倍 </li>
+              <li class="fragment"> 如果走得很順利，也可以放大 </li>
+              <li class="fragment"> Trial &amp; Error ! </li>
             </ul>
           </section>
           <section>
             <h3> 時間複雜度 </h3>
             <ul>
-              <li> $O(?)$ </li>
-              <li> 看人品囉... 雖一點的話可能永遠走不完 </li>
-              <li> 函數性質越好，<b>通常</b>會比較快收斂 </li>
+              <li class="fragment"> $O(?)$ </li>
+              <li class="fragment"> 看人品囉... 雖一點的話可能永遠走不完 </li>
+              <li class="fragment"> 函數性質越好，<b>通常</b>會比較快收斂 </li>
             </ul>
           </section>
           <section>
@@ -1117,43 +1529,53 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
               則稱 $f$ 是<b>凸</b>函數。
             </div>
             <ul>
-              <li> 1維凸函數：<b>斜率單調遞增</b> </li>
-              <li> 函數曲線永遠在兩點連線下方 </li>
-              <li> 往每個方向走，斜率都單調遞增 </li>
-              <li> Hessian Matrix 永遠是 Positive Semi-Definite </li>
+              <li class="fragment"> 1維凸函數：<b>斜率單調遞增</b> </li>
+              <li class="fragment"> 函數曲線永遠在兩點連線下方 </li>
+              <li class="fragment"> 往每個方向走，斜率都單調遞增 </li>
+              <li class="fragment"> Hessian Matrix 永遠是 Positive Semi-Definite </li>
             </ul>
-            (圖)
+            <div id="box104" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box104', {boundingbox: [-5, 5, 5, -5], axis:true});
+                var func = function(x){return x*x/5.0;};
+                board.create('functiongraph', [func, -5, 5]);
+                var A = board.create('point', [-1, func(-1)], {name:'A'});
+                var B = board.create('point', [2, func(2)], {name:'B'});
+                var l1 = board.create('segment', [A, B]);
+              }
+            </script>
           </section>
           <section>
             <h3> 凸函數 </h3>
             <ul>
-              <li> 凸函數一定單極值 (比單極值更強!) </li>
-              <li> 斜率單調 </li>
-              <li> 越靠近極值點越平緩 </li>
-              <li> 對 Gradient Descent 相當有利 </li>
+              <li class="fragment"> 凸函數一定單極值 (比單極值更強!) </li>
+              <li class="fragment"> 斜率單調 </li>
+              <li class="fragment"> 越靠近極值點越平緩 </li>
+              <li class="fragment"> 對 Gradient Descent 相當有利 </li>
             </ul>
           </section>
           <section>
             <h3> 常見的凸函數 </h3>
             <ul>
-              <li> $x^2$ </li>
-              <li> $2^x$ </li>
-              <li> $x^2 + y^2$ </li>
-              <li> $\sqrt{x^2 + y^2}$ (直線距離)</li>
-              <li> 多個凸函數<b>相加</b> </li>
-              <li> 多個凸函數<b>取$\max$</b> </li>
+              <li class="fragment"> $x^2$ </li>
+              <li class="fragment"> $2^x$ </li>
+              <li class="fragment"> $x^2 + y^2$ </li>
+              <li class="fragment"> $\sqrt{x^2 + y^2}$ (直線距離)</li>
+              <li class="fragment"> 多個凸函數<b>相加</b> </li>
+              <li class="fragment"> 多個凸函數<b>取$\max$</b> </li>
             </ul>
           </section>
           <section>
             <h3> 時間複雜度 </h3>
             <ul>
-              <li> ...還是$O(?)$ </li>
-              <li> 但通常不會太差 </li>
-              <li> 實際跑起來大概走個 $30$ ~ $1000$ 步左右會結束(通常啦...) </li>
-              <li> 保證時間複雜度? 函數條件要更強，而且要用較複雜的演算法 </li>
-              <li> 最簡單的是牛頓插值法 (多維的也不好寫)</li>
-              <li> 其他的嘛... 「線性規劃只是一個特例」</li>
-              <li> 還是放棄吧XDDD </li>
+              <li class="fragment"> ...還是$O(?)$ </li>
+              <li class="fragment"> 但通常不會太差 </li>
+              <li class="fragment"> 實際跑起來大概走個 $30$ ~ $1000$ 步左右會結束(通常啦...) </li>
+              <li class="fragment"> 保證時間複雜度? 函數條件要更強，而且要用較複雜的演算法 </li>
+              <li class="fragment"> 最簡單的是牛頓插值法 (多維的也不好寫)</li>
+              <li class="fragment"> 其他的嘛... 「線性規劃只是一個特例」</li>
+              <li class="fragment"> 還是放棄吧XDDD </li>
             </ul>
           </section>
         </section>
@@ -1164,13 +1586,26 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
             <div class="prob">
               平面上有 $N$ 個點，請找一個點，到這 $N$ 個點的距離總和最小。
             </div>
-            (圖)
+            <div id="box105" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box105', {boundingbox: [-5, 5, 5, -5]});
+                var pts = [[-4, 0], [0, 4], [4, 0]];
+                var PP = board.create('point', [0, 4*0.577350], {name:'P', strokeColor:'green'});
+                for(i=0; i<pts.length; i++)
+                {
+                  board.create('point', pts[i]);
+                  board.create('segment', [PP, pts[i]]);
+                }
+
+              }
+            </script>
           </section>
           <section>
             <h3> Geometric Median </h3>
             <ul>
-              <li> $N = 3$ : 三角形的費馬點，與三點連線夾角 $120^\circ$ </li>
-              <li> $N \ge 5$ : 沒有解析公式 Q__Q </li>
+              <li class="fragment"> $N = 3$ : 三角形的費馬點，與三點連線夾角 $120^\circ$ </li>
+              <li class="fragment"> $N \ge 5$ : 沒有解析公式 Q__Q </li>
             </ul>
           </section>
           <section>
@@ -1181,18 +1616,18 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
               求 $\min f(x, y)$。
             </div>
             <ul>
-              <li> $\sqrt{(x-x_i)^2 + (y-y_i)^2}$ 是凸函數 </li>
-              <li> 凸函數相加還是凸函數 </li>
-              <li> $f(x, y)$ 是凸函數! </li>
+              <li class="fragment"> $\sqrt{(x-x_i)^2 + (y-y_i)^2}$ 是凸函數 </li>
+              <li class="fragment"> 凸函數相加還是凸函數 </li>
+              <li class="fragment"> $f(x, y)$ 是凸函數! </li>
             </ul>
           </section>
           <section>
             <h3> Geometric Median </h3>
             <ul>
-              <li> 用任何一個你喜歡的方法找極值 </li>
-              <li> $\sqrt{x^2+y^2}$ 在原點有個尖點 </li>
-              <li> $f(x, y)$ 在那 $N$ 個點處以外都是平滑的 </li>
-              <li> 模擬退火 / Gradient Descent 都能順利找到極值 </li>
+              <li class="fragment"> 用任何一個你喜歡的方法找極值 </li>
+              <li class="fragment"> $\sqrt{x^2+y^2}$ 在原點有個尖點 </li>
+              <li class="fragment"> $f(x, y)$ 在那 $N$ 個點處以外都是平滑的 </li>
+              <li class="fragment"> 模擬退火 / Gradient Descent 都能順利找到極值 </li>
             </ul>
           </section>
           <section>
@@ -1200,15 +1635,26 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
             <div class="prob">
               平面上有 $N$ 個點，請找一個最小半徑的圓，把這 $N$ 個點包含在內。
             </div>
-            (圖)
+            <div id="box106" class="jxgbox" style="width:300px; height:300px;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box106', {boundingbox: [-5, 5, 5, -5]});
+                var pts = [[1, 0], [2, -1], [3, 2], [3, 0], [-1, 2], [3, -3], [-2, 3], [-3, -3]];
+                for(i=0; i<pts.length; i++)
+                {
+                  board.create('point', pts[i]);
+                }
+                var cc = board.create('circumcircle', [pts[5], pts[6], pts[7]]);
+              }
+            </script>
           </section>
           <section>
             <h3> 最小包含圓 </h3>
             <ul>
-              <li> 有各式各樣的算法 </li>
-              <li> 枚舉3個點的外接圓 : $O(N^4)$ </li>
-              <li> 隨機增量法 : 期望 $O(N)$ </li>
-              <li> 數值方法 </li>
+              <li class="fragment"> 有各式各樣的算法 </li>
+              <li class="fragment"> 枚舉3個點的外接圓 : $O(N^4)$ </li>
+              <li class="fragment"> 隨機增量法 : 期望 $O(N)$ </li>
+              <li class="fragment"> 數值方法 </li>
             </ul>
           </section>
           <section>
@@ -1219,33 +1665,33 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
               求 $\min f(x, y)$。
             </div>
             <ul>
-              <li> $\sqrt{(x-x_i)^2 + (y-y_i)^2}$ 是凸函數 </li>
-              <li> 凸函數取 $\max$ 還是凸函數 </li>
-              <li> $f(x, y)$ 是凸函數! </li>
+              <li class="fragment"> $\sqrt{(x-x_i)^2 + (y-y_i)^2}$ 是凸函數 </li>
+              <li class="fragment"> 凸函數取 $\max$ 還是凸函數 </li>
+              <li class="fragment"> $f(x, y)$ 是凸函數! </li>
             </ul>
           </section>
           <section>
             <h3> 最小包含圓 </h3>
             <ul>
-              <li> 取 $\max$ 有個小問題 : 函數會不平滑、有稜角 (不可微分) </li>
-              <li> Gradient Descent 會在兩壁間來回跳動 </li>
-              <li> ...可能會吃土 </li>
-              <li> 模擬退火比較容易成功 </li>
+              <li class="fragment"> 取 $\max$ 有個小問題 : 函數會不平滑、有稜角 (不可微分) </li>
+              <li class="fragment"> Gradient Descent 會在兩壁間來回跳動 </li>
+              <li class="fragment"> ...可能會吃土 </li>
+              <li class="fragment"> 模擬退火比較容易成功 </li>
             </ul>
           </section>
           <section>
             <h3> 模擬退火 vs Gradient Descent </h3>
             <p>模擬退火:</p>
             <ul>
-              <li> 適用範圍比較廣 </li>
-              <li> 甚至非單極值函數，也有機會找到最小值 </li>
-              <li> 收斂比較慢 </li>
+              <li class="fragment"> 適用範圍比較廣 </li>
+              <li class="fragment"> 甚至非單極值函數，也有機會找到最小值 </li>
+              <li class="fragment"> 收斂比較慢 </li>
             </ul>
             <p>Gradient Descent:</p>
             <ul>
-              <li> 如果函數性質良好，收斂相當的快 </li>
-              <li> 良好 : 凸函數、平滑函數 (可微分)</li>
-              <li> 如果函數很糟的話，可能會發散，或是收斂地非常非常慢</li>
+              <li class="fragment"> 如果函數性質良好，收斂相當的快 </li>
+              <li class="fragment"> 良好 : 凸函數、平滑函數 (可微分)</li>
+              <li class="fragment"> 如果函數很糟的話，可能會發散，或是收斂地非常非常慢</li>
             </ul>
           </section>
 
