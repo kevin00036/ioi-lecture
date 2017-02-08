@@ -65,18 +65,20 @@
         \)
         <section>
           <h1> <small>Computational Geometry</small> <br> 計算幾何 </h1>
+          <h3> step5 </h3>
+          <h3> 2017/02/09 </h3>
         </section>
 
-        <section>
-          <section>
-            <h3> WHO AMD I?</h3>
-            <ul>
-              <li class="fragment"> 黃凱祺 / STEP5 / kevin00050 / 衄 </li>
-              <li class="fragment"> <b><font color="blue">bcw</font></b>0x1bd2 (<font color="blue">$\beta$</font>obogei / kai-<font color="blue">$\varsigma$</font>hi / hanhan<font color="blue">$\omega$</font>) </li>
-              <li class="fragment"> $\alpha \beta \gamma \delta \epsilon \ \zeta \eta \theta \iota \ \kappa \lambda \mu \nu \xi \omicron \ \pi \rho \sigma \tau \upsilon \ \phi \chi \psi \omega$</li>
-            </ul>
-          </section>
-        </section>
+        <!--<section>-->
+          <!--<section>-->
+            <!--<h3> WHO AMD I?</h3>-->
+            <!--<ul>-->
+              <!--<li class="fragment"> 黃凱祺 / STEP5 / kevin00050 / 衄 </li>-->
+              <!--<li class="fragment"> <b><font color="blue">bcw</font></b>0x1bd2 (<font color="blue">$\beta$</font>obogei / kai-<font color="blue">$\varsigma$</font>hi / hanhan<font color="blue">$\omega$</font>) </li>-->
+              <!--<li class="fragment"> $\alpha \beta \gamma \delta \epsilon \ \zeta \eta \theta \iota \ \kappa \lambda \mu \nu \xi \omicron \ \pi \rho \sigma \tau \upsilon \ \phi \chi \psi \omega$</li>-->
+            <!--</ul>-->
+          <!--</section>-->
+        <!--</section>-->
 
         <section>
           <section>
@@ -180,7 +182,6 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             $$ (x, y) = (x_0, y_0) + t \cdot (d_x, d_y), \ t \in \mathbb{R}$$
             <p> $\vec{P_0} = (x_0, y_0)$ : 直線上任意一點 </p>
             <p> $\vec{d} = (d_x, d_y)$ : <b>方向</b>向量 </p>
-            <p> 就說向量比較好用吧..</p>
             <div id="box3" class="jxgbox" style="width:300px; height:200px;"></div>
             <script type="text/javascript">
               {
@@ -442,7 +443,6 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           <section>
             <h3> 有向面積 </h3>
             <p> <b>簡單多邊形</b>的有向面積</p>
-            <p> 乾脆把中心點$A$選成原點，那麼$\vec{AP_i}$就變成$P_i$位置向量</p>
             $$ \mathrm{Area}(P_1P_2\cdots P_N) = \sum_{i=1}^{N} \Delta P_iOP_{i+1}
             = \frac{1}{2} \sum_{i=1}^{N} P_i \times P_{i+1}$$
             <p>(定義$P_{N+1} = P_1$)</p>
@@ -744,9 +744,9 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             </script>
           </section>
           <section>
-            <h3> 捲包裹法 </h3>
+            <h3> 拿條繩子捲起來！ </h3>
             <ul>
-              <li class="fragment"> 先找一個必定在凸包上的點 (怎麼找?)</li>
+              <li class="fragment"> 先找一個必定在凸包上的點 (最左下角的點一定是！)</li>
               <li class="fragment"> 每次找最靠右邊的，加入凸包</li>
               <li class="fragment"> 時間複雜度 : $O(N^2)$</li>
             </ul>
@@ -1307,6 +1307,155 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
 
         <section>
           <section>
+            <h3> 半平面 </h3>
+            <div style="float:right; width:60%;">
+              <p> 直線: 
+                <ul>
+                  <li> $ax+by=c$ </li>
+                  <li> $\color{green}{\vec{d}} \times \vec{P_0P} = 0$ </li>
+                </ul>
+              </p>
+              <p> 半平面: 
+                <ul>
+                  <li> $ax+by \color{blue}{\ge}c$ </li>
+                  <li> $\color{green}{\vec{d}} \times \vec{P_0P} \color{blue}{\ge} 0$ </li>
+                </ul>
+              </p>
+            </div>
+            <div id="hbox1" class="jxgbox" style="width:300px; height:300px; float:left;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('hbox1', {boundingbox: [-5, 5, 10, -2]});
+                var A = [1, 1];
+                var B = [8, 3];
+                var C = [1, 4];
+                var D = [6, -2];
+                board.create('point', A, {name:'P0', strokecolor:'red'});
+                board.create('point', C, {name:'P', strokecolor:'red'});
+                board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
+                var l = board.create('segment', [A,B], {lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}, strokeColor:'green'});
+                var l2 = board.create('segment', [A,C], {lastArrow:true});
+                ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
+              }
+            </script>
+          </section>
+          <section>
+            <h3> 半平面交 </h3>
+            <div style="float:right; width:60%;">
+              就是很多半平面的交集！
+            </div>
+            <div id="hbox2" class="jxgbox" style="width:300px; height:300px; float:left;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('hbox2', {boundingbox: [-5, 5, 10, -2]});
+                var A = [1, 1];
+                var B = [8, 3];
+                var C = [1, 4];
+                var D = [6, -2];
+                var E = [4, 5];
+                board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
+                board.create('line',[A,C], {strokeColor:'#00ff00',strokeWidth:2});
+                board.create('line',[C,B], {strokeColor:'#ffff00',strokeWidth:2});
+                ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
+                ineq2 = board.create('inequality', [l2], {inverse: true, fillColor: 'green'});
+                ineq3 = board.create('inequality', [l3], {inverse: false, fillColor: 'yellow'});
+              }
+            </script>
+          </section>
+          <section>
+            <h3> 半平面交 </h3>
+            <div style="float:right; width:60%;">
+              半平面交一定是凸的嗎？
+              <p class="fragment"><big><b>是的！</b></big></p>
+              <p class="fragment">凸：內部任兩點連線段還在內部</p>
+              <p class="fragment">半平面交有限 → 是凸多邊形！</p>
+              <p class="fragment">... 或是縮成一條線段</p>
+              <p class="fragment">... 或是縮成一個點</p>
+              <p class="fragment">... 或是空集合</p>
+            </div>
+            <div id="hbox3" class="jxgbox" style="width:300px; height:300px; float:left;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('hbox3', {boundingbox: [-5, 5, 10, -2]});
+                var A = [1, 1];
+                var B = [8, 3];
+                var C = [1, 4];
+                var D = [3, 2];
+                var E = [2, 3];
+                board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
+                board.create('line',[A,C], {strokeColor:'#00ff00',strokeWidth:2});
+                board.create('line',[C,B], {strokeColor:'#ffff00',strokeWidth:2});
+                ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
+                ineq2 = board.create('inequality', [l2], {inverse: true, fillColor: 'green'});
+                ineq3 = board.create('inequality', [l3], {inverse: false, fillColor: 'yellow'});
+                board.create('point', D, {label:'A'});
+                board.create('point', E, {label:'B'});
+                board.create('segment',[D,E], {strokeColor:'#ff0000',strokeWidth:2});
+              }
+            </script>
+          </section>
+          <section>
+            <h3> 直線切割法 </h3>
+            <div style="float:right; width:60%;">
+              Idea: 計算每條直線所貢獻的部份
+              <p class="fragment">拿其中一條直線 $L_i$ 出來</p>
+              <p class="fragment">用其他的直線去切割他 (取交集)</p>
+              <p class="fragment">最後會形成一個線段</p>
+              <p class="fragment">... 或是整條直線</p>
+              <p class="fragment">... 或是單邊射線</p>
+              <p class="fragment">... 或是一個點</p>
+              <p class="fragment">... 或是空集合</p>
+            </div>
+            <div id="hbox4" class="jxgbox" style="width:300px; height:300px; float:left;"></div>
+            <script type="text/javascript">
+              {
+                var f4 = function()
+                {
+                  var board = JXG.JSXGraph.initBoard('hbox4', {boundingbox: [-5, 5, 10, -2]});
+                  var A = [1, 1];
+                  var B = [5, 3];
+                  var C = [1, 4];
+                  board.create('line',[A,B], {strokeColor:'#ccccff',strokeWidth:2});
+                  var lin = board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
+                  var n1 = function() {
+                    var l2 = board.create('line',[A,C], {strokeColor:'#00ff00',strokeWidth:1});
+                    ineq2 = board.create('inequality', [l2], {inverse: true, fillColor: 'green'});
+                    board.removeObject(lin);
+                    lin = board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2, straightFirst:false});
+                  };
+                  var n2 = function() {
+                    var l3 = board.create('line',[C,B], {strokeColor:'#ffff00',strokeWidth:1});
+                    ineq3 = board.create('inequality', [l3], {inverse: false, fillColor: 'yellow'});
+                    board.removeObject(lin);
+                    lin = board.create('segment',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
+                  };
+                  setTimeout(n1, 1000);
+                  setTimeout(n2, 2000);
+                  setTimeout(function(){JXG.JSXGraph.freeBoard(board);}, 4500);
+                };
+                f4();
+                setInterval(f4, 5000);
+              }
+            </script>
+          </section>
+          <section>
+            <h3> 直線切割法 </h3>
+            <div>
+              <ul>
+                <li>有任何的射線：交集延伸到無限遠處</li>
+                <li>切出來全部空集合：無解</li>
+                <li>否則的話解集有限 (bounded)</li>
+              </ul>
+              <p class="fragment"><b>時間複雜度 $O(N^2)$</b></p>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3> 誤差處理 </h3>
+          </section>
+          <section>
             <div class="ques">
               請問 $0.1 + 0.2 = $ ?
             </div>
@@ -1330,11 +1479,11 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           <section>
             <h3> 寬鬆比對 </h3>
             <pre><code data-trim class="cpp">
-bool operator == (const double &amp;a, const double &amp;b)
+bool eps_equal (const double &amp;a, const double &amp;b)
 { return abs(a-b) &lt; EPS;}
-bool operator &lt; (const double &amp;a, const double &amp;b)
+bool eps_less (const double &amp;a, const double &amp;b)
 { return a &lt; b - EPS;}
-bool operator &gt; (const double &amp;a, const double &amp;b)
+bool eps_greater (const double &amp;a, const double &amp;b)
 { return a &gt; b + EPS;}
             </code></pre>
             <ul>
@@ -1398,339 +1547,6 @@ bool operator &gt; (const double &amp;a, const double &amp;b)
           </section>
         </section>
 
-        <section>
-          <section>
-            <h3> 數值方法 </h3>
-            計算幾何中常會碰到求最小值的問題 :
-            <div class="ques">
-              給定一個函數 $f : [a, b] \to \mathbb{R}$ ，求 $\min f(x)$
-            </div>
-          </section>
-          <section>
-            ... 別唬我了，這根本無法做吧
-            <div id="box100" class="jxgbox" style="width:300px; height:300px;"></div>
-            <script type="text/javascript">
-              {
-                var board = JXG.JSXGraph.initBoard('box100', {boundingbox: [-5, 5, 5, -5], axis:true});
-                var arr = [];
-                for(i=0; i<50; i++) arr.push(Math.random() * 5 - 2.5);
-                board.create('functiongraph', [function(x){
-                  var nu = Math.floor((x+5)*5);
-                  var ep = x+5-nu/5;
-                  return arr[nu+1] * ep + arr[nu] * (1-ep);
-                }, -5, 5]);
-              }
-            </script>
-          </section>
-          <section>
-            <p> 如果函數 $f$ 有一些條件呢？</p>
-            <div class="def">
-              如果一個函數 $f$ 在 $x_0$ 處有最小值，且在 $x &lt; x_0$ 時嚴格遞減，
-              $x &gt; x_0$ 時嚴格遞增，則稱 $f$ 為<b>嚴格單極值函數</b>。              
-            </div>
-            <div id="box101" class="jxgbox" style="width:300px; height:300px;"></div>
-            <script type="text/javascript">
-              {
-                var board = JXG.JSXGraph.initBoard('box101', {boundingbox: [-5, 5, 5, -5], axis:true});
-                var func = function(x){return 2-2*Math.exp(1.0/(1+x*x));};
-                board.create('functiongraph', [func, -5, 5]);
-                board.create('point', [0, func(0)], {name:'x0'});
-              }
-            </script>
-          </section>
-          <section>
-            <ul>
-              <li class="fragment"> 隨便戳一點 $x$ </li>
-              <li class="fragment"> $f$ 在 $x$ 處遞減 : 極值在 $x$ 右邊 </li>
-              <li class="fragment"> $f$ 在 $x$ 處遞增 : 極值在 $x$ 左邊 </li>
-              <li class="fragment"> 二分搜！ </li>
-              <li class="fragment"> 時間複雜度 : $O(T \log\left(\frac{b-a}{\epsilon}\right))$ </li>
-              <li class="fragment"> $T$ : $f$ 求值一次的時間；$\epsilon$ : 誤差容忍值 </li>
-            </ul>
-            <div id="box102" class="jxgbox" style="width:300px; height:300px;"></div>
-            <script type="text/javascript">
-              {
-                var board = JXG.JSXGraph.initBoard('box102', {boundingbox: [-5, 5, 5, -5], axis:true});
-                var func = function(x){return 2-2*Math.exp(1.0/(1+x*x));};
-                board.create('functiongraph', [func, -5, 5]);
-                var A = board.create('point', [1, func(1)], {name:'x'});
-                var line = board.create('line', [[1,0],[1,1]], {visible:false});
-                var ineq = board.create('inequality', [line]);
-              }
-            </script>
-          </section>
-          <section>
-            <ul>
-              <li class="fragment"> 如何判斷遞增或遞減？ </li>
-              <li class="fragment"> 斜率 $f'(x)$ </li>
-              <li class="fragment"> 取旁邊一個很近的點 $f(x+\epsilon)$ 比大小 </li>
-              <li class="fragment"> 有時候不容易判斷 </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 三分搜尋法</h3>
-            <ul>
-              <li class="fragment"> 戳兩點 $l, r$ </li>
-              <li class="fragment"> $f(l) &lt; f(r)$ : 極值在 $[a, r]$ </li>
-              <li class="fragment"> $f(l) &gt; f(r)$ : 極值在 $[l, b]$ </li>
-              <li class="fragment"> $f(l) = f(r)$ ? </li>
-              <li class="fragment"> 時間複雜度 : $O(T \log\left(\frac{b-a}{\epsilon}\right))$ </li>
-            </ul>
-            <div id="box103" class="jxgbox" style="width:300px; height:300px;"></div>
-            <script type="text/javascript">
-              {
-                var board = JXG.JSXGraph.initBoard('box103', {boundingbox: [-5, 5, 5, -5], axis:true});
-                var func = function(x){return 2-2*Math.exp(1.0/(1+(x-1)*(x-1)));};
-                board.create('functiongraph', [func, -5, 5]);
-                var A = board.create('point', [-1.66, func(-1.66)], {name:'l'});
-                var B = board.create('point', [1.66, func(1.66)], {name:'r'});
-                var l1 = board.create('line', [-1.66, -1, 0], {visible:false});
-                var ineq = board.create('inequality', [l1]);
-              }
-            </script>
-          </section>
-          <section>
-            <h3> 多變數函數 </h3>
-            <ul>
-              <li class="fragment"> 二維函數 $f(x, y)$ </li>
-              <li class="fragment"> 二維的單極值函數，要怎麼找極小值？ </li>
-              <li class="fragment"> $\displaystyle \min_{x, y} f(x, y) = \min_y \min_x f(x, y)$ </li>
-              <li class="fragment"> 兩次三分搜 </li>
-              <li class="fragment"> 時間複雜度 : $O(T \log^2\left(\frac{b-a}{\epsilon}\right))$ </li>
-              <li class="fragment"> $d$ 維函數呢？ </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 模擬退火 </h3>
-            <ul>
-              <li class="fragment"> 先隨便戳一個點 </li>
-              <li class="fragment"> 一直往下走(函數值小的地方) </li>
-              <li class="fragment"> 總有一天會走到極小值 </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 模擬退火 </h3>
-            <ul>
-              <li class="fragment"> 可是要怎麼知道哪邊的函數值比較小呢？ </li>
-              <li class="fragment"> 最簡單的方法 : 隨便亂試! </li>
-              <li class="fragment"> 函數值變小 $\to$ 走過去 </li>
-              <li class="fragment"> 函數值變大 $\to$ 不理他 </li>
-            </ul>
-          </section>
-          <section>
-            <h3> Gradient Descent </h3>
-            <ul>
-              <li class="fragment"> 真的只能亂走嗎? </li>
-              <li class="fragment"> 直接計算出函數值<b>變小</b>的方向! </li>
-            </ul>
-            <div class="def fragment">
-              <b>梯度</b> (Gradient) : 概念上就是多維度的<em>斜率</em>。
-              梯度是一個向量，指向函數<em>上升最快</em>(坡度最陡)的方向；
-              大小即為該方向上的斜率。<br>
-              $$\nabla f(x, y) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)$$
-            </div>
-          </section>
-          <section>
-            <h3> Gradient Descent </h3>
-            <ul>
-              <li class="fragment"> 每一次往<b>負</b>梯度的方向走一步 </li>
-              <li class="fragment"> $(x, y) \gets (x, y) - \eta \cdot \nabla f(x, y)$ </li>
-              <li class="fragment"> $\eta$ 參數決定了步長(走的速度) </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 步長的選擇 </h3>
-            <ul>
-              <li class="fragment"> 步長太短 : 收斂太慢 </li>
-              <li class="fragment"> 步長太長 : 會走過頭 (甚至不收斂) </li>
-              <li class="fragment"> 一開始步長大一點，接著慢慢縮小 </li>
-              <li class="fragment"> 例如 : 每次乘以 $0.999$ 倍 </li>
-              <li class="fragment"> 如果走得很順利，也可以放大 </li>
-              <li class="fragment"> Trial &amp; Error ! </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 時間複雜度 </h3>
-            <ul>
-              <li class="fragment"> $O(?)$ </li>
-              <li class="fragment"> 看人品囉... 雖一點的話可能永遠走不完 </li>
-              <li class="fragment"> 函數性質越好，<b>通常</b>會比較快收斂 </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 凸函數 </h3>
-            <div class="def">
-              若一個函數 $f$，對於任意的 $x_1, x_2, 0 \le t \le 1$，皆符合
-              $$ f(t \cdot x_1 + (1-t)\cdot x_2) \leq t\cdot f(x_1) + (1-t)\cdot f(x_2)$$
-              則稱 $f$ 是<b>凸</b>函數。
-            </div>
-            <ul>
-              <li class="fragment"> 1維凸函數：<b>斜率單調遞增</b> </li>
-              <li class="fragment"> 函數曲線永遠在兩點連線下方 </li>
-              <li class="fragment"> 往每個方向走，斜率都單調遞增 </li>
-              <li class="fragment"> Hessian Matrix 永遠是 Positive Semi-Definite </li>
-            </ul>
-            <div id="box104" class="jxgbox" style="width:300px; height:300px;"></div>
-            <script type="text/javascript">
-              {
-                var board = JXG.JSXGraph.initBoard('box104', {boundingbox: [-5, 5, 5, -5], axis:true});
-                var func = function(x){return x*x/5.0;};
-                board.create('functiongraph', [func, -5, 5]);
-                var A = board.create('point', [-1, func(-1)], {name:'A'});
-                var B = board.create('point', [2, func(2)], {name:'B'});
-                var l1 = board.create('segment', [A, B]);
-              }
-            </script>
-          </section>
-          <section>
-            <h3> 凸函數 </h3>
-            <ul>
-              <li class="fragment"> 凸函數一定單極值 (比單極值更強!) </li>
-              <li class="fragment"> 斜率單調 </li>
-              <li class="fragment"> 越靠近極值點越平緩 </li>
-              <li class="fragment"> 對 Gradient Descent 相當有利 </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 常見的凸函數 </h3>
-            <ul>
-              <li class="fragment"> $x^2$ </li>
-              <li class="fragment"> $2^x$ </li>
-              <li class="fragment"> $x^2 + y^2$ </li>
-              <li class="fragment"> $\sqrt{x^2 + y^2}$ (直線距離)</li>
-              <li class="fragment"> 多個凸函數<b>相加</b> </li>
-              <li class="fragment"> 多個凸函數<b>取$\max$</b> </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 時間複雜度 </h3>
-            <ul>
-              <li class="fragment"> ...還是$O(?)$ </li>
-              <li class="fragment"> 但通常不會太差 </li>
-              <li class="fragment"> 實際跑起來大概走個 $30$ ~ $1000$ 步左右會結束(通常啦...) </li>
-              <li class="fragment"> 保證時間複雜度? 函數條件要更強，而且要用較複雜的演算法 </li>
-              <li class="fragment"> 最簡單的是牛頓插值法 (多維的也不好寫)</li>
-              <li class="fragment"> 其他的嘛... 「線性規劃只是一個特例」</li>
-              <li class="fragment"> 還是放棄吧XDDD </li>
-            </ul>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h3> Geometric Median </h3>
-            <div class="prob">
-              平面上有 $N$ 個點，請找一個點，到這 $N$ 個點的距離總和最小。
-            </div>
-            <div id="box105" class="jxgbox" style="width:300px; height:300px;"></div>
-            <script type="text/javascript">
-              {
-                var board = JXG.JSXGraph.initBoard('box105', {boundingbox: [-5, 5, 5, -5]});
-                var pts = [[-4, 0], [0, 4], [4, 0]];
-                var PP = board.create('point', [0, 4*0.577350], {name:'P', strokeColor:'green'});
-                for(i=0; i<pts.length; i++)
-                {
-                  board.create('point', pts[i]);
-                  board.create('segment', [PP, pts[i]]);
-                }
-
-              }
-            </script>
-          </section>
-          <section>
-            <h3> Geometric Median </h3>
-            <ul>
-              <li class="fragment"> $N = 3$ : 三角形的費馬點，與三點連線夾角 $120^\circ$ </li>
-              <li class="fragment"> $N \ge 5$ : 沒有解析公式 Q__Q </li>
-            </ul>
-          </section>
-          <section>
-            <h3> Geometric Median </h3>
-            <div class="ques">
-              令
-              $$f(x, y) = \sum_{i=1}^N \sqrt{(x-x_i)^2 + (y-y_i)^2}$$
-              求 $\min f(x, y)$。
-            </div>
-            <ul>
-              <li class="fragment"> $\sqrt{(x-x_i)^2 + (y-y_i)^2}$ 是凸函數 </li>
-              <li class="fragment"> 凸函數相加還是凸函數 </li>
-              <li class="fragment"> $f(x, y)$ 是凸函數! </li>
-            </ul>
-          </section>
-          <section>
-            <h3> Geometric Median </h3>
-            <ul>
-              <li class="fragment"> 用任何一個你喜歡的方法找極值 </li>
-              <li class="fragment"> $\sqrt{x^2+y^2}$ 在原點有個尖點 </li>
-              <li class="fragment"> $f(x, y)$ 在那 $N$ 個點處以外都是平滑的 </li>
-              <li class="fragment"> 模擬退火 / Gradient Descent 都能順利找到極值 </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 最小包含圓 </h3>
-            <div class="prob">
-              平面上有 $N$ 個點，請找一個最小半徑的圓，把這 $N$ 個點包含在內。
-            </div>
-            <div id="box106" class="jxgbox" style="width:300px; height:300px;"></div>
-            <script type="text/javascript">
-              {
-                var board = JXG.JSXGraph.initBoard('box106', {boundingbox: [-5, 5, 5, -5]});
-                var pts = [[1, 0], [2, -1], [3, 2], [3, 0], [-1, 2], [3, -3], [-2, 3], [-3, -3]];
-                for(i=0; i<pts.length; i++)
-                {
-                  board.create('point', pts[i]);
-                }
-                var cc = board.create('circumcircle', [pts[5], pts[6], pts[7]]);
-              }
-            </script>
-          </section>
-          <section>
-            <h3> 最小包含圓 </h3>
-            <ul>
-              <li class="fragment"> 有各式各樣的算法 </li>
-              <li class="fragment"> 枚舉3個點的外接圓 : $O(N^4)$ </li>
-              <li class="fragment"> 隨機增量法 : 期望 $O(N)$ </li>
-              <li class="fragment"> 數值方法 </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 最小包含圓 </h3>
-            <div class="ques">
-              設圓心為 $(x, y)$，需要的最小半徑即為最遠的點距離：
-              $$f(x, y) = \max_{i=1}^N \sqrt{(x-x_i)^2 + (y-y_i)^2}$$
-              求 $\min f(x, y)$。
-            </div>
-            <ul>
-              <li class="fragment"> $\sqrt{(x-x_i)^2 + (y-y_i)^2}$ 是凸函數 </li>
-              <li class="fragment"> 凸函數取 $\max$ 還是凸函數 </li>
-              <li class="fragment"> $f(x, y)$ 是凸函數! </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 最小包含圓 </h3>
-            <ul>
-              <li class="fragment"> 取 $\max$ 有個小問題 : 函數會不平滑、有稜角 (不可微分) </li>
-              <li class="fragment"> Gradient Descent 會在兩壁間來回跳動 </li>
-              <li class="fragment"> ...可能會吃土 </li>
-              <li class="fragment"> 模擬退火比較容易成功 </li>
-            </ul>
-          </section>
-          <section>
-            <h3> 模擬退火 vs Gradient Descent </h3>
-            <p>模擬退火:</p>
-            <ul>
-              <li class="fragment"> 適用範圍比較廣 </li>
-              <li class="fragment"> 甚至非單極值函數，也有機會找到最小值 </li>
-              <li class="fragment"> 收斂比較慢 </li>
-            </ul>
-            <p>Gradient Descent:</p>
-            <ul>
-              <li class="fragment"> 如果函數性質良好，收斂相當的快 </li>
-              <li class="fragment"> 良好 : 凸函數、平滑函數 (可微分)</li>
-              <li class="fragment"> 如果函數很糟的話，可能會發散，或是收斂地非常非常慢</li>
-            </ul>
-          </section>
-        </section>
         <section>
           <h2>習題 / Q &amp; A</h2>
         </section>
