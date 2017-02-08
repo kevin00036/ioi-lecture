@@ -925,7 +925,6 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                   pos = (pos + 1) % sz;
                   AA.moveTo([xco[pos], -6]);
                   AB.moveTo([xco[pos], 6]);
-                  console.log(xco[pos]);
                 }, 500);
               }
             </script>
@@ -1447,7 +1446,105 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 <li>否則的話解集有限 (bounded)</li>
               </ul>
               <p class="fragment"><b>時間複雜度 $O(N^2)$</b></p>
+              <p class="fragment">記得把重複的直線刪到剩一條！</p>
             </div>
+          </section>
+          <section>
+            <h3> 增量法 </h3>
+            <div style="float:right; width:60%;">
+              <ul>
+                <li> 每次都重新切割太慢了！</li>
+                <li> 把直線先排序會有一些好處 <br>
+                  (照<font color="red">法向量方向</font>極角排序)</li>
+                <li> 先假設半平面交是有界的 </li>
+                <li> 可以在最外圍用大矩形包起來，
+                  如果最後解出來有用到大矩形的邊，
+                  代表交集延伸到無限遠處！
+                </li>
+              </ul>
+            </div>
+            <div id="hbox5" class="jxgbox" style="width:300px; height:300px; float:left;"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('hbox5', {boundingbox: [-5, 1, 10, -2]});
+                var f4 = function()
+                {
+                  JXG.JSXGraph.freeBoard(board);
+                  board = JXG.JSXGraph.initBoard('hbox5', {boundingbox: [-5, 7, 5, -2]});
+                  var L1 = [[1, 1], [3, 1]];
+                  var L2 = [[1, 1], [2, 2]];
+                  var L3 = [[2, 2], [3, 4]];
+                  var arr = [L1, L2, L3];
+
+                  for (var i=0; i<arr.length; i++) {
+                    var dx = arr[i][1][0] - arr[i][0][0];
+                    var dy = arr[i][1][1] - arr[i][0][1];
+                    var r = Math.sqrt(dx*dx+dy*dy);
+                    dx = dx / r * 2;
+                    dy = dy / r * 2;
+                    var z = [arr[i][0][0]-dy, arr[i][0][1]+dx];
+                    var myf = function(ii, al, be, bd){
+                      bd.create('line', al, {strokeColor:'#0000ff',strokeWidth:2});
+                      bd.create('arrow', be, {strokeColor:'#ff0000'});
+                    };
+                    setTimeout(myf, (i+1)*1000, i, arr[i], [arr[i][0], z], board);
+                  }
+                };
+                f4();
+                setInterval(f4, 5000);
+              }
+            </script>
+          </section>
+          <section>
+            <h3> 增量法 </h3>
+            <div style="float:right; width:60%;">
+              <ul>
+                <li> 依序把半平面加進去</li>
+                <li class="fragment"> 有些半平面會被吃掉！ </li>
+                <li class="fragment"> $L_1$ 在 $L_2$ 上的交點，比 $L_3$ 在 $L_2$ 上的交點還要
+                  <font color="red">右邊</font></li>
+                <li class="fragment"> 觀察頭尾的半平面會最先被吃掉 </li>
+                <li class="fragment"> <b>Deque</b>!</li>
+                <li class="fragment"> 複雜度：$O(N \log N)$ </li>
+                </li>
+              </ul>
+            </div>
+            <div id="hbox6" class="jxgbox" style="width:300px; height:300px; float:left;"></div>
+            <script type="text/javascript">
+              {
+                var f4 = function()
+                {
+                  var board = JXG.JSXGraph.initBoard('hbox6', {boundingbox: [-3, 3, 7, -3]});
+                  var A = [1, 1];
+                  var B = [3, 0];
+                  var C = [-1, 0];
+                  var l1 = board.create('line',[A,B], {strokeColor:'#ccccff',strokeWidth:1,label:'L1'});
+                  var lin = board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
+                  board.create('inequality', [l1], {inverse: true, fillColor: 'blue'});
+                  var lin2;
+                  var n1 = function() {
+                    var l2 = board.create('line',[B,C], {strokeColor:'#ccffcc',strokeWidth:1});
+                    lin2 = board.create('line',[B,[4,0]], {strokeColor:'#00ff00',strokeWidth:2,straightFirst:false});
+                    ineq2 = board.create('inequality', [l2], {inverse: true, fillColor: 'green'});
+                    board.removeObject(lin);
+                    lin = board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2, straightLast:false});
+                  };
+                  var n2 = function() {
+                    var l3 = board.create('line',[C,A], {strokeColor:'#ffffcc',strokeWidth:1});
+                    var lin3 = board.create('line',[A,[3,2]], {strokeColor:'#ffff00',strokeWidth:2, straightFirst:false});
+                    ineq3 = board.create('inequality', [l3], {inverse: true, fillColor: 'yellow'});
+                    board.removeObject(lin);
+                    board.removeObject(lin2);
+                    lin = board.create('line',[A, [-1,2]], {strokeColor:'#0000ff',strokeWidth:2, straightFirst:false});
+                  };
+                  setTimeout(n1, 1000);
+                  setTimeout(n2, 2000);
+                  setTimeout(function(){JXG.JSXGraph.freeBoard(board);}, 7500);
+                };
+                f4();
+                setInterval(f4, 8000);
+              }
+            </script>
           </section>
         </section>
 
@@ -1523,6 +1620,7 @@ bool eps_greater (const double &amp;a, const double &amp;b)
             <ul>
               <li class="fragment"> 機八 Case </li>
               <li class="fragment"> 角度差 : $O(1/M^2)$ </li>
+              <li class="fragment"> 點到直線距離 : $O(1/M)$ </li>
             </ul>
             <div id="box99" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
