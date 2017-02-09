@@ -588,7 +588,6 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 board.create('segment', [P3, P4]);
               }
             </script>
-            <p class="fragment"><b> 好麻煩喔 QQQQ </b></p>
           </section>
         </section>
 
@@ -744,26 +743,17 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
             </script>
           </section>
           <section>
-            <h3> 拿條繩子捲起來！ </h3>
-            <ul>
-              <li class="fragment"> 先找一個必定在凸包上的點 (最左下角的點一定是！)</li>
-              <li class="fragment"> 每次找最靠右邊的，加入凸包</li>
-              <li class="fragment"> 時間複雜度 : $O(N^2)$</li>
-            </ul>
-            <div id="box26" class="jxgbox" style="width:300px; height:300px;"></div>
-            <script type="text/javascript">
-              {
-                var board = JXG.JSXGraph.initBoard('box26', {boundingbox: [-5, 5, 5, -5]});
-                var poly2 = [];
-                for(i=0; i<20; i++)
-                {
-                  var x = Math.random()*9-4.5;
-                  var y = Math.random()*9-4.5;
-                  poly2.push([x, y]);
-                }
-                board.create('polygon', poly2, {fillColor: 'yellow'});
-              }
-            </script>
+            <h3> 拿條橡皮筋綁起來！ </h3>
+            <div style="float:right">
+              <ul>
+                <li class="fragment"> 先找一個必定在凸包上的點 <br>(最左下角的點一定是！)</li>
+                <li class="fragment"> 每次找最靠右邊的，加入凸包</li>
+                <li class="fragment"> 時間複雜度 : $O(N^2)$</li>
+              </ul>
+            </div>
+            <div id="box26" style="width:300px; height:300px; float:left">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/ConvexHull.png">
+            </div>
           </section>
           <section>
             <h3> Monotone Chain </h3>
@@ -802,7 +792,7 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
           </section>
           <section>
             <h3> Monotone Chain </h3>
-            (實作動畫)
+            <img src="http://www.csie.ntnu.edu.tw/~u91029/Andrew'sMonotoneChain1.png">
           </section>
           <section>
             <h3> Monotone Chain </h3>
@@ -814,6 +804,74 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
               <li class="fragment"> 這樣找到的是<b>下</b>凸包</li>
               <li class="fragment"> 從右到左排序再做一次，接起來才是完整的凸包</li>
             </ul>
+          </section>
+          <section>
+            <h3> 加權平均 </h3>
+            <ul style:"float:right">
+              <li class="fragment"> 兩個點 $P_1, P_2$ 的 <b>加權平均</b> 長怎樣？</li>
+              <li class="fragment"> $P = \color{red}t \cdot P_1 + \color{red}{(1-t)} \cdot P_2, \color{red}{0 \le t \le 1}$</li>
+              <li class="fragment"> 落在線段 $P_1 P_2$ ！</li>
+              <li class="fragment"> 三個點 $P_1, P_2$ 的 <b>加權平均</b> 長怎樣？</li>
+              <li class="fragment"> $P = \color{green}{\alpha} \cdot P_1 + \color{blue}{\beta} \cdot P_2 + \color{purple}{\gamma}\cdot P_3$<br>
+              $\color{green}{\alpha}, \color{blue}{\beta}, \color{purple}{\gamma} \ge 0, \color{green}{\alpha} + \color{blue}{\beta} + \color{purple}{\gamma} = 1$</li>
+              <li class="fragment"> 落在三角形 $\Delta P_1 P_2 P_3$ ！</li>
+            </ul>
+            <div id="box101" class="jxgbox" style="width:300px; height:300px; float:left"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box101', {boundingbox: [-5, 5, 5, -5]});
+                var P1 = board.create('point', [-2, 3], {name: 'P1'});
+                var P2 = board.create('point', [2, 3], {name: 'P2'});
+                var P3 = board.create('point', [-2, 0], {name: 'P1'});
+                var P4 = board.create('point', [2, 0], {name: 'P2'});
+                var P5 = board.create('point', [1, -3], {name: 'P3'});
+                board.create('segment', [P1, P2]);
+                board.create('polygon', [P3, P4, P5]);
+              }
+            </script>
+          </section>
+          <section>
+            <h3> 加權平均 </h3>
+            <ul style:"float:right">
+              <li class="fragment"> $N$ 個點 $P_1, P_2$ 的 <b>加權平均</b> 長怎樣？</li>
+              <li class="fragment"> $P = \sum_{i=1}^N \color{green}{\alpha_i} \cdot P_i$ <br>
+                $\color{green}{\alpha_i} \ge 0, \sum_{i=1}^N \color{green}{\alpha_i} = 1$</li>
+              <li class="fragment"> 落在 $P_1 \sim P_N$ 的<b>凸包</b> ！</li>
+              <li class="fragment"> 事實上凸包有一個等價定義：<br>$N$ 個點的所有加權平均形成的集合</li>
+              <li class="fragment"> 這種加權平均又稱為 <br> <b>凸組合 (Convex combination)</b></li>
+            </ul>
+            <div id="box102" class="jxgbox" style="width:300px; height:300px; float:left"></div>
+            <script type="text/javascript">
+              {
+                var board = JXG.JSXGraph.initBoard('box102', {boundingbox: [-5, 5, 5, -5]});
+                var P1 = board.create('point', [-2, 3], {name:'P1'});
+                var P2 = board.create('point', [4, 0], {name:'P2'});
+                var P3 = board.create('point', [3, -1], {name:'P3'});
+                var P4 = board.create('point', [-1, 4], {name:'P4'});
+                var P5 = board.create('point', [1, 2], {name:'P5'});
+                var P6 = board.create('point', [1, 1], {name:'P6'});
+                var P7 = board.create('point', [-2, -2], {name:'P7'});
+                board.create('polygon', [P1, P7, P3, P2, P4]);
+              }
+            </script>
+          </section>
+          <section>
+            <h3> 另一種定義 </h3>
+            <ul style:"float:right">
+              <li class="fragment"> 如此一來可以定義更高維度的凸包！<br>
+                $P = \sum_{i=1}^N \color{green}{\alpha_i} \cdot P_i$ <br>
+                $\color{green}{\alpha_i} \ge 0, \sum_{i=1}^N \color{green}{\alpha_i} = 1$</li>
+              <li class="fragment"> 回過頭來看剛才說過的<b>凸多邊形</b>條件:<br>
+                <i>任兩點連線段，還在多邊形內部</i><br>
+                可以推廣成：<br><b>任取一些點的凸組合(加權平均)都還在內部</b>
+                <br> 或者說 <br>
+                <b>凸包還是自己!!</b>
+              </li>
+              <li class="fragment">凸多邊形的很多好性質可以從這裡推導！</li>
+            </ul>
+            <div id="box103" class="jxgbox" style="width:300px; height:300px; float:left">
+              <img src="https://i.stack.imgur.com/PFkhV.png">
+            </div>
           </section>
         </section>
 
@@ -1231,8 +1289,8 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 var lbb = board.create('point', [0, 0], {visible:false});
                 var lbc = board.create('point', [0, 0], {visible:false});
                 var lbd = board.create('point', [0, 0], {visible:false});
-                var line1 = board.create('line', [lba, lbb]);
-                var line2 = board.create('line', [lbc, lbd]);
+                var line1 = board.create('line', [lba, lbb], {color:'#660000', strokeWidth:2});
+                var line2 = board.create('line', [lbc, lbd], {color:'#666600', strokeWidth:2});
                 var theta2 = 0.0;
                 frot2 = function()
                 {
@@ -1334,7 +1392,7 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 board.create('line',[A,B], {strokeColor:'#00ff00',strokeWidth:2});
                 var l = board.create('segment', [A,B], {lastArrow:true, withLabel:true, name:'d', label:{position:'top', display: 'internal'}, strokeColor:'green'});
                 var l2 = board.create('segment', [A,C], {lastArrow:true});
-                ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
+                ineq = board.create('inequality', [l], {inverse: false, fillColor: 'blue'});
               }
             </script>
           </section>
@@ -1355,9 +1413,9 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
                 board.create('line',[A,C], {strokeColor:'#00ff00',strokeWidth:2});
                 board.create('line',[C,B], {strokeColor:'#ffff00',strokeWidth:2});
-                ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
-                ineq2 = board.create('inequality', [l2], {inverse: true, fillColor: 'green'});
-                ineq3 = board.create('inequality', [l3], {inverse: false, fillColor: 'yellow'});
+                ineq = board.create('inequality', [l], {inverse: false, fillColor: 'blue'});
+                ineq2 = board.create('inequality', [l2], {inverse: false, fillColor: 'green'});
+                ineq3 = board.create('inequality', [l3], {inverse: true, fillColor: 'yellow'});
               }
             </script>
           </section>
@@ -1384,9 +1442,9 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
                 board.create('line',[A,C], {strokeColor:'#00ff00',strokeWidth:2});
                 board.create('line',[C,B], {strokeColor:'#ffff00',strokeWidth:2});
-                ineq = board.create('inequality', [l], {inverse: true, fillColor: 'blue'});
-                ineq2 = board.create('inequality', [l2], {inverse: true, fillColor: 'green'});
-                ineq3 = board.create('inequality', [l3], {inverse: false, fillColor: 'yellow'});
+                ineq = board.create('inequality', [l], {inverse: false, fillColor: 'blue'});
+                ineq2 = board.create('inequality', [l2], {inverse: false, fillColor: 'green'});
+                ineq3 = board.create('inequality', [l3], {inverse: true, fillColor: 'yellow'});
                 board.create('point', D, {label:'A'});
                 board.create('point', E, {label:'B'});
                 board.create('segment',[D,E], {strokeColor:'#ff0000',strokeWidth:2});
@@ -1418,13 +1476,13 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                   var lin = board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
                   var n1 = function() {
                     var l2 = board.create('line',[A,C], {strokeColor:'#00ff00',strokeWidth:1});
-                    ineq2 = board.create('inequality', [l2], {inverse: true, fillColor: 'green'});
+                    ineq2 = board.create('inequality', [l2], {inverse: false, fillColor: 'green'});
                     board.removeObject(lin);
                     lin = board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2, straightFirst:false});
                   };
                   var n2 = function() {
                     var l3 = board.create('line',[C,B], {strokeColor:'#ffff00',strokeWidth:1});
-                    ineq3 = board.create('inequality', [l3], {inverse: false, fillColor: 'yellow'});
+                    ineq3 = board.create('inequality', [l3], {inverse: true, fillColor: 'yellow'});
                     board.removeObject(lin);
                     lin = board.create('segment',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
                   };
@@ -1520,19 +1578,19 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                   var C = [-1, 0];
                   var l1 = board.create('line',[A,B], {strokeColor:'#ccccff',strokeWidth:1,label:'L1'});
                   var lin = board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2});
-                  board.create('inequality', [l1], {inverse: true, fillColor: 'blue'});
+                  board.create('inequality', [l1], {inverse: false, fillColor: 'blue'});
                   var lin2;
                   var n1 = function() {
                     var l2 = board.create('line',[B,C], {strokeColor:'#ccffcc',strokeWidth:1});
                     lin2 = board.create('line',[B,[4,0]], {strokeColor:'#00ff00',strokeWidth:2,straightFirst:false});
-                    ineq2 = board.create('inequality', [l2], {inverse: true, fillColor: 'green'});
+                    ineq2 = board.create('inequality', [l2], {inverse: false, fillColor: 'green'});
                     board.removeObject(lin);
                     lin = board.create('line',[A,B], {strokeColor:'#0000ff',strokeWidth:2, straightLast:false});
                   };
                   var n2 = function() {
-                    var l3 = board.create('line',[C,A], {strokeColor:'#ffffcc',strokeWidth:1});
-                    var lin3 = board.create('line',[A,[3,2]], {strokeColor:'#ffff00',strokeWidth:2, straightFirst:false});
-                    ineq3 = board.create('inequality', [l3], {inverse: true, fillColor: 'yellow'});
+                    var l3 = board.create('line',[C,A], {strokeColor:'#ffcccc',strokeWidth:1});
+                    var lin3 = board.create('line',[A,[3,2]], {strokeColor:'#ff0000',strokeWidth:2, straightFirst:false});
+                    ineq3 = board.create('inequality', [l3], {inverse: false, fillColor: 'red'});
                     board.removeObject(lin);
                     board.removeObject(lin2);
                     lin = board.create('line',[A, [-1,2]], {strokeColor:'#0000ff',strokeWidth:2, straightFirst:false});
@@ -1545,6 +1603,74 @@ double abs(const pdd &amp;a) { return sqrt(dot(a, a));}
                 setInterval(f4, 8000);
               }
             </script>
+          </section>
+          <section>
+            <div class="prob">給兩個凸多邊形，求他們交集</div>
+            <div class="fragment">
+              凸多邊形可以表示成半平面交！
+            </div>
+          </section>
+          <section>
+            <div class="prob">給一個凸多邊形，求裡面能容納的最大圓</div>
+            <div style="float:right">
+              <ul>
+                <li class="fragment">半徑 $r$ 的圓可以被容納在多邊形內</li>
+                <li class="fragment"> $\Leftrightarrow$ 圓心$P$ 距離每條邊的距離至少 $r$</li>
+                <li class="fragment">到一條直線距離至少 $r$ 以上的點集？半平面！</li>
+                <li class="fragment">合法的圓心區域：半平面交</li>
+                <li class="fragment">如果半平面交非空，代表這個半徑 $r$ 可以</li>
+                <li class="fragment">二分搜 $r$！</li>
+              </ul>
+            </div>
+            <img src="http://i023.radikal.ru/1312/a8/54a2cb986d04.png" style="width:300px;float:left">
+          </section>
+          <section>
+            <div class="prob">Voronoi Diagram : 找出離每個點最近的領域</div>
+            <div style="float:right">
+              <ul>
+                <li class="fragment">先找出一個點 $P$ 的領域</li>
+                <li class="fragment">今有 $P$ 跟 $Q$ ，哪些點離 $P$ 比 $Q$ 近？</li>
+                <li class="fragment"> 分割線：<b>中垂線</b>！</li>
+                <li class="fragment"> 離 $P$ 近的區域：又是一個半平面</li>
+                <li class="fragment"> 離 $P$ 比其他點都近 → 半平面交</li>
+                <li class="fragment"> 總複雜度 $O(N^2 \log N)$</li>
+                <li class="fragment"> 其實還有更快的方法！<br>
+                但都很複雜(Ex. Delaunay Triangulation)</li>
+              </ul>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Euclidean_Voronoi_diagram.svg/382px-Euclidean_Voronoi_diagram.svg.png" style="width:300px;float:left">
+          </section>
+          <section>
+            <div class="prob">二維線性規劃：找一個 $(x, y)$ 使得
+              $$a_i \cdot x + b_i \cdot y \ge c$$，且
+              $$A \cdot x + B \cdot y$$ 最大
+            </div>
+            <div style="float:right">
+              <ul>
+                <li class="fragment"> 合法解區域：就是半平面交！</li>
+                <li class="fragment"> $Ax + By$ 的最大值？</li>
+                <li class="fragment"> 必定在頂點上！</li>
+                <li class="fragment"> 凸多邊形上找 $Ax+By$ 的最大值也是一樣</li>
+              </ul>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Linear_programming_polytope.png" style="width:300px;float:left">
+          </section>
+          <section>
+            <h3>半平面交有無解判定</h3>
+            如果只是要判定有解/無解，有沒有比較簡單的方法？
+            <div style="float:right">
+              <ul>
+                <li class="fragment">有！</li>
+                <li class="fragment">回想一下剛才的 $O(N^2)$ 直線切割法</li>
+                <li class="fragment">如果 $L_1$ 被 $L_2 \sim L_k$ 切到全沒了</li>
+                <li class="fragment">有個性質：$L_k$ 如果也被 $L_1 \sim L_{k-1} 切到全沒，<br>
+                  那就真的全沒了！</li>
+                <li class="fragment">因此可以交換 $L_1, L_k$ ，重做</li>
+                <li class="fragment">最慘重做 $N$ 次，複雜度 $O(N^2)$</li>
+                <li class="fragment">但實際上重做的次數不會那麼多！</li>
+                <li class="fragment">直線 Random shuffle 的話，期望複雜度 $O(N)$ <br>(證明暫略)</li>
+              </ul>
+            </div>
           </section>
         </section>
 
@@ -1622,15 +1748,15 @@ bool eps_greater (const double &amp;a, const double &amp;b)
               <li class="fragment"> 角度差 : $O(1/M^2)$ </li>
               <li class="fragment"> 點到直線距離 : $O(1/M)$ </li>
             </ul>
-            <div id="box99" class="jxgbox" style="width:300px; height:300px;"></div>
+            <div id="box929" class="jxgbox" style="width:300px; height:300px;"></div>
             <script type="text/javascript">
               {
-                var board = JXG.JSXGraph.initBoard('box99', {boundingbox: [-5, 5, 6, -5], axis:true});
-                var A = board.create('point', [0,0], {name:'O'});
-                var B = board.create('point', [4,3], {name:'(4,3)'});
-                var C = board.create('point', [5,4], {name:'(5,4)'});
-                board.create('segment', [A,B]);
-                board.create('segment', [A,C]);
+                var boardz = JXG.JSXGraph.initBoard('box929', {boundingbox: [-5, 5, 6, -5], axis:true});
+                var A = boardz.create('point', [0,0], {name:'O'});
+                var B = boardz.create('point', [4,3], {name:'(4,3)'});
+                var C = boardz.create('point', [5,4], {name:'(5,4)'});
+                boardz.create('segment', [A,B]);
+                boardz.create('segment', [A,C]);
               }
             </script>
           </section>
